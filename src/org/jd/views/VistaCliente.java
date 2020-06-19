@@ -202,12 +202,11 @@ public class VistaCliente extends Stage {
         tableView.getColumns().addAll(colDPI, colNombres, colApellidos, colGenero,
                 colFechaNacimiento, colTelefono, colDireccion);
         tableView.setOnMouseClicked(event -> {
-            /*if (tableView.getSelectionModel().getSelectedItem() != null) {
+            if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxApplications.getChildren().remove(0);
-                vBoxApplications.getChildren().add(0, ShowCategory.getInstance().getGridPane(
-                        (Category) tableView.getSelectionModel().getSelectedItem()));
-                updateTableViewItemsBook((Category) tableView.getSelectionModel().getSelectedItem());
-            }*/
+                vBoxApplications.getChildren().add(0, VistaMostrarCliente.getInstancia().getGridPane(
+                        (Cliente) tableView.getSelectionModel().getSelectedItem()));
+            }
         });
         tableView.setPrefSize(x, y * 0.995);
 
