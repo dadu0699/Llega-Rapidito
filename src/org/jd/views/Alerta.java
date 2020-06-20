@@ -14,16 +14,16 @@ import org.controlsfx.control.Notifications;
 
 public class Alerta extends Stage {
 
-    private static Alerta instance;
+    private static Alerta instancia;
 
     private Alerta() {
     }
 
     public static Alerta getInstancia() {
-        if (instance == null) {
-            instance = new Alerta();
+        if (instancia == null) {
+            instancia = new Alerta();
         }
-        return instance;
+        return instancia;
     }
 
     public void mostrarAlerta(GridPane gridPane, String title, String description) {

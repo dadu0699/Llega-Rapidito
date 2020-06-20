@@ -94,6 +94,7 @@ public class Panel extends Stage {
         btnRutas.setOnAction(event -> {
             selectButton(btnRutas);
             vBoxPaneles.getChildren().clear();
+            vBoxPaneles.getChildren().add(VistaRuta.getInstancia().getVistaRuta());
         });
 
         JFXButton btnReportes = new JFXButton("REPORTES");

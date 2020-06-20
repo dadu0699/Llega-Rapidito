@@ -70,12 +70,12 @@ public class VistaMostrarVehiculo extends Stage {
         jFTAnio.setEditable(false);
         gridPane.add(jFTAnio, 0, 8);
 
-        JFXTextField jFTFColor = new JFXTextField(vehiculo.getColor());
-        jFTFColor.setPromptText("COLOR");
-        jFTFColor.setLabelFloat(true);
-        jFTFColor.setPrefWidth(x);
-        jFTFColor.setEditable(false);
-        gridPane.add(jFTFColor, 0, 9);
+        JFXTextField jFTColor = new JFXTextField(vehiculo.getColor());
+        jFTColor.setPromptText("COLOR");
+        jFTColor.setLabelFloat(true);
+        jFTColor.setPrefWidth(x);
+        jFTColor.setEditable(false);
+        gridPane.add(jFTColor, 0, 9);
 
         JFXTextField jFTPrecio = new JFXTextField(vehiculo.getPrecio());
         jFTPrecio.setPromptText("PRECIO");

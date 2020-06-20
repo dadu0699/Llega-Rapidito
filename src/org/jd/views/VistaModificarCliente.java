@@ -15,16 +15,16 @@ import org.jd.util.PropiedadesPantalla;
 
 public class VistaModificarCliente extends Stage {
 
-    private static VistaModificarCliente instance;
+    private static VistaModificarCliente instancia;
 
     private VistaModificarCliente() {
     }
 
     static VistaModificarCliente getInstancia() {
-        if (instance == null) {
-            instance = new VistaModificarCliente();
+        if (instancia == null) {
+            instancia = new VistaModificarCliente();
         }
-        return instance;
+        return instancia;
     }
 
     public GridPane getGridPane(Cliente cliente) {
@@ -38,7 +38,7 @@ public class VistaModificarCliente extends Stage {
         gridPane.setPadding(new Insets(20, 20, 20, 10));
         // gridPane.setGridLinesVisible(true);
 
-        Text txtTitulo = new Text("MOSTRAR");
+        Text txtTitulo = new Text("MODIFICAR");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(25));
         gridPane.add(txtTitulo, 0, 4, 2, 1);
@@ -61,11 +61,10 @@ public class VistaModificarCliente extends Stage {
         jFTApellidos.setPrefWidth(x);
         gridPane.add(jFTApellidos, 0, 7, 2, 1);
 
-        String[] generos = { "Masculino", "Femenino" };
+        String[] generos = {"Masculino", "Femenino"};
         ObservableList obsGenero = FXCollections.observableArrayList(generos);
         ObservableList<String> informacion = obsGenero;
         JFXComboBox<String> cbGenero = new JFXComboBox<>(informacion);
-        String opcion = cliente.getGenero();
         cbGenero.getSelectionModel().select(cliente.getGenero());
         cbGenero.setPromptText("GENERO");
         cbGenero.setLabelFloat(true);
@@ -100,18 +99,19 @@ public class VistaModificarCliente extends Stage {
                     || jFTNombres.getText().length() == 0 || jFTApellidos.getText().length() == 0
                     || cbGenero.getSelectionModel().getSelectedItem() == null || jFTFNacimiento.getText().length() == 0
                     || jFTTelefono.getText().length() == 0
-            // ||
-            // !Verificaciones.getInstancia().esNumeroEntero(jFTTelefono.getText().trim())
+                    // || !Verificaciones.getInstancia().esNumeroEntero(jFTTelefono.getText().trim())
                     || jFTDireccion.getText().length() == 0) {
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
                 // MODIFICAR Cliente (METODO)
                 /*
-                 * if (ControllerService.getInstance().updateService()) {
-                 * Alerta.getInstancia().mostrarNotificacion("CLIENTES",
-                 * "CLIENTE ACTUALIZADO EXITOSAMENTE"); } else {
-                 * Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR",
-                 * "ERROR AL MODIFICAR CLIENTE"); }
+                if (ControllerService.getInstance().updateService()) {
+                    Alerta.getInstancia().mostrarNotificacion("CLIENTES",
+                            "CLIENTE ACTUALIZADO EXITOSAMENTE");
+                } else {
+                    Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR",
+                            "ERROR AL MODIFICAR CLIENTE");
+                }
                  */
                 VistaCliente.getInstancia().actualizarItemsTabla();
             }
