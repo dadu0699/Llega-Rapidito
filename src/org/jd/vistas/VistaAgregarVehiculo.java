@@ -1,4 +1,4 @@
-package org.jd.views;
+package org.jd.vistas;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -10,24 +10,23 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.jd.beans.Vehiculo;
-import org.jd.util.PropiedadesPantalla;
+import org.jd.utilidades.PropiedadesPantalla;
 
-public class VistaModificarVehiculo extends Stage {
+public class VistaAgregarVehiculo extends Stage {
 
-    private static VistaModificarVehiculo instancia;
+    private static VistaAgregarVehiculo instancia;
 
-    private VistaModificarVehiculo() {
+    private VistaAgregarVehiculo() {
     }
 
-    static VistaModificarVehiculo getInstancia() {
+    public static VistaAgregarVehiculo getInstancia() {
         if (instancia == null) {
-            instancia = new VistaModificarVehiculo();
+            instancia = new VistaAgregarVehiculo();
         }
         return instancia;
     }
 
-    public GridPane getGridPane(Vehiculo vehiculo) {
+    public GridPane getFormulario() {
         GridPane gridPane = new GridPane();
 
         double x = PropiedadesPantalla.getInstancia().getX();
@@ -38,64 +37,63 @@ public class VistaModificarVehiculo extends Stage {
         gridPane.setPadding(new Insets(20, 20, 20, 10));
         // gridPane.setGridLinesVisible(true);
 
-        Text txtTitulo = new Text("MODIFICAR");
+        Text txtTitulo = new Text("AGREGAR");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(25));
-        gridPane.add(txtTitulo, 0, 4, 2, 1);
+        gridPane.add(txtTitulo, 0, 4);
 
-        JFXTextField jFTPlaca = new JFXTextField(vehiculo.getPlaca());
+        JFXTextField jFTPlaca = new JFXTextField();
         jFTPlaca.setPromptText("PLACA");
         jFTPlaca.setLabelFloat(true);
         jFTPlaca.setPrefWidth(x);
-        gridPane.add(jFTPlaca, 0, 5, 2, 1);
+        gridPane.add(jFTPlaca, 0, 5);
 
-        JFXTextField jFTMarca = new JFXTextField(vehiculo.getMarca());
+        JFXTextField jFTMarca = new JFXTextField();
         jFTMarca.setPromptText("MARCA");
         jFTMarca.setLabelFloat(true);
         jFTMarca.setPrefWidth(x);
-        gridPane.add(jFTMarca, 0, 6, 2, 1);
+        gridPane.add(jFTMarca, 0, 6);
 
-        JFXTextField jFTModelo = new JFXTextField(vehiculo.getModelo());
+        JFXTextField jFTModelo = new JFXTextField();
         jFTModelo.setPromptText("MODELO");
         jFTModelo.setLabelFloat(true);
         jFTModelo.setPrefWidth(x);
-        gridPane.add(jFTModelo, 0, 7, 2, 1);
+        gridPane.add(jFTModelo, 0, 7);
 
-        JFXTextField jFTAnio = new JFXTextField(vehiculo.getAnio());
+        JFXTextField jFTAnio = new JFXTextField();
         jFTAnio.setPromptText("AÑO");
         jFTAnio.setLabelFloat(true);
         jFTAnio.setPrefWidth(x);
-        gridPane.add(jFTAnio, 0, 8, 2, 1);
+        gridPane.add(jFTAnio, 0, 8);
 
-        JFXTextField jFTColor = new JFXTextField(vehiculo.getColor());
+        JFXTextField jFTColor = new JFXTextField();
         jFTColor.setPromptText("COLOR");
         jFTColor.setLabelFloat(true);
         jFTColor.setPrefWidth(x);
-        gridPane.add(jFTColor, 0, 9, 2, 1);
+        gridPane.add(jFTColor, 0, 9);
 
-        JFXTextField jFTPrecio = new JFXTextField(vehiculo.getPrecio());
+        JFXTextField jFTPrecio = new JFXTextField();
         jFTPrecio.setPromptText("PRECIO");
         jFTPrecio.setLabelFloat(true);
         jFTPrecio.setPrefWidth(x);
-        gridPane.add(jFTPrecio, 0, 10, 2, 1);
+        gridPane.add(jFTPrecio, 0, 10);
 
         String[] transmisiones = {"Automática", "Mecánica"};
         ObservableList obsTransmision = FXCollections.observableArrayList(transmisiones);
         ObservableList<String> informacion = obsTransmision;
         JFXComboBox<String> cbTransmision = new JFXComboBox<>(informacion);
         cbTransmision.setPromptText("TRANSMISIÓN");
-        cbTransmision.getSelectionModel().select(vehiculo.getTransmision());
         cbTransmision.setLabelFloat(true);
         cbTransmision.setPrefWidth(x);
-        gridPane.add(cbTransmision, 0, 11, 2, 1);
+        gridPane.add(cbTransmision, 0, 11);
 
-        JFXButton btnModificar = new JFXButton("MODIFICAR");
-        btnModificar.getStyleClass().addAll("customButton", "primaryButton");
-        btnModificar.setButtonType(JFXButton.ButtonType.FLAT);
-        btnModificar.setPrefSize(x, y * 0.04);
-        btnModificar.setOnAction(event -> {
+        JFXButton buttonAdd = new JFXButton("AGREGAR");
+        buttonAdd.getStyleClass().addAll("customButton", "primaryButton");
+        buttonAdd.setButtonType(JFXButton.ButtonType.FLAT);
+        buttonAdd.setPrefSize(x, y * 0.04);
+        buttonAdd.setOnAction(event -> {
             if (jFTPlaca.getText().length() == 0
-                    || jFTMarca.getText().length() == 0
+                    || jFTMarca.getText().length() == 0 
                     || jFTModelo.getText().length() == 0
                     || jFTAnio.getText().length() == 0
                     || jFTColor.getText().length() == 0
@@ -103,18 +101,9 @@ public class VistaModificarVehiculo extends Stage {
                     || cbTransmision.getSelectionModel().getSelectedItem() == null) {
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
-                VistaVehiculo.getInstancia().actualizarItemsTabla();
             }
         });
-        gridPane.add(btnModificar, 0, 12);
-
-        JFXButton btnCancelar = new JFXButton("CANCELAR");
-        btnCancelar.getStyleClass().addAll("customButton", "dangerButton");
-        btnCancelar.setButtonType(JFXButton.ButtonType.FLAT);
-        btnCancelar.setPrefSize(x, y * 0.04);
-        btnCancelar.setOnAction(event -> VistaVehiculo.getInstancia().reiniciarHBox());
-        gridPane.add(btnCancelar, 1, 12);
-
+        gridPane.add(buttonAdd, 0, 12);
         return gridPane;
     }
 }

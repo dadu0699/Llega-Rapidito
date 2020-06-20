@@ -5,7 +5,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.jd.views.Panel;
+import org.jd.vistas.Panel;
 
 public class LlegaRapidito extends Application {
     private static Stage stage;

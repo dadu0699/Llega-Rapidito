@@ -1,7 +1,9 @@
-package org.jd.views;
+package org.jd.vistas;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import java.util.ArrayList;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -10,29 +12,27 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.layout.VBox;
-import java.util.ArrayList;
-import javafx.beans.value.ObservableValue;
-import org.jd.beans.Cliente;
-import org.jd.util.PropiedadesPantalla;
+import org.jd.modelos.Ruta;
+import org.jd.utilidades.PropiedadesPantalla;
 
-public class VistaCliente extends Stage {
+public class VistaRuta extends Stage {
 
-    private static VistaCliente instancia;
+    private static VistaRuta instancia;
     private HBox hBoxPaneles;
     private VBox vBoxCRUD;
     private TableView tableView;
     private ObservableList observableList;
 
-    private VistaCliente() {
+    private VistaRuta() {
     }
 
-    public static VistaCliente getInstancia() {
+    public static VistaRuta getInstancia() {
         if (instancia == null) {
-            instancia = new VistaCliente();
+            instancia = new VistaRuta();
         }
         return instancia;
     }
@@ -40,20 +40,19 @@ public class VistaCliente extends Stage {
     public void reiniciarHBox() {
         hBoxPaneles.getChildren().clear();
         vBoxCRUD.getChildren().clear();
-        vBoxCRUD.getChildren().add(VistaAgregarCliente.getInstancia().getFormulario());
-        hBoxPaneles.getChildren().addAll(getTablaCliente(), vBoxCRUD);
+        vBoxCRUD.getChildren().add(VistaAgregarRuta.getInstancia().getFormulario());
+        hBoxPaneles.getChildren().addAll(getTablaRuta(), vBoxCRUD);
     }
 
     private void actualizarObsList() {
-        ArrayList<Cliente> clientes = new ArrayList<>();
-        clientes.add(new Cliente(201801266, "Didier", "Dominguez", "Masculino", "06/04/1999", "5555-5555", "Boca del monte"));
-        clientes.add(new Cliente(201800491, "Jacqueline", "Mendez", "Femenino", "06/11/1999", "5555-5555", "Zona 1"));
-        // clientes = CategoryController.getInstancia().getBooks();
+        ArrayList<Ruta> rutas = new ArrayList<>();
+        rutas.add(new Ruta("Guatemala", "Peten", "10 Horas"));
+        rutas.add(new Ruta("El progreso", "Guatemala", "2 Horas"));
 
         if (observableList != null) {
             observableList.clear();
         }
-        observableList = FXCollections.observableArrayList(clientes);
+        observableList = FXCollections.observableArrayList(rutas);
     }
 
     public void actualizarItemsTabla() {
@@ -63,8 +62,6 @@ public class VistaCliente extends Stage {
 
     // Lista de busqueda
     private void actualizarObsList(String search) {
-        // observableList =
-        // FXCollections.observableArrayList(CategoryController.getInstance().searchBooks(search));
     }
 
     public void actualizarItemsTabla(String search) {
@@ -72,7 +69,7 @@ public class VistaCliente extends Stage {
         tableView.setItems(observableList);
     }
 
-    public VBox getVistaCliente() {
+    public VBox getVistaRuta() {
         VBox vBox = new VBox();
         GridPane gridPaneTitulo = new GridPane();
 
@@ -85,7 +82,7 @@ public class VistaCliente extends Stage {
         gridPaneTitulo.setPrefSize(x, y * 0.005);
         vBox.setPrefSize(x, y);
 
-        Text txtTitulo = new Text("CLIENTES");
+        Text txtTitulo = new Text("RUTAS");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(30));
         gridPaneTitulo.add(txtTitulo, 0, 0);
@@ -96,14 +93,14 @@ public class VistaCliente extends Stage {
 
         vBoxCRUD = new VBox();
         vBoxCRUD.setPrefSize(x * 0.30, y * 0.995);
-        vBoxCRUD.getChildren().add(VistaAgregarCliente.getInstancia().getFormulario());
+        vBoxCRUD.getChildren().add(VistaAgregarRuta.getInstancia().getFormulario());
 
-        hBoxPaneles.getChildren().addAll(getTablaCliente(), vBoxCRUD);
+        hBoxPaneles.getChildren().addAll(getTablaRuta(), vBoxCRUD);
         vBox.getChildren().addAll(gridPaneTitulo, hBoxPaneles);
         return vBox;
     }
 
-    private GridPane getTablaCliente() {
+    private GridPane getTablaRuta() {
         GridPane gridPane = new GridPane();
 
         double x = PropiedadesPantalla.getInstancia().getX();
@@ -127,10 +124,6 @@ public class VistaCliente extends Stage {
         btnArchivo.setButtonType(JFXButton.ButtonType.FLAT);
         btnArchivo.setPrefSize(x, y);
         btnArchivo.setOnAction(event -> {
-            /*
-             * FileControl.getInstancia().uploadFile("User File", "*.json");
-             * FileControl.getInstancia().readUserJSON(); actualizarItemsTabla();
-             */
         });
 
         JFXButton btnAgregar = new JFXButton("AGREGAR");
@@ -139,7 +132,7 @@ public class VistaCliente extends Stage {
         btnAgregar.setPrefSize(x, y);
         btnAgregar.setOnAction(event -> {
             vBoxCRUD.getChildren().clear();
-            vBoxCRUD.getChildren().addAll(VistaAgregarCliente.getInstancia().getFormulario());
+            vBoxCRUD.getChildren().addAll(VistaAgregarRuta.getInstancia().getFormulario());
         });
 
         JFXButton btnModificar = new JFXButton("MODIFICAR");
@@ -149,8 +142,7 @@ public class VistaCliente extends Stage {
         btnModificar.setOnAction(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
-                vBoxCRUD.getChildren().add(0, VistaModificarCliente.getInstancia()
-                        .getGridPane((Cliente) tableView.getSelectionModel().getSelectedItem()));
+                vBoxCRUD.getChildren().add(0, VistaModificarRuta.getInstancia() .getGridPane((Ruta) tableView.getSelectionModel().getSelectedItem()));
             } else {
                 reiniciarHBox();
             }
@@ -161,12 +153,12 @@ public class VistaCliente extends Stage {
         btnEliminar.setButtonType(JFXButton.ButtonType.FLAT);
         btnEliminar.setPrefSize(x, y);
         btnEliminar.setOnAction(event -> {
-            Cliente cliente = (Cliente) tableView.getSelectionModel().getSelectedItem();
-            if (cliente != null) {
+            Ruta ruta = (Ruta) tableView.getSelectionModel().getSelectedItem();
+            if (ruta != null) {
                 reiniciarHBox();
-                // ELIMINAR Cliente (METODO)
-                VistaCliente.this.actualizarItemsTabla();
-                Alerta.getInstancia().mostrarNotificacion("CLIENTES", "CLIENTE ELIMINADO EXITOSAMENTE");
+                // ELIMINAR Ruta (METODO)
+                VistaRuta.this.actualizarItemsTabla();
+                Alerta.getInstancia().mostrarNotificacion("RUTAS", "RUTA ELIMINADO EXITOSAMENTE");
             }
         });
 
@@ -177,43 +169,25 @@ public class VistaCliente extends Stage {
         hBoxBotones.setMargin(btnModificar, new Insets(0, 5, 0, 0));
         gridPane.add(hBoxBotones, 0, 1);
 
-        TableColumn<Cliente, Integer> colDPI = new TableColumn<>("DPI");
-        colDPI.setPrefWidth(x / 10);
-        colDPI.setCellValueFactory(new PropertyValueFactory<>("DPI"));
+        TableColumn<Ruta, String> colOrigen = new TableColumn<>("ORIGEN");
+        colOrigen.setPrefWidth(x * 7 / 30);
+        colOrigen.setCellValueFactory(new PropertyValueFactory<>("origen"));
 
-        TableColumn<Cliente, String> colNombres = new TableColumn<>("NOMBRES");
-        colNombres.setPrefWidth(x / 10);
-        colNombres.setCellValueFactory(new PropertyValueFactory<>("nombres"));
+        TableColumn<Ruta, String> colDestino = new TableColumn<>("DESTINO");
+        colDestino.setPrefWidth(x * 7 / 30);
+        colDestino.setCellValueFactory(new PropertyValueFactory<>("destino"));
 
-        TableColumn<Cliente, String> colApellidos = new TableColumn<>("APELLIDOS");
-        colApellidos.setPrefWidth(x / 10);
-        colApellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
-
-        TableColumn<Cliente, String> colGenero = new TableColumn<>("GENERO");
-        colGenero.setPrefWidth(x / 10);
-        colGenero.setCellValueFactory(new PropertyValueFactory<>("genero"));
-
-        TableColumn<Cliente, String> colFechaNacimiento = new TableColumn<>("FECHA NACIMIENTO");
-        colFechaNacimiento.setPrefWidth(x / 10);
-        colFechaNacimiento.setCellValueFactory(new PropertyValueFactory<>("fechaNacimiento"));
-
-        TableColumn<Cliente, String> colTelefono = new TableColumn<>("TELEFONO");
-        colTelefono.setPrefWidth(x / 10);
-        colTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
-
-        TableColumn<Cliente, String> colDireccion = new TableColumn<>("DIRECCION");
-        colDireccion.setPrefWidth(x / 10);
-        colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+        TableColumn<Ruta, String> colTiempoRuta = new TableColumn<>("TIEMPO RUTA");
+        colTiempoRuta.setPrefWidth(x * 7 / 30);
+        colTiempoRuta.setCellValueFactory(new PropertyValueFactory<>("tiempoRuta"));
 
         actualizarObsList();
         tableView = new TableView<>(observableList);
-        tableView.getColumns().addAll(colDPI, colNombres, colApellidos, colGenero, colFechaNacimiento, colTelefono,
-                colDireccion);
+        tableView.getColumns().addAll(colOrigen, colDestino, colTiempoRuta);
         tableView.setOnMouseClicked(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
-                vBoxCRUD.getChildren().add(0, VistaMostrarCliente.getInstancia()
-                        .getGridPane((Cliente) tableView.getSelectionModel().getSelectedItem()));
+                vBoxCRUD.getChildren().add(0, VistaMostrarRuta.getInstancia().getGridPane((Ruta) tableView.getSelectionModel().getSelectedItem()));
             }
         });
         tableView.setPrefSize(x, y * 0.995);

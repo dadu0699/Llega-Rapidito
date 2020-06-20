@@ -1,4 +1,4 @@
-package org.jd.views;
+package org.jd.vistas;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -9,8 +9,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.jd.beans.Vehiculo;
-import org.jd.util.PropiedadesPantalla;
+import org.jd.modelos.Vehiculo;
+import org.jd.utilidades.PropiedadesPantalla;
 
 public class VistaMostrarVehiculo extends Stage {
 

@@ -1,11 +1,11 @@
-package org.jd.views;
+package org.jd.vistas;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.jd.util.PropiedadesPantalla;
+import org.jd.utilidades.PropiedadesPantalla;
 
 public class Panel extends Stage {
 

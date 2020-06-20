@@ -1,4 +1,4 @@
-package org.jd.views;
+package org.jd.vistas;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -16,23 +16,23 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.jd.beans.Ruta;
-import org.jd.util.PropiedadesPantalla;
+import org.jd.modelos.Vehiculo;
+import org.jd.utilidades.PropiedadesPantalla;
 
-public class VistaRuta extends Stage {
+public class VistaVehiculo extends Stage {
 
-    private static VistaRuta instancia;
+    private static VistaVehiculo instancia;
     private HBox hBoxPaneles;
     private VBox vBoxCRUD;
     private TableView tableView;
     private ObservableList observableList;
 
-    private VistaRuta() {
+    private VistaVehiculo() {
     }
 
-    public static VistaRuta getInstancia() {
+    public static VistaVehiculo getInstancia() {
         if (instancia == null) {
-            instancia = new VistaRuta();
+            instancia = new VistaVehiculo();
         }
         return instancia;
     }
@@ -40,17 +40,20 @@ public class VistaRuta extends Stage {
     public void reiniciarHBox() {
         hBoxPaneles.getChildren().clear();
         vBoxCRUD.getChildren().clear();
-        // vBoxCRUD.getChildren().add(VistaAgregarRuta.getInstancia().getFormulario());
-        hBoxPaneles.getChildren().addAll(getTablaRuta(), vBoxCRUD);
+        vBoxCRUD.getChildren().add(VistaAgregarVehiculo.getInstancia().getFormulario());
+        hBoxPaneles.getChildren().addAll(getTablaVehiculo(), vBoxCRUD);
     }
 
     private void actualizarObsList() {
-        ArrayList<Ruta> rutas = new ArrayList<>();
+        ArrayList<Vehiculo> vehiculos = new ArrayList<>();
+        vehiculos.add(new Vehiculo("AS213", "Mercedes", "AMG", "2020", "Verde", "Q.200.00", "Mecánica"));
+        vehiculos.add(new Vehiculo("QEW43", "BMW", "M3", "1980", "Negro", "Q.125.00", "Mecánica"));
+        // vehiculos = CategoryController.getInstancia().getBooks();
 
         if (observableList != null) {
             observableList.clear();
         }
-        observableList = FXCollections.observableArrayList(rutas);
+        observableList = FXCollections.observableArrayList(vehiculos);
     }
 
     public void actualizarItemsTabla() {
@@ -67,7 +70,7 @@ public class VistaRuta extends Stage {
         tableView.setItems(observableList);
     }
 
-    public VBox getVistaRuta() {
+    public VBox getVistaVehiculo() {
         VBox vBox = new VBox();
         GridPane gridPaneTitulo = new GridPane();
 
@@ -76,11 +79,10 @@ public class VistaRuta extends Stage {
 
         gridPaneTitulo.setVgap(10);
         gridPaneTitulo.setPadding(new Insets(20));
-        // gridPaneTitulo.setGridLinesVisible(true);
         gridPaneTitulo.setPrefSize(x, y * 0.005);
         vBox.setPrefSize(x, y);
 
-        Text txtTitulo = new Text("RUTAS");
+        Text txtTitulo = new Text("VEHICULOS");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(30));
         gridPaneTitulo.add(txtTitulo, 0, 0);
@@ -91,14 +93,14 @@ public class VistaRuta extends Stage {
 
         vBoxCRUD = new VBox();
         vBoxCRUD.setPrefSize(x * 0.30, y * 0.995);
-        // vBoxCRUD.getChildren().add(VistaAgregarRuta.getInstancia().getFormulario());
+        vBoxCRUD.getChildren().add(VistaAgregarVehiculo.getInstancia().getFormulario());
 
-        hBoxPaneles.getChildren().addAll(getTablaRuta(), vBoxCRUD);
+        hBoxPaneles.getChildren().addAll(getTablaVehiculo(), vBoxCRUD);
         vBox.getChildren().addAll(gridPaneTitulo, hBoxPaneles);
         return vBox;
     }
 
-    private GridPane getTablaRuta() {
+    private GridPane getTablaVehiculo() {
         GridPane gridPane = new GridPane();
 
         double x = PropiedadesPantalla.getInstancia().getX();
@@ -130,7 +132,7 @@ public class VistaRuta extends Stage {
         btnAgregar.setPrefSize(x, y);
         btnAgregar.setOnAction(event -> {
             vBoxCRUD.getChildren().clear();
-            // vBoxCRUD.getChildren().addAll(VistaAgregarRuta.getInstancia().getFormulario());
+            vBoxCRUD.getChildren().addAll(VistaAgregarVehiculo.getInstancia().getFormulario());
         });
 
         JFXButton btnModificar = new JFXButton("MODIFICAR");
@@ -140,7 +142,8 @@ public class VistaRuta extends Stage {
         btnModificar.setOnAction(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
-                // vBoxCRUD.getChildren().add(0, VistaModificarRuta.getInstancia() .getGridPane((Ruta) tableView.getSelectionModel().getSelectedItem()));
+                vBoxCRUD.getChildren().add(0, VistaModificarVehiculo.getInstancia().getGridPane(
+                        (Vehiculo) tableView.getSelectionModel().getSelectedItem()));
             } else {
                 reiniciarHBox();
             }
@@ -151,12 +154,12 @@ public class VistaRuta extends Stage {
         btnEliminar.setButtonType(JFXButton.ButtonType.FLAT);
         btnEliminar.setPrefSize(x, y);
         btnEliminar.setOnAction(event -> {
-            Ruta ruta = (Ruta) tableView.getSelectionModel().getSelectedItem();
-            if (ruta != null) {
+            Vehiculo vehiculo = (Vehiculo) tableView.getSelectionModel().getSelectedItem();
+            if (vehiculo != null) {
                 reiniciarHBox();
-                // ELIMINAR Ruta (METODO)
-                VistaRuta.this.actualizarItemsTabla();
-                Alerta.getInstancia().mostrarNotificacion("RUTAS", "RUTA ELIMINADO EXITOSAMENTE");
+                // ELIMINAR Vehiculo (METODO)
+                VistaVehiculo.this.actualizarItemsTabla();
+                Alerta.getInstancia().mostrarNotificacion("VEHICULOS", "VEHICULO ELIMINADO EXITOSAMENTE");
             }
         });
 
@@ -167,27 +170,45 @@ public class VistaRuta extends Stage {
         hBoxBotones.setMargin(btnModificar, new Insets(0, 5, 0, 0));
         gridPane.add(hBoxBotones, 0, 1);
 
-        TableColumn<Ruta, String> colOrigen = new TableColumn<>("ORIGEN");
-        colOrigen.setPrefWidth(x * 7 / 30);
-        colOrigen.setCellValueFactory(new PropertyValueFactory<>("origen"));
+        TableColumn<Vehiculo, String> colPlaca = new TableColumn<>("PLACA");
+        colPlaca.setPrefWidth(x / 10);
+        colPlaca.setCellValueFactory(new PropertyValueFactory<>("placa"));
 
-        TableColumn<Ruta, String> colDestino = new TableColumn<>("DESTINO");
-        colDestino.setPrefWidth(x * 7 / 30);
-        colDestino.setCellValueFactory(new PropertyValueFactory<>("destino"));
+        TableColumn<Vehiculo, String> colMarca = new TableColumn<>("MARCA");
+        colMarca.setPrefWidth(x / 10);
+        colMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
 
-        TableColumn<Ruta, String> colTiempoRuta = new TableColumn<>("TIEMPO RUTA");
-        colTiempoRuta.setPrefWidth(x * 7 / 30);
-        colTiempoRuta.setCellValueFactory(new PropertyValueFactory<>("tiempoRuta"));
+        TableColumn<Vehiculo, String> colModelo = new TableColumn<>("MODELO");
+        colModelo.setPrefWidth(x / 10);
+        colModelo.setCellValueFactory(new PropertyValueFactory<>("modelo"));
+
+        TableColumn<Vehiculo, String> colAnio = new TableColumn<>("AÑO");
+        colAnio.setPrefWidth(x / 10);
+        colAnio.setCellValueFactory(new PropertyValueFactory<>("anio"));
+
+        TableColumn<Vehiculo, String> colColor = new TableColumn<>("COLOR");
+        colColor.setPrefWidth(x / 10);
+        colColor.setCellValueFactory(new PropertyValueFactory<>("color"));
+
+        TableColumn<Vehiculo, String> colPrecio = new TableColumn<>("PRECIO");
+        colPrecio.setPrefWidth(x / 10);
+        colPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
+
+        TableColumn<Vehiculo, String> colTransmision = new TableColumn<>("TRANSMISIÓN");
+        colTransmision.setPrefWidth(x / 10);
+        colTransmision.setCellValueFactory(new PropertyValueFactory<>("transmision"));
 
         actualizarObsList();
         tableView = new TableView<>(observableList);
-        tableView.getColumns().addAll(colOrigen, colDestino, colTiempoRuta);
+        tableView.getColumns().addAll(colPlaca, colMarca, colModelo, colAnio, colColor, colPrecio, colTransmision);
+
         tableView.setOnMouseClicked(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
-                // vBoxCRUD.getChildren().add(0, VistaMostrarRuta.getInstancia().getGridPane((Ruta) tableView.getSelectionModel().getSelectedItem()));
+                vBoxCRUD.getChildren().add(0, VistaMostrarVehiculo.getInstancia().getGridPane((Vehiculo) tableView.getSelectionModel().getSelectedItem()));
             }
         });
+
         tableView.setPrefSize(x, y * 0.995);
 
         gridPane.add(tableView, 0, 3);

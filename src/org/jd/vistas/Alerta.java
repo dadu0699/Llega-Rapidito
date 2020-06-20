@@ -1,4 +1,4 @@
-package org.jd.views;
+package org.jd.vistas;
 
 import com.jfoenix.controls.JFXAlert;
 import com.jfoenix.controls.JFXButton;

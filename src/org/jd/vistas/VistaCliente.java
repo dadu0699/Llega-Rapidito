@@ -1,9 +1,7 @@
-package org.jd.views;
+package org.jd.vistas;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import java.util.ArrayList;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -12,27 +10,29 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.jd.beans.Vehiculo;
-import org.jd.util.PropiedadesPantalla;
+import javafx.scene.layout.VBox;
+import java.util.ArrayList;
+import javafx.beans.value.ObservableValue;
+import org.jd.modelos.Cliente;
+import org.jd.utilidades.PropiedadesPantalla;
 
-public class VistaVehiculo extends Stage {
+public class VistaCliente extends Stage {
 
-    private static VistaVehiculo instancia;
+    private static VistaCliente instancia;
     private HBox hBoxPaneles;
     private VBox vBoxCRUD;
     private TableView tableView;
     private ObservableList observableList;
 
-    private VistaVehiculo() {
+    private VistaCliente() {
     }
 
-    public static VistaVehiculo getInstancia() {
+    public static VistaCliente getInstancia() {
         if (instancia == null) {
-            instancia = new VistaVehiculo();
+            instancia = new VistaCliente();
         }
         return instancia;
     }
@@ -40,20 +40,20 @@ public class VistaVehiculo extends Stage {
     public void reiniciarHBox() {
         hBoxPaneles.getChildren().clear();
         vBoxCRUD.getChildren().clear();
-        vBoxCRUD.getChildren().add(VistaAgregarVehiculo.getInstancia().getFormulario());
-        hBoxPaneles.getChildren().addAll(getTablaVehiculo(), vBoxCRUD);
+        vBoxCRUD.getChildren().add(VistaAgregarCliente.getInstancia().getFormulario());
+        hBoxPaneles.getChildren().addAll(getTablaCliente(), vBoxCRUD);
     }
 
     private void actualizarObsList() {
-        ArrayList<Vehiculo> vehiculos = new ArrayList<>();
-        vehiculos.add(new Vehiculo("AS213", "Mercedes", "AMG", "2020", "Verde", "Q.200.00", "Mecánica"));
-        vehiculos.add(new Vehiculo("QEW43", "BMW", "M3", "1980", "Negro", "Q.125.00", "Mecánica"));
-        // vehiculos = CategoryController.getInstancia().getBooks();
+        ArrayList<Cliente> clientes = new ArrayList<>();
+        clientes.add(new Cliente(201801266, "Didier", "Dominguez", "Masculino", "06/04/1999", "5555-5555", "Boca del monte"));
+        clientes.add(new Cliente(201800491, "Jacqueline", "Mendez", "Femenino", "06/11/1999", "5555-5555", "Zona 1"));
+        // clientes = CategoryController.getInstancia().getBooks();
 
         if (observableList != null) {
             observableList.clear();
         }
-        observableList = FXCollections.observableArrayList(vehiculos);
+        observableList = FXCollections.observableArrayList(clientes);
     }
 
     public void actualizarItemsTabla() {
@@ -63,6 +63,8 @@ public class VistaVehiculo extends Stage {
 
     // Lista de busqueda
     private void actualizarObsList(String search) {
+        // observableList =
+        // FXCollections.observableArrayList(CategoryController.getInstance().searchBooks(search));
     }
 
     public void actualizarItemsTabla(String search) {
@@ -70,7 +72,7 @@ public class VistaVehiculo extends Stage {
         tableView.setItems(observableList);
     }
 
-    public VBox getVistaVehiculo() {
+    public VBox getVistaCliente() {
         VBox vBox = new VBox();
         GridPane gridPaneTitulo = new GridPane();
 
@@ -79,10 +81,11 @@ public class VistaVehiculo extends Stage {
 
         gridPaneTitulo.setVgap(10);
         gridPaneTitulo.setPadding(new Insets(20));
+        // gridPaneTitulo.setGridLinesVisible(true);
         gridPaneTitulo.setPrefSize(x, y * 0.005);
         vBox.setPrefSize(x, y);
 
-        Text txtTitulo = new Text("VEHICULOS");
+        Text txtTitulo = new Text("CLIENTES");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(30));
         gridPaneTitulo.add(txtTitulo, 0, 0);
@@ -93,14 +96,14 @@ public class VistaVehiculo extends Stage {
 
         vBoxCRUD = new VBox();
         vBoxCRUD.setPrefSize(x * 0.30, y * 0.995);
-        vBoxCRUD.getChildren().add(VistaAgregarVehiculo.getInstancia().getFormulario());
+        vBoxCRUD.getChildren().add(VistaAgregarCliente.getInstancia().getFormulario());
 
-        hBoxPaneles.getChildren().addAll(getTablaVehiculo(), vBoxCRUD);
+        hBoxPaneles.getChildren().addAll(getTablaCliente(), vBoxCRUD);
         vBox.getChildren().addAll(gridPaneTitulo, hBoxPaneles);
         return vBox;
     }
 
-    private GridPane getTablaVehiculo() {
+    private GridPane getTablaCliente() {
         GridPane gridPane = new GridPane();
 
         double x = PropiedadesPantalla.getInstancia().getX();
@@ -124,6 +127,10 @@ public class VistaVehiculo extends Stage {
         btnArchivo.setButtonType(JFXButton.ButtonType.FLAT);
         btnArchivo.setPrefSize(x, y);
         btnArchivo.setOnAction(event -> {
+            /*
+             * FileControl.getInstancia().uploadFile("User File", "*.json");
+             * FileControl.getInstancia().readUserJSON(); actualizarItemsTabla();
+             */
         });
 
         JFXButton btnAgregar = new JFXButton("AGREGAR");
@@ -132,7 +139,7 @@ public class VistaVehiculo extends Stage {
         btnAgregar.setPrefSize(x, y);
         btnAgregar.setOnAction(event -> {
             vBoxCRUD.getChildren().clear();
-            vBoxCRUD.getChildren().addAll(VistaAgregarVehiculo.getInstancia().getFormulario());
+            vBoxCRUD.getChildren().addAll(VistaAgregarCliente.getInstancia().getFormulario());
         });
 
         JFXButton btnModificar = new JFXButton("MODIFICAR");
@@ -142,8 +149,8 @@ public class VistaVehiculo extends Stage {
         btnModificar.setOnAction(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
-                vBoxCRUD.getChildren().add(0, VistaModificarVehiculo.getInstancia().getGridPane(
-                        (Vehiculo) tableView.getSelectionModel().getSelectedItem()));
+                vBoxCRUD.getChildren().add(0, VistaModificarCliente.getInstancia()
+                        .getGridPane((Cliente) tableView.getSelectionModel().getSelectedItem()));
             } else {
                 reiniciarHBox();
             }
@@ -154,12 +161,12 @@ public class VistaVehiculo extends Stage {
         btnEliminar.setButtonType(JFXButton.ButtonType.FLAT);
         btnEliminar.setPrefSize(x, y);
         btnEliminar.setOnAction(event -> {
-            Vehiculo vehiculo = (Vehiculo) tableView.getSelectionModel().getSelectedItem();
-            if (vehiculo != null) {
+            Cliente cliente = (Cliente) tableView.getSelectionModel().getSelectedItem();
+            if (cliente != null) {
                 reiniciarHBox();
-                // ELIMINAR Vehiculo (METODO)
-                VistaVehiculo.this.actualizarItemsTabla();
-                Alerta.getInstancia().mostrarNotificacion("VEHICULOS", "VEHICULO ELIMINADO EXITOSAMENTE");
+                // ELIMINAR Cliente (METODO)
+                VistaCliente.this.actualizarItemsTabla();
+                Alerta.getInstancia().mostrarNotificacion("CLIENTES", "CLIENTE ELIMINADO EXITOSAMENTE");
             }
         });
 
@@ -170,45 +177,45 @@ public class VistaVehiculo extends Stage {
         hBoxBotones.setMargin(btnModificar, new Insets(0, 5, 0, 0));
         gridPane.add(hBoxBotones, 0, 1);
 
-        TableColumn<Vehiculo, String> colPlaca = new TableColumn<>("PLACA");
-        colPlaca.setPrefWidth(x / 10);
-        colPlaca.setCellValueFactory(new PropertyValueFactory<>("placa"));
+        TableColumn<Cliente, Integer> colDPI = new TableColumn<>("DPI");
+        colDPI.setPrefWidth(x / 10);
+        colDPI.setCellValueFactory(new PropertyValueFactory<>("DPI"));
 
-        TableColumn<Vehiculo, String> colMarca = new TableColumn<>("MARCA");
-        colMarca.setPrefWidth(x / 10);
-        colMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
+        TableColumn<Cliente, String> colNombres = new TableColumn<>("NOMBRES");
+        colNombres.setPrefWidth(x / 10);
+        colNombres.setCellValueFactory(new PropertyValueFactory<>("nombres"));
 
-        TableColumn<Vehiculo, String> colModelo = new TableColumn<>("MODELO");
-        colModelo.setPrefWidth(x / 10);
-        colModelo.setCellValueFactory(new PropertyValueFactory<>("modelo"));
+        TableColumn<Cliente, String> colApellidos = new TableColumn<>("APELLIDOS");
+        colApellidos.setPrefWidth(x / 10);
+        colApellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
 
-        TableColumn<Vehiculo, String> colAnio = new TableColumn<>("AÑO");
-        colAnio.setPrefWidth(x / 10);
-        colAnio.setCellValueFactory(new PropertyValueFactory<>("anio"));
+        TableColumn<Cliente, String> colGenero = new TableColumn<>("GENERO");
+        colGenero.setPrefWidth(x / 10);
+        colGenero.setCellValueFactory(new PropertyValueFactory<>("genero"));
 
-        TableColumn<Vehiculo, String> colColor = new TableColumn<>("COLOR");
-        colColor.setPrefWidth(x / 10);
-        colColor.setCellValueFactory(new PropertyValueFactory<>("color"));
+        TableColumn<Cliente, String> colFechaNacimiento = new TableColumn<>("FECHA NACIMIENTO");
+        colFechaNacimiento.setPrefWidth(x / 10);
+        colFechaNacimiento.setCellValueFactory(new PropertyValueFactory<>("fechaNacimiento"));
 
-        TableColumn<Vehiculo, String> colPrecio = new TableColumn<>("PRECIO");
-        colPrecio.setPrefWidth(x / 10);
-        colPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
+        TableColumn<Cliente, String> colTelefono = new TableColumn<>("TELEFONO");
+        colTelefono.setPrefWidth(x / 10);
+        colTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
 
-        TableColumn<Vehiculo, String> colTransmision = new TableColumn<>("TRANSMISIÓN");
-        colTransmision.setPrefWidth(x / 10);
-        colTransmision.setCellValueFactory(new PropertyValueFactory<>("transmision"));
+        TableColumn<Cliente, String> colDireccion = new TableColumn<>("DIRECCION");
+        colDireccion.setPrefWidth(x / 10);
+        colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
 
         actualizarObsList();
         tableView = new TableView<>(observableList);
-        tableView.getColumns().addAll(colPlaca, colMarca, colModelo, colAnio, colColor, colPrecio, colTransmision);
-
+        tableView.getColumns().addAll(colDPI, colNombres, colApellidos, colGenero, colFechaNacimiento, colTelefono,
+                colDireccion);
         tableView.setOnMouseClicked(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
-                vBoxCRUD.getChildren().add(0, VistaMostrarVehiculo.getInstancia().getGridPane((Vehiculo) tableView.getSelectionModel().getSelectedItem()));
+                vBoxCRUD.getChildren().add(0, VistaMostrarCliente.getInstancia()
+                        .getGridPane((Cliente) tableView.getSelectionModel().getSelectedItem()));
             }
         });
-
         tableView.setPrefSize(x, y * 0.995);
 
         gridPane.add(tableView, 0, 3);

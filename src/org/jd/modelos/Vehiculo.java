@@ -1,4 +1,4 @@
-package org.jd.beans;
+package org.jd.modelos;
 
 public class Vehiculo {
 
