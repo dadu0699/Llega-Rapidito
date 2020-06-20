@@ -48,11 +48,11 @@ public class VistaAgregarCliente extends Stage {
         jFTDPI.setPrefWidth(x);
         gridPane.add(jFTDPI, 0, 5);
 
-        JFXTextField jFTNombre = new JFXTextField();
-        jFTNombre.setPromptText("NOMBRES");
-        jFTNombre.setLabelFloat(true);
-        jFTNombre.setPrefWidth(x);
-        gridPane.add(jFTNombre, 0, 6);
+        JFXTextField jFTNombres = new JFXTextField();
+        jFTNombres.setPromptText("NOMBRES");
+        jFTNombres.setLabelFloat(true);
+        jFTNombres.setPrefWidth(x);
+        gridPane.add(jFTNombres, 0, 6);
 
         JFXTextField jFTApellidos = new JFXTextField();
         jFTApellidos.setPromptText("APELLIDOS");
@@ -101,25 +101,27 @@ public class VistaAgregarCliente extends Stage {
         buttonAdd.setOnAction(event -> {
             if (jFTDPI.getText().length() == 0
                     // || !Verificaciones.getInstancia().esNumeroEntero(jFTDPI.getText().trim())
-                    || jFTNombre.getText().length() == 0
+                    || jFTNombres.getText().length() == 0 
                     || jFTApellidos.getText().length() == 0
-                    || cbGenero.getSelectionModel().getSelectedItem() == null
+                    || cbGenero.getSelectionModel().getSelectedItem() == null 
                     || jFTFNacimiento.getText().length() == 0
                     || jFTTelefono.getText().length() == 0
                     // || !Verificaciones.getInstancia().esNumeroEntero(jFTTelefono.getText().trim())
                     || jFTDireccion.getText().length() == 0) {
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
-                Alerta.getInstancia().mostrarNotificacion("ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
-                /*User user = UserController.getInstance().search(Integer.parseInt(fieldID.getText().trim()));
+                /*
+                User user = UserController.getInstance().search(Integer.parseInt(fieldID.getText().trim()));
                 if (user != null) {
-                    Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "EL USUARIO YA ESTÁ REGISTRADO");
-                } else {
-                    // Agregar cliente
-                    
+                    Alerta.getInstancia().mostrarAlerta(gridPane,
+                            "ERROR", "EL USUARIO YA ESTÁ REGISTRADO");
+                } else { // Agregar cliente
+
                     VistaCliente.getInstancia().updateTableViewItems();
-                    Alerta.getInstancia().mostrarNotificacion("USUARIO", "REGISTRO REALIZADO EXITOSAMENTE");
-                }*/
+                    Alerta.getInstancia().mostrarNotificacion("USUARIO",
+                            "REGISTRO REALIZADO EXITOSAMENTE");
+                }
+                */
             }
         });
         gridPane.add(buttonAdd, 0, 12);

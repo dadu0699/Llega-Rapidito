@@ -10,7 +10,7 @@ import org.jd.util.PropiedadesPantalla;
 public class Panel extends Stage {
 
     private static Panel instancia;
-    private HBox hBoxBotones; // Contenedor de elementos en forma horizontal 
+    private HBox hBoxBotones; // Contenedor de elementos en forma horizontal
 
     private Panel() {
     }
@@ -23,7 +23,7 @@ public class Panel extends Stage {
     }
 
     public VBox getPanel() {
-        VBox vBox = new VBox(); // Contenedor principal 
+        VBox vBox = new VBox(); // Contenedor principal
         hBoxBotones = new HBox(); // Contenerdor de los botones del menu
         VBox vBoxPaneles = new VBox(); // Contenedor de los paneles de cada menu
 
@@ -38,19 +38,20 @@ public class Panel extends Stage {
 
         JFXButton btnEncabezado = new JFXButton("LLEGA RAPIDITO"); // Asignacion del nombre al boton
         btnEncabezado.setDisable(true); // Desactivar boton
-        btnEncabezado.getStyleClass().addAll("headerNavButton", "panelButton"); // Diseños del panel de botones y de boton
+        btnEncabezado.getStyleClass().addAll("headerNavButton", "panelButton"); // Diseños del panel de botones y de
+                                                                                // boton
         btnEncabezado.setPrefSize(2 * x / 8, y); // Tamaño del boton
         btnEncabezado.setButtonType(JFXButton.ButtonType.FLAT); // Tipo de boton
 
         JFXButton btnClientes = new JFXButton("CLIENTES");
         selectButton(btnClientes); // Boton seleccionado al iniciar
-        btnClientes.setId("btnClientes"); // Asignacion de id al boton 
+        btnClientes.setId("btnClientes"); // Asignacion de id al boton
         btnClientes.getStyleClass().addAll("panelButton", "primaryButton");
         btnClientes.setPrefSize(x / 8, y);
         btnClientes.setButtonType(JFXButton.ButtonType.FLAT);
         btnClientes.setOnAction(event -> { // Evento clic y funcionalidad al realizarlo
             selectButton(btnClientes); // Asignacion de diseños al seleccionar el boton
-            vBoxPaneles.getChildren().clear();  // Limpieza del panel para agregar los nuevos atributos
+            vBoxPaneles.getChildren().clear(); // Limpieza del panel para agregar los nuevos atributos
             vBoxPaneles.getChildren().add(VistaCliente.getInstancia().getVistaCliente());
         });
 
@@ -62,6 +63,7 @@ public class Panel extends Stage {
         btnVehiculos.setOnAction(event -> {
             selectButton(btnVehiculos);
             vBoxPaneles.getChildren().clear();
+            vBoxPaneles.getChildren().add(VistaVehiculo.getInstancia().getVistaVehiculo());
         });
 
         JFXButton btnConductores = new JFXButton("CONDUCTORES");
@@ -104,13 +106,14 @@ public class Panel extends Stage {
             vBoxPaneles.getChildren().clear();
         });
 
-        hBoxBotones.getChildren().addAll(btnEncabezado, btnClientes, btnVehiculos, 
-                btnConductores, btnViajes, btnRutas, btnReportes); // Asignacion de botones al contenedor 
+        hBoxBotones.getChildren().addAll(btnEncabezado, btnClientes, btnVehiculos, btnConductores, btnViajes, btnRutas,
+                btnReportes); // Asignacion de botones al contenedor
         vBox.getChildren().addAll(hBoxBotones, vBoxPaneles); // Asignacion de los contenedores al panel principal
         return vBox;
     }
 
-    // Metodo para quitar el estilo de boton seleccionado y asignarlo al boton presionado
+    // Metodo para quitar el estilo de boton seleccionado y asignarlo al boton
+    // presionado
     private void selectButton(JFXButton jfxButton) {
         for (Node node : hBoxBotones.getChildren()) { // Se recorren todos los nodos del contenedor botones
             if (node instanceof JFXButton) { // Se verifica que el nodo sea una instancia del objeto JFXButton

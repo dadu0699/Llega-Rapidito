@@ -1,10 +1,7 @@
 package org.jd.views;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -16,6 +13,7 @@ import org.jd.beans.Cliente;
 import org.jd.util.PropiedadesPantalla;
 
 public class VistaMostrarCliente extends Stage {
+
     private static VistaMostrarCliente instancia;
 
     private VistaMostrarCliente() {
@@ -38,7 +36,7 @@ public class VistaMostrarCliente extends Stage {
         gridPane.setHgap(5);
         gridPane.setPadding(new Insets(20, 20, 20, 10));
         // gridPane.setGridLinesVisible(true);
-        
+
         Text txtTitulo = new Text("MOSTRAR");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(25));
@@ -48,6 +46,7 @@ public class VistaMostrarCliente extends Stage {
         jFTDPI.setPromptText("DPI");
         jFTDPI.setLabelFloat(true);
         jFTDPI.setPrefWidth(x);
+        jFTDPI.setEditable(false);
         gridPane.add(jFTDPI, 0, 5);
 
         JFXTextField jFTNombres = new JFXTextField(cliente.getNombres());
@@ -92,18 +91,23 @@ public class VistaMostrarCliente extends Stage {
         jFTDireccion.setEditable(false);
         gridPane.add(jFTDireccion, 0, 11);
 
-        JFXButton buttonCopy = new JFXButton("COPIAR");
-        buttonCopy.getStyleClass().addAll("customButton", "primaryButton");
-        buttonCopy.setButtonType(JFXButton.ButtonType.FLAT);
-        buttonCopy.setPrefSize(x, y * 0.04);
-        buttonCopy.setOnAction(event -> {
+        JFXButton btnCopiar = new JFXButton("COPIAR");
+        btnCopiar.getStyleClass().addAll("customButton", "primaryButton");
+        btnCopiar.setButtonType(JFXButton.ButtonType.FLAT);
+        btnCopiar.setPrefSize(x, y * 0.04);
+        btnCopiar.setOnAction(event -> {
             final Clipboard clipboard = Clipboard.getSystemClipboard();
             final ClipboardContent content = new ClipboardContent();
-            /*content.putString("CARNET:        " + cliente.getID() + "\nNOMBRE:        " + cliente.getName()
-                    + "\nAPELLIDO:      " + cliente.getLastName() + "\nCARRERA:       " + cliente.getCareer());*/
+            content.putString("DPI:                   " + cliente.getDPI() 
+                    + "\nNOMBRES:               " + cliente.getNombres() 
+                    + "\nAPELLIDOS:             " + cliente.getApellidos()
+                    + "\nGENERO:                " + cliente.getGenero() 
+                    + "\nFECHA NACIMIENTO:      " + cliente.getFechaNacimiento() 
+                    + "\nTELEFONO:              " + cliente.getTelefono()
+                    + "\nDIRECCION:             " + cliente.getDireccion());
             clipboard.setContent(content);
         });
-        gridPane.add(buttonCopy, 0, 12);
+        gridPane.add(btnCopiar, 0, 12);
         return gridPane;
     }
 }
