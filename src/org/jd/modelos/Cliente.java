@@ -2,7 +2,7 @@ package org.jd.modelos;
 
 public class Cliente {
 
-    private Integer DPI;
+    private String DPI;
     private String nombres;
     private String apellidos;
     private String genero;
@@ -10,7 +10,7 @@ public class Cliente {
     private String telefono;
     private String direccion;
 
-    public Cliente(Integer DPI, String nombres, String apellidos, String genero,
+    public Cliente(String DPI, String nombres, String apellidos, String genero,
             String fechaNacimiento, String telefono, String direccion) {
         this.DPI = DPI;
         this.nombres = nombres;
@@ -21,11 +21,11 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public Integer getDPI() {
+    public String getDPI() {
         return DPI;
     }
 
-    public void setDPI(Integer DPI) {
+    public void setDPI(String DPI) {
         this.DPI = DPI;
     }
 

@@ -46,8 +46,8 @@ public class VistaCliente extends Stage {
 
     private void actualizarObsList() {
         ArrayList<Cliente> clientes = new ArrayList<>();
-        clientes.add(new Cliente(201801266, "Didier", "Dominguez", "Masculino", "06/04/1999", "5555-5555", "Boca del monte"));
-        clientes.add(new Cliente(201800491, "Jacqueline", "Mendez", "Femenino", "06/11/1999", "5555-5555", "Zona 1"));
+        clientes.add(new Cliente("201801266", "Didier", "Dominguez", "Masculino", "06/04/1999", "5555-5555", "Boca del monte"));
+        clientes.add(new Cliente("201800491", "Jacqueline", "Mendez", "Femenino", "06/11/1999", "5555-5555", "Zona 1"));
         // clientes = CategoryController.getInstancia().getBooks();
 
         if (observableList != null) {
@@ -177,7 +177,7 @@ public class VistaCliente extends Stage {
         hBoxBotones.setMargin(btnModificar, new Insets(0, 5, 0, 0));
         gridPane.add(hBoxBotones, 0, 1);
 
-        TableColumn<Cliente, Integer> colDPI = new TableColumn<>("DPI");
+        TableColumn<Cliente, String> colDPI = new TableColumn<>("DPI");
         colDPI.setPrefWidth(x / 10);
         colDPI.setCellValueFactory(new PropertyValueFactory<>("DPI"));
 
