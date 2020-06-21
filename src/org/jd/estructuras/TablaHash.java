@@ -70,8 +70,8 @@ public class TablaHash {
         }
         return tablaTemporal;
     }
-    
-    public boolean eliminar(String llave){
+
+    public boolean eliminar(String llave) {
         return tablaHash[funcionHash(new Long(llave))].eliminar(llave);
     }
 
@@ -89,16 +89,21 @@ public class TablaHash {
     }
 
     public ArrayList<Cliente> buscarCliente(String buscar) {
-        buscar = buscar.toLowerCase();
         ArrayList<Cliente> clientes = new ArrayList<>();
-        for (Cliente cliente : obtenerDatos()) {
-            if (cliente.getDPI().toLowerCase().contains(buscar)
-                    || cliente.getNombres().toLowerCase().contains(buscar)
-                    || cliente.getApellidos().toLowerCase().contains(buscar)
-                    || cliente.getTelefono().toLowerCase().contains(buscar)
-                    || cliente.getFechaNacimiento().toLowerCase().contains(buscar)
-                    || cliente.getDireccion().toLowerCase().contains(buscar)) {
-                clientes.add(cliente);
+        buscar = buscar.toLowerCase();
+        NodoListaSimple auxiliar;
+        for (int i = 0; i < tablaHash.length; i++) {
+            auxiliar = tablaHash[i].getPrimero();
+            while (auxiliar != null) {
+                if (auxiliar.getCliente().getDPI().toLowerCase().contains(buscar)
+                        || auxiliar.getCliente().getNombres().toLowerCase().contains(buscar)
+                        || auxiliar.getCliente().getApellidos().toLowerCase().contains(buscar)
+                        || auxiliar.getCliente().getTelefono().toLowerCase().contains(buscar)
+                        || auxiliar.getCliente().getFechaNacimiento().toLowerCase().contains(buscar)
+                        || auxiliar.getCliente().getDireccion().toLowerCase().contains(buscar)) {
+                    clientes.add(auxiliar.getCliente());
+                }
+                auxiliar = auxiliar.getSiguiente();
             }
         }
         return clientes;
