@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 import javafx.beans.value.ObservableValue;
+import org.jd.estructuras.TablaHash;
 import org.jd.modelos.Cliente;
 import org.jd.utilidades.PropiedadesPantalla;
 
@@ -45,10 +46,7 @@ public class VistaCliente extends Stage {
     }
 
     private void actualizarObsList() {
-        ArrayList<Cliente> clientes = new ArrayList<>();
-        clientes.add(new Cliente("201801266", "Didier", "Dominguez", "Masculino", "06/04/1999", "5555-5555", "Boca del monte"));
-        clientes.add(new Cliente("201800491", "Jacqueline", "Mendez", "Femenino", "06/11/1999", "5555-5555", "Zona 1"));
-        // clientes = CategoryController.getInstancia().getBooks();
+        ArrayList<Cliente> clientes = TablaHash.getInstancia().obtenerDatos();
 
         if (observableList != null) {
             observableList.clear();
@@ -62,9 +60,8 @@ public class VistaCliente extends Stage {
     }
 
     // Lista de busqueda
-    private void actualizarObsList(String search) {
-        // observableList =
-        // FXCollections.observableArrayList(CategoryController.getInstance().searchBooks(search));
+    private void actualizarObsList(String buscar) {
+        observableList = FXCollections.observableArrayList(TablaHash.getInstancia().buscarCliente(buscar));
     }
 
     public void actualizarItemsTabla(String search) {
@@ -149,8 +146,8 @@ public class VistaCliente extends Stage {
         btnModificar.setOnAction(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
-                vBoxCRUD.getChildren().add(0, VistaModificarCliente.getInstancia()
-                        .getGridPane((Cliente) tableView.getSelectionModel().getSelectedItem()));
+                vBoxCRUD.getChildren().add(0, VistaModificarCliente.getInstancia().getGridPane(
+                        (Cliente) tableView.getSelectionModel().getSelectedItem()));
             } else {
                 reiniciarHBox();
             }
@@ -163,8 +160,8 @@ public class VistaCliente extends Stage {
         btnEliminar.setOnAction(event -> {
             Cliente cliente = (Cliente) tableView.getSelectionModel().getSelectedItem();
             if (cliente != null) {
+                TablaHash.getInstancia().eliminar(cliente.getDPI());
                 reiniciarHBox();
-                // ELIMINAR Cliente (METODO)
                 VistaCliente.this.actualizarItemsTabla();
                 Alerta.getInstancia().mostrarNotificacion("CLIENTES", "CLIENTE ELIMINADO EXITOSAMENTE");
             }

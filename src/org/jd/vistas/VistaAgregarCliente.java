@@ -10,6 +10,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jd.estructuras.TablaHash;
+import org.jd.modelos.Cliente;
 import org.jd.utilidades.PropiedadesPantalla;
 
 public class VistaAgregarCliente extends Stage {
@@ -101,27 +103,28 @@ public class VistaAgregarCliente extends Stage {
         buttonAdd.setOnAction(event -> {
             if (jFTDPI.getText().length() == 0
                     // || !Verificaciones.getInstancia().esNumeroEntero(jFTDPI.getText().trim())
-                    || jFTNombres.getText().length() == 0 
+                    || jFTNombres.getText().length() == 0
                     || jFTApellidos.getText().length() == 0
-                    || cbGenero.getSelectionModel().getSelectedItem() == null 
+                    || cbGenero.getSelectionModel().getSelectedItem() == null
                     || jFTFNacimiento.getText().length() == 0
                     || jFTTelefono.getText().length() == 0
                     // || !Verificaciones.getInstancia().esNumeroEntero(jFTTelefono.getText().trim())
                     || jFTDireccion.getText().length() == 0) {
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
-                /*
-                User user = UserController.getInstance().search(Integer.parseInt(fieldID.getText().trim()));
-                if (user != null) {
-                    Alerta.getInstancia().mostrarAlerta(gridPane,
-                            "ERROR", "EL USUARIO YA ESTÁ REGISTRADO");
-                } else { // Agregar cliente
-
-                    VistaCliente.getInstancia().updateTableViewItems();
-                    Alerta.getInstancia().mostrarNotificacion("USUARIO",
-                            "REGISTRO REALIZADO EXITOSAMENTE");
+                boolean cliente = TablaHash.getInstancia().insertar(
+                        new Cliente(jFTDPI.getText(), jFTNombres.getText(),
+                                jFTApellidos.getText(),
+                                cbGenero.getSelectionModel().getSelectedItem(),
+                                jFTFNacimiento.getText(), jFTTelefono.getText(),
+                                jFTDireccion.getText()));
+                if (!cliente) {
+                    Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "EL CLIENTE FUE REGISTRADO PREVIAMENTE");
+                } else {
+                    // VistaCliente.getInstancia().actualizarItemsTabla();
+                    VistaCliente.getInstancia().reiniciarHBox();
+                    Alerta.getInstancia().mostrarNotificacion("CLIENTE", "REGISTRO REALIZADO EXITOSAMENTE");
                 }
-                */
             }
         });
         gridPane.add(buttonAdd, 0, 12);

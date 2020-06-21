@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jd.estructuras.TablaHash;
 import org.jd.modelos.Cliente;
 import org.jd.utilidades.PropiedadesPantalla;
 
@@ -47,6 +48,7 @@ public class VistaModificarCliente extends Stage {
         jFTDPI.setPromptText("DPI");
         jFTDPI.setLabelFloat(true);
         jFTDPI.setPrefWidth(x);
+        jFTDPI.setEditable(false);
         gridPane.add(jFTDPI, 0, 5, 2, 1);
 
         JFXTextField jFTNombres = new JFXTextField(cliente.getNombres());
@@ -94,25 +96,25 @@ public class VistaModificarCliente extends Stage {
         btnModificar.setButtonType(JFXButton.ButtonType.FLAT);
         btnModificar.setPrefSize(x, y * 0.04);
         btnModificar.setOnAction(event -> {
-            if (jFTDPI.getText().length() == 0
-                    // || !Verificaciones.getInstancia().esNumeroEntero(jFTDPI.getText().trim())
-                    || jFTNombres.getText().length() == 0 || jFTApellidos.getText().length() == 0
-                    || cbGenero.getSelectionModel().getSelectedItem() == null || jFTFNacimiento.getText().length() == 0
+            if (jFTNombres.getText().length() == 0
+                    || jFTApellidos.getText().length() == 0
+                    || cbGenero.getSelectionModel().getSelectedItem() == null
+                    || jFTFNacimiento.getText().length() == 0
                     || jFTTelefono.getText().length() == 0
                     // || !Verificaciones.getInstancia().esNumeroEntero(jFTTelefono.getText().trim())
                     || jFTDireccion.getText().length() == 0) {
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
-                // MODIFICAR Cliente (METODO)
-                /*
-                if (ControllerService.getInstance().updateService()) {
-                    Alerta.getInstancia().mostrarNotificacion("CLIENTES",
-                            "CLIENTE ACTUALIZADO EXITOSAMENTE");
-                } else {
-                    Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR",
-                            "ERROR AL MODIFICAR CLIENTE");
+                Cliente clienteModificar = TablaHash.getInstancia().buscar(cliente.getDPI());
+                if (clienteModificar != null) {
+                    clienteModificar.setNombres(jFTNombres.getText());
+                    clienteModificar.setApellidos(jFTApellidos.getText());
+                    clienteModificar.setGenero(cbGenero.getSelectionModel().getSelectedItem());
+                    clienteModificar.setFechaNacimiento(jFTFNacimiento.getText());
+                    clienteModificar.setTelefono(jFTTelefono.getText());
+                    clienteModificar.setDireccion(jFTDireccion.getText());
+                    Alerta.getInstancia().mostrarNotificacion("CLIENTES", "CLIENTE ACTUALIZADO EXITOSAMENTE");
                 }
-                 */
                 VistaCliente.getInstancia().actualizarItemsTabla();
             }
         });
