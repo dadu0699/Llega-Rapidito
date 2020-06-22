@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.jd.estructuras.ListaAdyacencia;
 import org.jd.modelos.Ruta;
+import org.jd.utilidades.ManejoDeArchivos;
 import org.jd.utilidades.PropiedadesPantalla;
 
 public class VistaRuta extends Stage {
@@ -124,6 +125,9 @@ public class VistaRuta extends Stage {
         btnArchivo.setButtonType(JFXButton.ButtonType.FLAT);
         btnArchivo.setPrefSize(x, y);
         btnArchivo.setOnAction(event -> {
+            ManejoDeArchivos.getInstancia().subirArchivo("Archivo de Rutas", "*.txt");
+            ListaAdyacencia.getInstancia().agregarArchivo(ManejoDeArchivos.getInstancia().leerArchivo());
+            actualizarItemsTabla();
         });
 
         JFXButton btnAgregar = new JFXButton("AGREGAR");

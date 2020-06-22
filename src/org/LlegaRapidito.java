@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import org.jd.vistas.Panel;
 
 public class LlegaRapidito extends Application {
+
     private static Stage stage;
     private static VBox root;
     private static JFXDecorator decorator;

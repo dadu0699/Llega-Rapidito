@@ -71,7 +71,7 @@ public class VistaAgregarRuta extends Stage {
                 boolean ruta = ListaAdyacencia.getInstancia().insertar(jFTOrigen.getText(),
                         Integer.parseInt(jFTTiempoRuta.getText()), jFTDestino.getText());
                 if (!ruta) {
-                    Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "LA RUTA FUE REGISTRADO PREVIAMENTE");
+                    Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "LA RUTA FUE REGISTRADA PREVIAMENTE");
                 } else {
                     // VistaRuta.getInstancia().actualizarItemsTabla();
                     VistaRuta.getInstancia().reiniciarHBox();

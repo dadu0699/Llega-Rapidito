@@ -2,6 +2,7 @@ package org.jd.estructuras;
 
 import java.util.ArrayList;
 import org.jd.modelos.Ruta;
+import org.jd.vistas.Alerta;
 
 public class ListaAdyacencia {
 
@@ -105,6 +106,22 @@ public class ListaAdyacencia {
             vertice = vertice.getSiguiente();
         }
         return rutas;
+    }
+
+    public void agregarArchivo(String contenido) {
+        String[] rutas = contenido.split("%");
+        String[] atributos;
+        boolean rutaInsertada;
+        for (String ruta : rutas) {
+            atributos = ruta.split("/");
+            rutaInsertada = insertar(atributos[0].trim(), Integer.parseInt(atributos[2].trim()), 
+                    atributos[1].trim());
+            if (!rutaInsertada) {
+                Alerta.getInstancia().mostrarNotificacion("ARCHIVO RUTA", "LA RUTA FUE REGISTRADA PREVIAMENTE");
+            } else {
+                Alerta.getInstancia().mostrarNotificacion("ARCHIVO RUTA", "REGISTRO REALIZADO EXITOSAMENTE");
+            }
+        }
     }
 
     public String contenidoGrafica() {
