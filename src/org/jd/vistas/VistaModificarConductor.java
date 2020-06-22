@@ -41,82 +41,76 @@ public class VistaModificarConductor extends Stage {
         Text txtTitulo = new Text("MODIFICAR");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(25));
-        gridPane.add(txtTitulo, 0, 4, 2, 1);
+        gridPane.add(txtTitulo, 0, 3, 2, 1);
 
-       JFXTextField jFTDPI = new JFXTextField();
+        JFXTextField jFTDPI = new JFXTextField(conductor.getDPI());
         jFTDPI.setPromptText("DPI");
         jFTDPI.setLabelFloat(true);
         jFTDPI.setPrefWidth(x);
-        gridPane.add(jFTDPI, 0, 5, 2, 1);
+        gridPane.add(jFTDPI, 0, 4, 2, 1);
 
-        JFXTextField jFTNombres = new JFXTextField();
+        JFXTextField jFTNombres = new JFXTextField(conductor.getNombres());
         jFTNombres.setPromptText("NOMBRES");
         jFTNombres.setLabelFloat(true);
         jFTNombres.setPrefWidth(x);
-        gridPane.add(jFTNombres, 0, 6, 2, 1);
+        gridPane.add(jFTNombres, 0, 5, 2, 1);
 
-        JFXTextField jFTApellidos = new JFXTextField();
+        JFXTextField jFTApellidos = new JFXTextField(conductor.getApellidos());
         jFTApellidos.setPromptText("APELLIDOS");
         jFTApellidos.setLabelFloat(true);
         jFTApellidos.setPrefWidth(x);
-        gridPane.add(jFTApellidos, 0, 7, 2, 1);
+        gridPane.add(jFTApellidos, 0, 6, 2, 1);
 
-         JFXTextField jFTLicencia = new JFXTextField();
+        JFXTextField jFTLicencia = new JFXTextField(conductor.getLicencia());
         jFTLicencia.setPromptText("LICENCIA");
         jFTLicencia.setLabelFloat(true);
         jFTLicencia.setPrefWidth(x);
-        gridPane.add(jFTLicencia, 0, 8, 2, 1);
-        
+        gridPane.add(jFTLicencia, 0, 7, 2, 1);
+
         String[] generos = {"Masculino", "Femenino"};
         ObservableList obsGenero = FXCollections.observableArrayList(generos);
         ObservableList<String> informacion = obsGenero;
         JFXComboBox<String> cbGenero = new JFXComboBox<>(informacion);
+        cbGenero.getSelectionModel().select(conductor.getGenero());
         cbGenero.setPromptText("GENERO");
         cbGenero.setLabelFloat(true);
         cbGenero.setPrefWidth(x);
-        gridPane.add(cbGenero, 0, 9, 2, 1);
+        gridPane.add(cbGenero, 0, 8, 2, 1);
 
-        JFXTextField jFTGenero = new JFXTextField();
-        jFTGenero.setPromptText("GENERO");
-        jFTGenero.setLabelFloat(true);
-        jFTGenero.setPrefWidth(x);
-        jFTGenero.setVisible(false);
-        gridPane.add(jFTGenero, 0, 9, 2, 1);
-
-        JFXTextField jFTFNacimiento = new JFXTextField();
+        JFXTextField jFTFNacimiento = new JFXTextField(conductor.getFechaNacimiento());
         jFTFNacimiento.setPromptText("FECHA NACIMIENTO");
         jFTFNacimiento.setLabelFloat(true);
         jFTFNacimiento.setPrefWidth(x);
-        gridPane.add(jFTFNacimiento, 0, 10, 2, 1);
+        gridPane.add(jFTFNacimiento, 0, 9, 2, 1);
 
-        JFXTextField jFTTelefono = new JFXTextField();
+        JFXTextField jFTTelefono = new JFXTextField(conductor.getTelefono());
         jFTTelefono.setPromptText("TELEFONO");
         jFTTelefono.setLabelFloat(true);
         jFTTelefono.setPrefWidth(x);
-        gridPane.add(jFTTelefono, 0, 11, 2, 1);
+        gridPane.add(jFTTelefono, 0, 10, 2, 1);
 
-        JFXTextField jFTDireccion = new JFXTextField();
+        JFXTextField jFTDireccion = new JFXTextField(conductor.getDireccion());
         jFTDireccion.setPromptText("DIRECCION");
         jFTDireccion.setLabelFloat(true);
         jFTDireccion.setPrefWidth(x);
-        gridPane.add(jFTDireccion, 0, 12, 2, 1);
+        gridPane.add(jFTDireccion, 0, 11, 2, 1);
 
         JFXButton btnModificar = new JFXButton("MODIFICAR");
         btnModificar.getStyleClass().addAll("customButton", "primaryButton");
         btnModificar.setButtonType(JFXButton.ButtonType.FLAT);
         btnModificar.setPrefSize(x, y * 0.04);
         btnModificar.setOnAction(event -> {
-           if (jFTDPI.getText().length() == 0
+            if (jFTDPI.getText().length() == 0
                     || jFTNombres.getText().length() == 0
                     || jFTApellidos.getText().length() == 0
-                   || jFTLicencia.getText().length() == 0
+                    || jFTLicencia.getText().length() == 0
                     || cbGenero.getSelectionModel().getSelectedItem() == null
                     || jFTFNacimiento.getText().length() == 0
                     || jFTTelefono.getText().length() == 0
                     || jFTDireccion.getText().length() == 0) {
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
-               //Agregar a la lista circular
+                //Agregar a la lista circular
                 VistaConductor.getInstancia().actualizarItemsTabla();
             }
         });

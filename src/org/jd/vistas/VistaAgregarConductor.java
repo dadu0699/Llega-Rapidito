@@ -40,31 +40,31 @@ public class VistaAgregarConductor extends Stage {
         Text txtTitulo = new Text("AGREGAR");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(25));
-        gridPane.add(txtTitulo, 0, 4);
+        gridPane.add(txtTitulo, 0, 3);
 
       JFXTextField jFTDPI = new JFXTextField();
         jFTDPI.setPromptText("DPI");
         jFTDPI.setLabelFloat(true);
         jFTDPI.setPrefWidth(x);
-        gridPane.add(jFTDPI, 0, 5);
+        gridPane.add(jFTDPI, 0, 4);
 
         JFXTextField jFTNombres = new JFXTextField();
         jFTNombres.setPromptText("NOMBRES");
         jFTNombres.setLabelFloat(true);
         jFTNombres.setPrefWidth(x);
-        gridPane.add(jFTNombres, 0, 6);
+        gridPane.add(jFTNombres, 0, 5);
 
         JFXTextField jFTApellidos = new JFXTextField();
         jFTApellidos.setPromptText("APELLIDOS");
         jFTApellidos.setLabelFloat(true);
         jFTApellidos.setPrefWidth(x);
-        gridPane.add(jFTApellidos, 0, 7);
+        gridPane.add(jFTApellidos, 0, 6);
 
          JFXTextField jFTLicencia = new JFXTextField();
         jFTLicencia.setPromptText("LICENCIA");
         jFTLicencia.setLabelFloat(true);
         jFTLicencia.setPrefWidth(x);
-        gridPane.add(jFTLicencia, 0, 8);
+        gridPane.add(jFTLicencia, 0, 7);
         
         String[] generos = {"Masculino", "Femenino"};
         ObservableList obsGenero = FXCollections.observableArrayList(generos);
@@ -73,32 +73,25 @@ public class VistaAgregarConductor extends Stage {
         cbGenero.setPromptText("GENERO");
         cbGenero.setLabelFloat(true);
         cbGenero.setPrefWidth(x);
-        gridPane.add(cbGenero, 0, 9);
-
-        JFXTextField jFTGenero = new JFXTextField();
-        jFTGenero.setPromptText("GENERO");
-        jFTGenero.setLabelFloat(true);
-        jFTGenero.setPrefWidth(x);
-        jFTGenero.setVisible(false);
-        gridPane.add(jFTGenero, 0, 9);
+        gridPane.add(cbGenero, 0, 8);
 
         JFXTextField jFTFNacimiento = new JFXTextField();
         jFTFNacimiento.setPromptText("FECHA NACIMIENTO");
         jFTFNacimiento.setLabelFloat(true);
         jFTFNacimiento.setPrefWidth(x);
-        gridPane.add(jFTFNacimiento, 0, 10);
+        gridPane.add(jFTFNacimiento, 0, 9);
 
         JFXTextField jFTTelefono = new JFXTextField();
         jFTTelefono.setPromptText("TELEFONO");
         jFTTelefono.setLabelFloat(true);
         jFTTelefono.setPrefWidth(x);
-        gridPane.add(jFTTelefono, 0, 11);
+        gridPane.add(jFTTelefono, 0, 10);
 
         JFXTextField jFTDireccion = new JFXTextField();
         jFTDireccion.setPromptText("DIRECCION");
         jFTDireccion.setLabelFloat(true);
         jFTDireccion.setPrefWidth(x);
-        gridPane.add(jFTDireccion, 0, 12);
+        gridPane.add(jFTDireccion, 0, 11);
         
         JFXButton buttonAdd = new JFXButton("AGREGAR");
         buttonAdd.getStyleClass().addAll("customButton", "primaryButton");

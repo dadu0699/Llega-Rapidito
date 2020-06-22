@@ -132,7 +132,7 @@ public class TablaHash {
         NodoListaSimple auxiliar;
 
         stringBuilder.append("digraph G {");
-        stringBuilder.append("\n\t graph [bgcolor=transparent];");
+        stringBuilder.append("\n\tgraph [bgcolor=transparent];");
         stringBuilder.append("\n\trankdir = LR;");
         stringBuilder.append("\n\tnode[shape=record, style=filled color=\"#393C4BFF\""
                 + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");

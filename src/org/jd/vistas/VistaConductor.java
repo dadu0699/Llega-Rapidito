@@ -138,14 +138,14 @@ public class VistaConductor extends Stage {
         btnModificar.getStyleClass().addAll("customButton", "warningButton");
         btnModificar.setButtonType(JFXButton.ButtonType.FLAT);
         btnModificar.setPrefSize(x, y);
-       btnModificar.setOnAction(event -> {
+        btnModificar.setOnAction(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
-            vBoxCRUD.getChildren().remove(0);
-               vBoxCRUD.getChildren().add(0, VistaModificarConductor.getInstancia().getGridPane((Conductor) tableView.getSelectionModel().getSelectedItem())); 
+                vBoxCRUD.getChildren().remove(0);
+                vBoxCRUD.getChildren().add(0, VistaModificarConductor.getInstancia().getGridPane((Conductor) tableView.getSelectionModel().getSelectedItem()));
             } else {
                 reiniciarHBox();
-            } 
-        }); 
+            }
+        });
 
         JFXButton btnEliminar = new JFXButton("ELIMINAR");
         btnEliminar.getStyleClass().addAll("customButton", "dangerButton");
@@ -180,10 +180,10 @@ public class VistaConductor extends Stage {
         colApellidos.setPrefWidth(x / 10);
         colApellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
 
-          TableColumn<Conductor, String> colLicencia = new TableColumn<>("LICENCIA");
+        TableColumn<Conductor, String> colLicencia = new TableColumn<>("LICENCIA");
         colLicencia.setPrefWidth(x / 10);
         colLicencia.setCellValueFactory(new PropertyValueFactory<>("licencia"));
-        
+
         TableColumn<Conductor, String> colGenero = new TableColumn<>("GENERO");
         colGenero.setPrefWidth(x / 10);
         colGenero.setCellValueFactory(new PropertyValueFactory<>("genero"));
@@ -199,10 +199,10 @@ public class VistaConductor extends Stage {
         TableColumn<Conductor, String> colDireccion = new TableColumn<>("DIRECCION");
         colDireccion.setPrefWidth(x / 10);
         colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
-        
+
         actualizarObsList();
         tableView = new TableView<>(observableList);
-         tableView.getColumns().addAll(colDPI, colNombres, colApellidos, colLicencia, colGenero, colFechaNacimiento, colTelefono,
+        tableView.getColumns().addAll(colDPI, colNombres, colApellidos, colLicencia, colGenero, colFechaNacimiento, colTelefono,
                 colDireccion);
 
         tableView.setOnMouseClicked(event -> {
@@ -210,7 +210,7 @@ public class VistaConductor extends Stage {
                 vBoxCRUD.getChildren().remove(0);
                 vBoxCRUD.getChildren().add(0, VistaMostrarConductor.getInstancia().getGridPane((Conductor) tableView.getSelectionModel().getSelectedItem()));
             }
-        }); 
+        });
 
         tableView.setPrefSize(x, y * 0.995);
 
