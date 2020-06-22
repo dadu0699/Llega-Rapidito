@@ -40,7 +40,7 @@ public class VistaConductor extends Stage {
     public void reiniciarHBox() {
         hBoxPaneles.getChildren().clear();
         vBoxCRUD.getChildren().clear();
-//        vBoxCRUD.getChildren().add(VistaAgregarConductor.getInstancia().getFormulario());
+        vBoxCRUD.getChildren().add(VistaAgregarConductor.getInstancia().getFormulario());
         hBoxPaneles.getChildren().addAll(getTablaConductor(), vBoxCRUD);
     }
 
@@ -92,7 +92,7 @@ public class VistaConductor extends Stage {
 
         vBoxCRUD = new VBox();
         vBoxCRUD.setPrefSize(x * 0.30, y * 0.995);
-      //  vBoxCRUD.getChildren().add(VistaAgregarConductor.getInstancia().getFormulario());
+        vBoxCRUD.getChildren().add(VistaAgregarConductor.getInstancia().getFormulario());
 
         hBoxPaneles.getChildren().addAll(getTablaConductor(), vBoxCRUD);
         vBox.getChildren().addAll(gridPaneTitulo, hBoxPaneles);
@@ -131,30 +131,29 @@ public class VistaConductor extends Stage {
         btnAgregar.setPrefSize(x, y);
         btnAgregar.setOnAction(event -> {
             vBoxCRUD.getChildren().clear();
-      //      vBoxCRUD.getChildren().addAll(VistaAgregarConductor.getInstancia().getFormulario());
+            vBoxCRUD.getChildren().addAll(VistaAgregarConductor.getInstancia().getFormulario());
         });
 
         JFXButton btnModificar = new JFXButton("MODIFICAR");
         btnModificar.getStyleClass().addAll("customButton", "warningButton");
         btnModificar.setButtonType(JFXButton.ButtonType.FLAT);
         btnModificar.setPrefSize(x, y);
-       /* btnModificar.setOnAction(event -> {
+       btnModificar.setOnAction(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
-                vBoxCRUD.getChildren().remove(0);
-                vBoxCRUD.getChildren().add(0, VistaModificarConductor.getInstancia().getGridPane(
-                        (Conductor) tableView.getSelectionModel().getSelectedItem()));
+            vBoxCRUD.getChildren().remove(0);
+            //   vBoxCRUD.getChildren().add(0, VistaModificarConductor.getInstancia().getGridPane((Conductor) tableView.getSelectionModel().getSelectedItem())); 
             } else {
                 reiniciarHBox();
             } 
-        }); */
+        }); 
 
         JFXButton btnEliminar = new JFXButton("ELIMINAR");
         btnEliminar.getStyleClass().addAll("customButton", "dangerButton");
         btnEliminar.setButtonType(JFXButton.ButtonType.FLAT);
         btnEliminar.setPrefSize(x, y);
         btnEliminar.setOnAction(event -> {
-            Conductor vehiculo = (Conductor) tableView.getSelectionModel().getSelectedItem();
-            if (vehiculo != null) {
+            Conductor conductor = (Conductor) tableView.getSelectionModel().getSelectedItem();
+            if (conductor != null) {
                 reiniciarHBox();
                 // ELIMINAR Conductor (METODO)
                 VistaConductor.this.actualizarItemsTabla();
