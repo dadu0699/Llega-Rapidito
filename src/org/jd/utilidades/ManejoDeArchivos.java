@@ -101,4 +101,27 @@ public class ManejoDeArchivos {
             e.printStackTrace();
         }
     }
+
+    public void compilarSFDP(String nombre, String ruta) {
+        String comandoDOT = "sfdp.exe -Tpng " + nombre + ".sfdp -o " + nombre + ".png";
+
+        try {
+            Process process = Runtime.getRuntime().exec("cmd /c " + comandoDOT, null, new File(directorio + "/" + ruta));
+
+            StringBuilder output = new StringBuilder();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                output.append(linea).append("\n");
+            }
+
+            int exitVal = process.waitFor();
+            if (exitVal == 0) {
+                // System.out.println("Success!");
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
