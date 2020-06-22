@@ -83,7 +83,6 @@ public class ManejoDeArchivos {
         String comandoDOT = "dot.exe -Tpng " + nombre + ".dot -o " + nombre + ".png";
 
         try {
-            //Run a bat file
             Process process = Runtime.getRuntime().exec("cmd /c " + comandoDOT, null, new File(directorio + "/" + ruta));
 
             StringBuilder output = new StringBuilder();
@@ -97,7 +96,7 @@ public class ManejoDeArchivos {
             int exitVal = process.waitFor();
             if (exitVal == 0) {
                 // System.out.println("Success!");
-            }  //abnormal...
+            }
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }

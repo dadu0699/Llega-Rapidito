@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import javafx.beans.value.ObservableValue;
 import org.jd.estructuras.TablaHash;
 import org.jd.modelos.Cliente;
+import org.jd.utilidades.ManejoDeArchivos;
 import org.jd.utilidades.PropiedadesPantalla;
 
 public class VistaCliente extends Stage {
@@ -113,7 +114,8 @@ public class VistaCliente extends Stage {
         JFXTextField txtBuscar = new JFXTextField();
         txtBuscar.setPromptText("BUSCAR");
         txtBuscar.setPrefSize(x, y * 0.005);
-        txtBuscar.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+        txtBuscar.textProperty().addListener((ObservableValue<? extends String> observable, 
+                String oldValue, String newValue) -> {
             actualizarItemsTabla(txtBuscar.getText().trim());
         });
         gridPane.add(txtBuscar, 0, 0);
@@ -124,10 +126,9 @@ public class VistaCliente extends Stage {
         btnArchivo.setButtonType(JFXButton.ButtonType.FLAT);
         btnArchivo.setPrefSize(x, y);
         btnArchivo.setOnAction(event -> {
-            /*
-             * FileControl.getInstancia().uploadFile("User File", "*.json");
-             * FileControl.getInstancia().readUserJSON(); actualizarItemsTabla();
-             */
+            ManejoDeArchivos.getInstancia().subirArchivo("Archivo de Clientes", "*.txt");
+            TablaHash.getInstancia().agregarArchivo(ManejoDeArchivos.getInstancia().leerArchivo());
+            actualizarItemsTabla();
         });
 
         JFXButton btnAgregar = new JFXButton("AGREGAR");

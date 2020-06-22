@@ -2,6 +2,7 @@ package org.jd.estructuras;
 
 import java.util.ArrayList;
 import org.jd.modelos.Cliente;
+import org.jd.vistas.Alerta;
 
 public class TablaHash {
 
@@ -109,7 +110,72 @@ public class TablaHash {
         return clientes;
     }
 
-    public void imprimirTabla() {
+    public void agregarArchivo(String contenido) {
+        String[] clientes = contenido.split(";");
+        String[] atributos;
+        boolean clienteInsertado;
+        for (String cliente : clientes) {
+            atributos = cliente.split(",");
+            clienteInsertado = insertar(new Cliente(atributos[0].trim(),
+                    atributos[1].trim(), atributos[2].trim(), atributos[3].trim(),
+                    atributos[4].trim(), atributos[5].trim(), atributos[6].trim()));
+            if (!clienteInsertado) {
+                Alerta.getInstancia().mostrarNotificacion("ARCHIVO CLIENTE", "EL CLIENTE FUE REGISTRADO PREVIAMENTE");
+            } else {
+                Alerta.getInstancia().mostrarNotificacion("ARCHIVO CLIENTE", "REGISTRO REALIZADO EXITOSAMENTE");
+            }
+        }
+    }
+    
+    public String contenidoGrafica() {
+        StringBuilder stringBuilder = new StringBuilder();
+        NodoListaSimple auxiliar;
+        
+        stringBuilder.append("digraph G {");
+        stringBuilder.append("\n\t graph [bgcolor=transparent];");
+        stringBuilder.append("\n\trankdir = LR;");
+        stringBuilder.append("\n\tnode[shape=record, style=filled color=\"#393C4BFF\""
+                + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");
+
+        for (int i = tablaHash.length-1; i >= 0; i--) {
+            stringBuilder.append("\n\tBucket").append(i).append("[label =\"Bucket ").append(i).append("\"];");
+            auxiliar = tablaHash[i].getPrimero();
+
+            if (auxiliar != null && auxiliar.getCliente() != null) {
+                stringBuilder.append("\n\tN").append(auxiliar.getCliente().getDPI()).append("[label =\"")
+                        .append(auxiliar.getCliente().getNombres()).append(" ")
+                        .append(auxiliar.getCliente().getApellidos()).append("\\n")
+                        .append(auxiliar.getCliente().getGenero()).append("\\n")
+                        .append(auxiliar.getCliente().getFechaNacimiento()).append("\\n")
+                        .append(auxiliar.getCliente().getTelefono()).append("\\n")
+                        .append(auxiliar.getCliente().getDireccion()).append("\"];");
+
+                stringBuilder.append("\n\tBucket").append(i).append(" -> N")
+                        .append(auxiliar.getCliente().getDPI()).append("[color=\"#E91E63\"];");
+            }
+
+            while (auxiliar != null) {
+                if (auxiliar.getSiguiente()!= null) {
+                stringBuilder.append("\n\tN").append(auxiliar.getSiguiente().getCliente().getDPI()).append("[label =\"")
+                        .append(auxiliar.getSiguiente().getCliente().getNombres()).append("\\n")
+                        .append(auxiliar.getSiguiente().getCliente().getApellidos()).append(" ")
+                        .append(auxiliar.getSiguiente().getCliente().getGenero()).append("\\n")
+                        .append(auxiliar.getSiguiente().getCliente().getFechaNacimiento()).append("\\n")
+                        .append(auxiliar.getSiguiente().getCliente().getTelefono()).append("\\n")
+                        .append(auxiliar.getSiguiente().getCliente().getDireccion()).append("\"];");
+
+                    stringBuilder.append("\n\tN").append(auxiliar.getCliente().getDPI()).append(" -> N")
+                            .append(auxiliar.getSiguiente().getCliente().getDPI()).append("[color=\"#E91E63\"];");
+                }
+                auxiliar = auxiliar.getSiguiente();
+            }
+        }
+
+        stringBuilder.append("\n}");
+        return stringBuilder.toString();
+    }
+
+    private void imprimirTabla() {
         NodoListaSimple auxiliar;
         for (int i = 0; i < tablaHash.length; i++) {
             System.out.print("Bucket " + i + ":  ");
