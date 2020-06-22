@@ -114,7 +114,7 @@ public class TablaHash {
         String[] clientes = contenido.split(";");
         String[] atributos;
         boolean clienteInsertado;
-        if (clientes.length > 0) {
+        if (clientes.length > 1) {
             for (String cliente : clientes) {
                 atributos = cliente.split(",");
                 clienteInsertado = insertar(new Cliente(atributos[0].trim(),

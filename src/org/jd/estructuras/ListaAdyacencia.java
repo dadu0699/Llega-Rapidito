@@ -112,7 +112,7 @@ public class ListaAdyacencia {
         String[] rutas = contenido.split("%");
         String[] atributos;
         boolean rutaInsertada;
-        if (rutas.length > 0) {
+        if (rutas.length > 1) {
             for (String ruta : rutas) {
                 atributos = ruta.split("/");
                 rutaInsertada = insertar(atributos[0].trim(), Integer.parseInt(atributos[2].trim()),
