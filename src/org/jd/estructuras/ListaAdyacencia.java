@@ -57,7 +57,7 @@ public class ListaAdyacencia {
         return false;
     }
 
-    public Vertice insertar(String lugar) {
+    private Vertice insertar(String lugar) {
         Vertice nuevo = buscar(lugar);
         if (nuevo == null) {
             nuevo = new Vertice(lugar);
@@ -112,14 +112,16 @@ public class ListaAdyacencia {
         String[] rutas = contenido.split("%");
         String[] atributos;
         boolean rutaInsertada;
-        for (String ruta : rutas) {
-            atributos = ruta.split("/");
-            rutaInsertada = insertar(atributos[0].trim(), Integer.parseInt(atributos[2].trim()), 
-                    atributos[1].trim());
-            if (!rutaInsertada) {
-                Alerta.getInstancia().mostrarNotificacion("ARCHIVO RUTA", "LA RUTA FUE REGISTRADA PREVIAMENTE");
-            } else {
-                Alerta.getInstancia().mostrarNotificacion("ARCHIVO RUTA", "REGISTRO REALIZADO EXITOSAMENTE");
+        if (rutas.length > 0) {
+            for (String ruta : rutas) {
+                atributos = ruta.split("/");
+                rutaInsertada = insertar(atributos[0].trim(), Integer.parseInt(atributos[2].trim()),
+                        atributos[1].trim());
+                if (!rutaInsertada) {
+                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO RUTA", "LA RUTA FUE REGISTRADA PREVIAMENTE");
+                } else {
+                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO RUTA", "REGISTRO REALIZADO EXITOSAMENTE");
+                }
             }
         }
     }
@@ -206,8 +208,8 @@ public class ListaAdyacencia {
 
     public String contenidoGrafo() {
         StringBuilder stringBuilder = new StringBuilder();
-        ArrayList<Ruta> rutas = obtenerListaGrafo();
         Vertice vertice = primero;
+        Arista arista;
 
         stringBuilder.append("digraph G {");
         stringBuilder.append("\n\tgraph [bgcolor=transparent];");
@@ -220,15 +222,23 @@ public class ListaAdyacencia {
                     .append("[label =\"").append(vertice.getLugar()).append("\"];");
             vertice = vertice.getSiguiente();
         }
-        rutas.forEach((ruta) -> {
-            stringBuilder.append("\n\tN")
-                    .append(ruta.getOrigen().replaceAll(" ", "_"))
-                    .append(" -> N")
-                    .append(ruta.getDestino().replaceAll(" ", "_"))
-                    .append("[label=\"")
-                    .append(ruta.getTiempoRuta())
-                    .append("\",color=\"#E91E63\", fontcolor = \"#F8F8F2FF\"];");
-        });
+
+        vertice = primero;
+        while (vertice != null) {
+            arista = vertice.getAristas().getPrimero();
+            while (arista != null) {
+                stringBuilder.append("\n\tN")
+                        .append(vertice.getLugar().replaceAll(" ", "_"))
+                        .append(" -> N")
+                        .append(arista.getDestino().getLugar().replaceAll(" ", "_"))
+                        .append("[label=\"")
+                        .append(arista.getPeso())
+                        .append("\",color=\"#E91E63\", fontcolor = \"#F8F8F2FF\"];");
+                arista = arista.getSiguiente();
+            }
+            vertice = vertice.getSiguiente();
+        }
+
         stringBuilder.append("\n}");
         return stringBuilder.toString();
     }

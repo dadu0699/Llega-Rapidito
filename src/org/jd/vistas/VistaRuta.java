@@ -146,7 +146,7 @@ public class VistaRuta extends Stage {
         btnModificar.setOnAction(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
-                vBoxCRUD.getChildren().add(0, VistaModificarRuta.getInstancia() .getGridPane((Ruta) tableView.getSelectionModel().getSelectedItem()));
+                vBoxCRUD.getChildren().add(0, VistaModificarRuta.getInstancia().getGridPane((Ruta) tableView.getSelectionModel().getSelectedItem()));
             } else {
                 reiniciarHBox();
             }

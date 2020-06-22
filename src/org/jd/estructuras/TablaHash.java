@@ -114,15 +114,17 @@ public class TablaHash {
         String[] clientes = contenido.split(";");
         String[] atributos;
         boolean clienteInsertado;
-        for (String cliente : clientes) {
-            atributos = cliente.split(",");
-            clienteInsertado = insertar(new Cliente(atributos[0].trim(),
-                    atributos[1].trim(), atributos[2].trim(), atributos[3].trim(),
-                    atributos[4].trim(), atributos[5].trim(), atributos[6].trim()));
-            if (!clienteInsertado) {
-                Alerta.getInstancia().mostrarNotificacion("ARCHIVO CLIENTE", "EL CLIENTE FUE REGISTRADO PREVIAMENTE");
-            } else {
-                Alerta.getInstancia().mostrarNotificacion("ARCHIVO CLIENTE", "REGISTRO REALIZADO EXITOSAMENTE");
+        if (clientes.length > 0) {
+            for (String cliente : clientes) {
+                atributos = cliente.split(",");
+                clienteInsertado = insertar(new Cliente(atributos[0].trim(),
+                        atributos[1].trim(), atributos[2].trim(), atributos[3].trim(),
+                        atributos[4].trim(), atributos[5].trim(), atributos[6].trim()));
+                if (!clienteInsertado) {
+                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO CLIENTE", "EL CLIENTE FUE REGISTRADO PREVIAMENTE");
+                } else {
+                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO CLIENTE", "REGISTRO REALIZADO EXITOSAMENTE");
+                }
             }
         }
     }
