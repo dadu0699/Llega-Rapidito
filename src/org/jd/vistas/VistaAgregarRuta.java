@@ -58,11 +58,12 @@ public class VistaAgregarRuta extends Stage {
         jFTTiempoRuta.setPrefWidth(x);
         gridPane.add(jFTTiempoRuta, 0, 9);
 
-        JFXButton buttonAdd = new JFXButton("AGREGAR");
-        buttonAdd.getStyleClass().addAll("customButton", "primaryButton");
-        buttonAdd.setButtonType(JFXButton.ButtonType.FLAT);
-        buttonAdd.setPrefSize(x, y * 0.04);
-        buttonAdd.setOnAction(event -> {
+        JFXButton btnAgregar = new JFXButton("AGREGAR");
+        btnAgregar.getStyleClass().addAll("customButton", "primaryButton");
+        btnAgregar.setButtonType(JFXButton.ButtonType.FLAT);
+        btnAgregar.setPrefSize(x, y * 0.04);
+        btnAgregar.setDisable(true);
+        btnAgregar.setOnAction(event -> {
             if (jFTOrigen.getText().length() == 0
                     || jFTDestino.getText().length() == 0
                     || jFTTiempoRuta.getText().length() == 0) {
@@ -79,7 +80,7 @@ public class VistaAgregarRuta extends Stage {
                 }
             }
         });
-        gridPane.add(buttonAdd, 0, 10);
+        gridPane.add(btnAgregar, 0, 10);
         return gridPane;
     }
 }

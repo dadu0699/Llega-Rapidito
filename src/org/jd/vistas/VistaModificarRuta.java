@@ -65,6 +65,7 @@ public class VistaModificarRuta extends Stage {
         btnModificar.getStyleClass().addAll("customButton", "primaryButton");
         btnModificar.setButtonType(JFXButton.ButtonType.FLAT);
         btnModificar.setPrefSize(x, y * 0.04);
+        btnModificar.setDisable(true);
         btnModificar.setOnAction(event -> {
             if (jFTOrigen.getText().length() == 0
                     || jFTDestino.getText().length() == 0

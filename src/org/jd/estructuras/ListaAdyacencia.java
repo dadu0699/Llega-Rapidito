@@ -51,7 +51,7 @@ public class ListaAdyacencia {
 
         if (origen.getAristas().buscar(lugarDestino) == null) {
             origen.getAristas().insertar(new Arista(peso, destino));
-            destino.getAristas().insertar(new Arista(peso, origen));
+            // destino.getAristas().insertar(new Arista(peso, origen));
             return true;
         }
         return false;
@@ -227,7 +227,7 @@ public class ListaAdyacencia {
                     .append(ruta.getDestino().replaceAll(" ", "_"))
                     .append("[label=\"")
                     .append(ruta.getTiempoRuta())
-                    .append("\",color=\"#E91E63\", fontcolor = \"#F8F8F2FF\", dir=\"none\"];");
+                    .append("\",color=\"#E91E63\", fontcolor = \"#F8F8F2FF\"];");
         });
         stringBuilder.append("\n}");
         return stringBuilder.toString();

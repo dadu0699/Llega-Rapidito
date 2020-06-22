@@ -156,6 +156,7 @@ public class VistaRuta extends Stage {
         btnEliminar.getStyleClass().addAll("customButton", "dangerButton");
         btnEliminar.setButtonType(JFXButton.ButtonType.FLAT);
         btnEliminar.setPrefSize(x, y);
+        btnEliminar.setDisable(true);
         btnEliminar.setOnAction(event -> {
             Ruta ruta = (Ruta) tableView.getSelectionModel().getSelectedItem();
             if (ruta != null) {

@@ -35,7 +35,7 @@ public class Alerta extends Stage {
         layout.setHeading(new Label(title));
         layout.setBody(new Label(description));
 
-        JFXButton cancelButton = new JFXButton("Close");
+        JFXButton cancelButton = new JFXButton("Cerrar");
         cancelButton.setCancelButton(true);
         cancelButton.getStyleClass().addAll("customButton", "primaryButton");
         cancelButton.setButtonType(JFXButton.ButtonType.FLAT);
