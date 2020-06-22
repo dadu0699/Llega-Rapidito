@@ -46,8 +46,8 @@ public class VistaConductor extends Stage {
 
     private void actualizarObsList() {
         ArrayList<Conductor> conductor = new ArrayList<>();
-        conductor.add(new Conductor("18", "Juan", "Perez", 'C', "Masculino", "18/06/1985", "5555-5555", "Ciudad"));
-        conductor.add(new Conductor("19", "Mario", "Garcia", 'A', "Masculino", "18/06/1995", "5555-5555", "Jutiapa"));
+        conductor.add(new Conductor("18", "Juan", "Perez", "C", "Masculino", "18/06/1985", "5555-5555", "Ciudad"));
+        conductor.add(new Conductor("19", "Mario", "Garcia", "A", "Masculino", "18/06/1995", "5555-5555", "Jutiapa"));
 
         if (observableList != null) {
             observableList.clear();
@@ -141,7 +141,7 @@ public class VistaConductor extends Stage {
        btnModificar.setOnAction(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
             vBoxCRUD.getChildren().remove(0);
-            //   vBoxCRUD.getChildren().add(0, VistaModificarConductor.getInstancia().getGridPane((Conductor) tableView.getSelectionModel().getSelectedItem())); 
+               vBoxCRUD.getChildren().add(0, VistaModificarConductor.getInstancia().getGridPane((Conductor) tableView.getSelectionModel().getSelectedItem())); 
             } else {
                 reiniciarHBox();
             } 
@@ -208,9 +208,9 @@ public class VistaConductor extends Stage {
         tableView.setOnMouseClicked(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
-      //          vBoxCRUD.getChildren().add(0, VistaMostrarConductor.getInstancia().getGridPane((Conductor) tableView.getSelectionModel().getSelectedItem()));
+                vBoxCRUD.getChildren().add(0, VistaMostrarConductor.getInstancia().getGridPane((Conductor) tableView.getSelectionModel().getSelectedItem()));
             }
-        });
+        }); 
 
         tableView.setPrefSize(x, y * 0.995);
 

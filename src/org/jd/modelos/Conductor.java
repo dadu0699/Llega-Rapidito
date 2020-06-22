@@ -5,13 +5,13 @@ public class Conductor {
     private String DPI;
     private String nombres;
     private String apellidos;
-    private char licencia;
+    private String licencia;
     private String genero;
     private String fechaNacimiento;
     private String telefono;
     private String direccion;
 
-    public Conductor(String DPI, String nombres, String apellidos, char licencia,
+    public Conductor(String DPI, String nombres, String apellidos, String licencia,
             String genero, String fechaNacimiento, String telefono, String direccion) {
         this.DPI = DPI;
         this.nombres = nombres;
@@ -47,11 +47,11 @@ public class Conductor {
         this.apellidos = apellidos;
     }
 
-    public char getLicencia() {
+    public String getLicencia() {
         return licencia;
     }
 
-    public void setLicencia(char licencia) {
+    public void setLicencia(String licencia) {
         this.licencia = licencia;
     }
 

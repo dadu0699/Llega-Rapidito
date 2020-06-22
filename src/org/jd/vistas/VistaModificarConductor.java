@@ -10,7 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.jd.modelos.Vehiculo;
+import org.jd.modelos.Conductor;
 import org.jd.utilidades.PropiedadesPantalla;
 
 public class VistaModificarConductor extends Stage {
@@ -27,7 +27,7 @@ public class VistaModificarConductor extends Stage {
         return instancia;
     }
 
-    public GridPane getGridPane(Vehiculo vehiculo) {
+    public GridPane getGridPane(Conductor conductor) {
         GridPane gridPane = new GridPane();
 
         double x = PropiedadesPantalla.getInstancia().getX();
@@ -47,25 +47,25 @@ public class VistaModificarConductor extends Stage {
         jFTDPI.setPromptText("DPI");
         jFTDPI.setLabelFloat(true);
         jFTDPI.setPrefWidth(x);
-        gridPane.add(jFTDPI, 0, 5);
+        gridPane.add(jFTDPI, 0, 5, 2, 1);
 
         JFXTextField jFTNombres = new JFXTextField();
         jFTNombres.setPromptText("NOMBRES");
         jFTNombres.setLabelFloat(true);
         jFTNombres.setPrefWidth(x);
-        gridPane.add(jFTNombres, 0, 6);
+        gridPane.add(jFTNombres, 0, 6, 2, 1);
 
         JFXTextField jFTApellidos = new JFXTextField();
         jFTApellidos.setPromptText("APELLIDOS");
         jFTApellidos.setLabelFloat(true);
         jFTApellidos.setPrefWidth(x);
-        gridPane.add(jFTApellidos, 0, 7);
+        gridPane.add(jFTApellidos, 0, 7, 2, 1);
 
          JFXTextField jFTLicencia = new JFXTextField();
         jFTLicencia.setPromptText("LICENCIA");
         jFTLicencia.setLabelFloat(true);
         jFTLicencia.setPrefWidth(x);
-        gridPane.add(jFTLicencia, 0, 8);
+        gridPane.add(jFTLicencia, 0, 8, 2, 1);
         
         String[] generos = {"Masculino", "Femenino"};
         ObservableList obsGenero = FXCollections.observableArrayList(generos);
@@ -74,32 +74,32 @@ public class VistaModificarConductor extends Stage {
         cbGenero.setPromptText("GENERO");
         cbGenero.setLabelFloat(true);
         cbGenero.setPrefWidth(x);
-        gridPane.add(cbGenero, 0, 9);
+        gridPane.add(cbGenero, 0, 9, 2, 1);
 
         JFXTextField jFTGenero = new JFXTextField();
         jFTGenero.setPromptText("GENERO");
         jFTGenero.setLabelFloat(true);
         jFTGenero.setPrefWidth(x);
         jFTGenero.setVisible(false);
-        gridPane.add(jFTGenero, 0, 9);
+        gridPane.add(jFTGenero, 0, 9, 2, 1);
 
         JFXTextField jFTFNacimiento = new JFXTextField();
         jFTFNacimiento.setPromptText("FECHA NACIMIENTO");
         jFTFNacimiento.setLabelFloat(true);
         jFTFNacimiento.setPrefWidth(x);
-        gridPane.add(jFTFNacimiento, 0, 10);
+        gridPane.add(jFTFNacimiento, 0, 10, 2, 1);
 
         JFXTextField jFTTelefono = new JFXTextField();
         jFTTelefono.setPromptText("TELEFONO");
         jFTTelefono.setLabelFloat(true);
         jFTTelefono.setPrefWidth(x);
-        gridPane.add(jFTTelefono, 0, 11);
+        gridPane.add(jFTTelefono, 0, 11, 2, 1);
 
         JFXTextField jFTDireccion = new JFXTextField();
         jFTDireccion.setPromptText("DIRECCION");
         jFTDireccion.setLabelFloat(true);
         jFTDireccion.setPrefWidth(x);
-        gridPane.add(jFTDireccion, 0, 12);
+        gridPane.add(jFTDireccion, 0, 12, 2, 1);
 
         JFXButton btnModificar = new JFXButton("MODIFICAR");
         btnModificar.getStyleClass().addAll("customButton", "primaryButton");
@@ -126,7 +126,7 @@ public class VistaModificarConductor extends Stage {
         btnCancelar.getStyleClass().addAll("customButton", "dangerButton");
         btnCancelar.setButtonType(JFXButton.ButtonType.FLAT);
         btnCancelar.setPrefSize(x, y * 0.04);
-        btnCancelar.setOnAction(event -> VistaVehiculo.getInstancia().reiniciarHBox());
+        btnCancelar.setOnAction(event -> VistaConductor.getInstancia().reiniciarHBox());
         gridPane.add(btnCancelar, 1, 12);
 
         return gridPane;
