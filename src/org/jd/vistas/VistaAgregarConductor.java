@@ -42,7 +42,7 @@ public class VistaAgregarConductor extends Stage {
         txtTitulo.setFont(new Font(25));
         gridPane.add(txtTitulo, 0, 3);
 
-      JFXTextField jFTDPI = new JFXTextField();
+        JFXTextField jFTDPI = new JFXTextField();
         jFTDPI.setPromptText("DPI");
         jFTDPI.setLabelFloat(true);
         jFTDPI.setPrefWidth(x);
@@ -60,12 +60,12 @@ public class VistaAgregarConductor extends Stage {
         jFTApellidos.setPrefWidth(x);
         gridPane.add(jFTApellidos, 0, 6);
 
-         JFXTextField jFTLicencia = new JFXTextField();
+        JFXTextField jFTLicencia = new JFXTextField();
         jFTLicencia.setPromptText("LICENCIA");
         jFTLicencia.setLabelFloat(true);
         jFTLicencia.setPrefWidth(x);
         gridPane.add(jFTLicencia, 0, 7);
-        
+
         String[] generos = {"Masculino", "Femenino"};
         ObservableList obsGenero = FXCollections.observableArrayList(generos);
         ObservableList<String> informacion = obsGenero;
@@ -92,16 +92,16 @@ public class VistaAgregarConductor extends Stage {
         jFTDireccion.setLabelFloat(true);
         jFTDireccion.setPrefWidth(x);
         gridPane.add(jFTDireccion, 0, 11);
-        
+
         JFXButton buttonAdd = new JFXButton("AGREGAR");
         buttonAdd.getStyleClass().addAll("customButton", "primaryButton");
         buttonAdd.setButtonType(JFXButton.ButtonType.FLAT);
         buttonAdd.setPrefSize(x, y * 0.04);
         buttonAdd.setOnAction(event -> {
-           if (jFTDPI.getText().length() == 0
+            if (jFTDPI.getText().length() == 0
                     || jFTNombres.getText().length() == 0
                     || jFTApellidos.getText().length() == 0
-                   || jFTLicencia.getText().length() == 0
+                    || jFTLicencia.getText().length() == 0
                     || cbGenero.getSelectionModel().getSelectedItem() == null
                     || jFTFNacimiento.getText().length() == 0
                     || jFTTelefono.getText().length() == 0
