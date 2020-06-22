@@ -7,6 +7,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jd.estructuras.ListaAdyacencia;
 import org.jd.utilidades.PropiedadesPantalla;
 
 public class VistaAgregarRuta extends Stage {
@@ -67,6 +68,15 @@ public class VistaAgregarRuta extends Stage {
                     || jFTTiempoRuta.getText().length() == 0) {
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
+                boolean ruta = ListaAdyacencia.getInstancia().insertar(jFTOrigen.getText(),
+                        Integer.parseInt(jFTTiempoRuta.getText()), jFTDestino.getText());
+                if (!ruta) {
+                    Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "LA RUTA FUE REGISTRADO PREVIAMENTE");
+                } else {
+                    // VistaRuta.getInstancia().actualizarItemsTabla();
+                    VistaRuta.getInstancia().reiniciarHBox();
+                    Alerta.getInstancia().mostrarNotificacion("RUTA", "REGISTRO REALIZADO EXITOSAMENTE");
+                }
             }
         });
         gridPane.add(buttonAdd, 0, 10);

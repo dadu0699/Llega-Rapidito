@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jd.estructuras.ListaAdyacencia;
 import org.jd.modelos.Ruta;
 import org.jd.utilidades.PropiedadesPantalla;
 
@@ -45,9 +46,7 @@ public class VistaRuta extends Stage {
     }
 
     private void actualizarObsList() {
-        ArrayList<Ruta> rutas = new ArrayList<>();
-        rutas.add(new Ruta("Guatemala", "Peten", "10 Horas"));
-        rutas.add(new Ruta("El progreso", "Guatemala", "2 Horas"));
+        ArrayList<Ruta> rutas = ListaAdyacencia.getInstancia().obtenerDatos();
 
         if (observableList != null) {
             observableList.clear();
@@ -61,7 +60,8 @@ public class VistaRuta extends Stage {
     }
 
     // Lista de busqueda
-    private void actualizarObsList(String search) {
+    private void actualizarObsList(String buscar) {
+        observableList = FXCollections.observableArrayList(ListaAdyacencia.getInstancia().buscarRuta(buscar));
     }
 
     public void actualizarItemsTabla(String search) {
