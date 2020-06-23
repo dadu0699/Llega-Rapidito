@@ -42,8 +42,12 @@ public class TablaHash {
     public boolean insertar(Cliente cliente) {
         String llave = cliente.getDPI();
         if (buscar(llave) == null) {
+            if (tablaHash[funcionHash(new Long(llave))].getPrimero() == null) {
+                cantidadDatos++;
+            }
+
             tablaHash[funcionHash(new Long(llave))].agregar(cliente);
-            cantidadDatos++;
+           // cantidadDatos++;
 
             if ((cantidadDatos * 100 / m) >= 72) {
                 m += 37;
