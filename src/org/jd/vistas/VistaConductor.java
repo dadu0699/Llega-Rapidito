@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jd.estructuras.ListaCircular;
 import org.jd.modelos.Conductor;
 import org.jd.utilidades.PropiedadesPantalla;
 
@@ -45,14 +46,10 @@ public class VistaConductor extends Stage {
     }
 
     private void actualizarObsList() {
-        ArrayList<Conductor> conductor = new ArrayList<>();
-        conductor.add(new Conductor("18", "Juan", "Perez", "C", "Masculino", "18/06/1985", "5555-5555", "Ciudad"));
-        conductor.add(new Conductor("19", "Mario", "Garcia", "A", "Masculino", "18/06/1995", "5555-5555", "Jutiapa"));
-
         if (observableList != null) {
             observableList.clear();
         }
-        observableList = FXCollections.observableArrayList(conductor);
+        observableList = FXCollections.observableArrayList(ListaCircular.getInstancia().obtenerDatos());
     }
 
     public void actualizarItemsTabla() {
@@ -61,7 +58,8 @@ public class VistaConductor extends Stage {
     }
 
     // Lista de busqueda
-    private void actualizarObsList(String search) {
+    private void actualizarObsList(String buscar) {
+        observableList = FXCollections.observableArrayList(ListaCircular.getInstancia().buscarConductor(buscar));
     }
 
     public void actualizarItemsTabla(String search) {
@@ -154,8 +152,8 @@ public class VistaConductor extends Stage {
         btnEliminar.setOnAction(event -> {
             Conductor conductor = (Conductor) tableView.getSelectionModel().getSelectedItem();
             if (conductor != null) {
+                ListaCircular.getInstancia().eliminar(conductor.getDPI());
                 reiniciarHBox();
-                // ELIMINAR Conductor (METODO)
                 VistaConductor.this.actualizarItemsTabla();
                 Alerta.getInstancia().mostrarNotificacion("CONDUCTORES", "CONDUCTOR ELIMINADO EXITOSAMENTE");
             }

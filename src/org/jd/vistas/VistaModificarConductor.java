@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jd.estructuras.ListaCircular;
 import org.jd.modelos.Conductor;
 import org.jd.utilidades.PropiedadesPantalla;
 
@@ -110,7 +111,9 @@ public class VistaModificarConductor extends Stage {
                     || jFTDireccion.getText().length() == 0) {
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
-                //Agregar a la lista circular
+                ListaCircular.getInstancia().modificar(jFTDPI.getText(), jFTNombres.getText(), jFTApellidos.getText(), jFTLicencia.getText(),
+                        cbGenero.getSelectionModel().getSelectedItem(), jFTFNacimiento.getText(), jFTTelefono.getText(), jFTDireccion.getText());
+                Alerta.getInstancia().mostrarNotificacion("CONDUCTORES", "CONDUCTOR ACTUALIZADO EXITOSAMENTE");
                 VistaConductor.getInstancia().actualizarItemsTabla();
             }
         });

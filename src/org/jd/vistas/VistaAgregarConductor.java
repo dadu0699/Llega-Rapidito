@@ -10,6 +10,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jd.estructuras.ListaCircular;
+import org.jd.modelos.Conductor;
 import org.jd.utilidades.PropiedadesPantalla;
 
 public class VistaAgregarConductor extends Stage {
@@ -108,6 +110,16 @@ public class VistaAgregarConductor extends Stage {
                     || jFTDireccion.getText().length() == 0) {
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
+                boolean conductor = ListaCircular.getInstancia().agregar(new Conductor(jFTDPI.getText(), jFTNombres.getText(), jFTApellidos.getText(),
+                        jFTLicencia.getText(), cbGenero.getSelectionModel().getSelectedItem(), jFTFNacimiento.getText(), jFTTelefono.getText(), jFTDireccion.getText()));
+
+                if (!conductor) {
+                    Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "EL CONDUCTOR FUE REGISTRADO PREVIAMENTE");
+                } else {
+                    // VistaConductor.getInstancia().actualizarItemsTabla();
+                    VistaConductor.getInstancia().reiniciarHBox();
+                    Alerta.getInstancia().mostrarNotificacion("CONDUCTOR", "REGISTRO REALIZADO EXITOSAMENTE");
+                }
             }
         });
         gridPane.add(buttonAdd, 0, 12);
