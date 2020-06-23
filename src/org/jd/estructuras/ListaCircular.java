@@ -2,6 +2,7 @@ package org.jd.estructuras;
 
 import java.util.ArrayList;
 import org.jd.modelos.Conductor;
+import org.jd.vistas.Alerta;
 
 public class ListaCircular {
 
@@ -60,7 +61,7 @@ public class ListaCircular {
         }
         return false;
     }
-    
+
     public void leer() {
         NodoListaCircular aux = primero;
         do {
@@ -144,7 +145,7 @@ public class ListaCircular {
             while (aux.getSiguiente() != primero) {
                 ayuda = aux.getSiguiente();
                 while (ayuda != primero) {
-                    if (Integer.parseInt(aux.getConductor().getDPI()) > Integer.parseInt(ayuda.getConductor().getDPI())) {
+                    if (Long.parseLong(aux.getConductor().getDPI()) > Long.parseLong(ayuda.getConductor().getDPI())) {
 
                         temporal.getConductor().setDPI(aux.getConductor().getDPI());
                         temporal.getConductor().setNombres(aux.getConductor().getNombres());
@@ -215,5 +216,24 @@ public class ListaCircular {
         } while (aux != primero);
 
         return conductores;
+    }
+
+    public void agregarArchivo(String contenido) {
+        String[] conductores = contenido.split(";");
+        String[] atributos;
+        boolean conductorInsertado;
+        if (conductores.length > 1) {
+            for (String conductor : conductores) {
+                atributos = conductor.split("%");
+                conductorInsertado = agregar(new Conductor(atributos[0].trim(), atributos[1].trim(), atributos[2].trim(), atributos[3].trim(),
+                        atributos[4].trim(), atributos[5].trim(), atributos[6].trim(), atributos[7].trim()));
+
+                if (!conductorInsertado) {
+                    Alerta.getInstancia().mostrarNotificacion("ERROR", "EL CONDUCTOR FUE REGISTRADO PREVIAMENTE");
+                } else {
+                    Alerta.getInstancia().mostrarNotificacion("CONDUCTOR", "REGISTRO REALIZADO EXITOSAMENTE");
+                }
+            }
+        }
     }
 }

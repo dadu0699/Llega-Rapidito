@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.jd.estructuras.ListaCircular;
 import org.jd.modelos.Conductor;
+import org.jd.utilidades.ManejoDeArchivos;
 import org.jd.utilidades.PropiedadesPantalla;
 
 public class VistaConductor extends Stage {
@@ -121,6 +122,9 @@ public class VistaConductor extends Stage {
         btnArchivo.setButtonType(JFXButton.ButtonType.FLAT);
         btnArchivo.setPrefSize(x, y);
         btnArchivo.setOnAction(event -> {
+            ManejoDeArchivos.getInstancia().subirArchivo("Archivo de Conductores", "*.txt");
+            ListaCircular.getInstancia().agregarArchivo(ManejoDeArchivos.getInstancia().leerArchivo());
+            actualizarItemsTabla();
         });
 
         JFXButton btnAgregar = new JFXButton("AGREGAR");
