@@ -47,12 +47,10 @@ public class VistaCliente extends Stage {
     }
 
     private void actualizarObsList() {
-        ArrayList<Cliente> clientes = TablaHash.getInstancia().obtenerDatos();
-
         if (observableList != null) {
             observableList.clear();
         }
-        observableList = FXCollections.observableArrayList(clientes);
+        observableList = FXCollections.observableArrayList(TablaHash.getInstancia().obtenerDatos());
     }
 
     public void actualizarItemsTabla() {
@@ -114,7 +112,7 @@ public class VistaCliente extends Stage {
         JFXTextField txtBuscar = new JFXTextField();
         txtBuscar.setPromptText("BUSCAR");
         txtBuscar.setPrefSize(x, y * 0.005);
-        txtBuscar.textProperty().addListener((ObservableValue<? extends String> observable, 
+        txtBuscar.textProperty().addListener((ObservableValue<? extends String> observable,
                 String oldValue, String newValue) -> {
             actualizarItemsTabla(txtBuscar.getText().trim());
         });

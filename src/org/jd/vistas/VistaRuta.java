@@ -47,12 +47,10 @@ public class VistaRuta extends Stage {
     }
 
     private void actualizarObsList() {
-        ArrayList<Ruta> rutas = ListaAdyacencia.getInstancia().obtenerDatos();
-
         if (observableList != null) {
             observableList.clear();
         }
-        observableList = FXCollections.observableArrayList(rutas);
+        observableList = FXCollections.observableArrayList(ListaAdyacencia.getInstancia().obtenerDatos());
     }
 
     public void actualizarItemsTabla() {

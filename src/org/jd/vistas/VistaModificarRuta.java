@@ -38,7 +38,7 @@ public class VistaModificarRuta extends Stage {
         Text txtTitulo = new Text("MODIFICAR");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(25));
-        gridPane.add(txtTitulo, 0, 4, 2, 1);
+        gridPane.add(txtTitulo, 0, 6, 2, 1);
 
         JFXTextField jFTOrigen = new JFXTextField(ruta.getOrigen());
         jFTOrigen.setPromptText("ORIGEN");
