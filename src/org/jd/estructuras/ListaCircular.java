@@ -236,4 +236,39 @@ public class ListaCircular {
             }
         }
     }
+
+    public String contenidoGrafica() {
+        StringBuilder stringBuilder = new StringBuilder();
+        NodoListaCircular aux = primero;
+
+        stringBuilder.append("digraph G {");
+        stringBuilder.append("\n\tgraph [bgcolor=transparent];");
+        stringBuilder.append("\n\trankdir = LR;");
+        stringBuilder.append("\n\tnode[shape=record, style=filled color=\"#393C4BFF\""
+                + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");
+
+        if (!estaVacia()) {
+            do {
+                stringBuilder.append("\n\tN").append(aux.getConductor().getDPI()).append("[label =\"")
+                        .append(aux.getConductor().getDPI()).append("\\n")
+                        .append(aux.getConductor().getNombres()).append(" ")
+                        .append(aux.getConductor().getApellidos()).append("\\n")
+                        .append(aux.getConductor().getGenero()).append("\\n")
+                        .append(aux.getConductor().getFechaNacimiento()).append("\\n")
+                        .append(aux.getConductor().getTelefono()).append("\\n")
+                        .append(aux.getConductor().getLicencia()).append("\\n")
+                        .append(aux.getConductor().getDireccion()).append("\"];");
+
+                stringBuilder.append("\n\tN").append(aux.getConductor().getDPI()).append(" -> N")
+                        .append(aux.getSiguiente().getConductor().getDPI()).append("[color=\"#E91E63\"];");
+                stringBuilder.append("\n\tN").append(aux.getConductor().getDPI()).append(" -> N")
+                        .append(aux.getAnterior().getConductor().getDPI()).append("[color=\"#E91E63\"];");
+                aux = aux.getSiguiente();
+                System.out.println();
+            } while (aux != primero);
+        }
+
+        stringBuilder.append("\n}");
+        return stringBuilder.toString();
+    }
 }
