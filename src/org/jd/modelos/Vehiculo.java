@@ -75,4 +75,9 @@ public class Vehiculo {
     public void setTransmision(String transmision) {
         this.transmision = transmision;
     }
+    
+        @Override
+    public String toString() {
+        return this.placa + " -- " + this.marca + " " + this.modelo;
+    }
 }

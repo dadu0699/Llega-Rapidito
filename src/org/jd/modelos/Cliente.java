@@ -76,4 +76,9 @@ public class Cliente {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+    
+        @Override
+    public String toString() {
+        return this.DPI + " -- " + this.nombres + " " + this.apellidos;
+    }
 }

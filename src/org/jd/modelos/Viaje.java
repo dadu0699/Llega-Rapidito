@@ -93,8 +93,5 @@ public class Viaje {
 
     public void setRuta(Ruta ruta) {
         this.ruta = ruta;
-    }
-    
-    
-    
+    }   
 }
