@@ -111,7 +111,7 @@ public class VistaMostrarViaje {
                     + "\nFECHA:                " + viaje.getFecha()
                     + "\nHORA:      " + viaje.getHora()
                     + "\nCLIENTE:              " + viaje.getCliente().getDPI()
-                    + "\nCONUDCOR:             " + viaje.getConductor().getDPI()
+                    + "\nCONDUCTOR:             " + viaje.getConductor().getDPI()
                     + "\nVEHICULO:             " + viaje.getVehiculo().getPlaca());
             clipboard.setContent(content);
         });
