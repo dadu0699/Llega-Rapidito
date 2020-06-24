@@ -108,7 +108,7 @@ public class VistaMostrarConductor extends Stage {
             content.putString("DPI:                   " + conductor.getDPI()
                     + "\nNOMBRES:               " + conductor.getNombres()
                     + "\nAPELLIDOS:             " + conductor.getApellidos()
-                    + "\nLICENCIA:                " + conductor.getLicencia()
+                    + "\nLICENCIA:              " + conductor.getLicencia()
                     + "\nGENERO:                " + conductor.getGenero()
                     + "\nFECHA NACIMIENTO:      " + conductor.getFechaNacimiento()
                     + "\nTELEFONO:              " + conductor.getTelefono()

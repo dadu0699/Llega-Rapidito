@@ -39,7 +39,7 @@ public class Panel extends Stage {
         JFXButton btnEncabezado = new JFXButton("LLEGA RAPIDITO"); // Asignacion del nombre al boton
         btnEncabezado.setDisable(true); // Desactivar boton
         btnEncabezado.getStyleClass().addAll("headerNavButton", "panelButton"); // Diseños del panel de botones y de
-                                                                                // boton
+        // boton
         btnEncabezado.setPrefSize(2 * x / 8, y); // Tamaño del boton
         btnEncabezado.setButtonType(JFXButton.ButtonType.FLAT); // Tipo de boton
 

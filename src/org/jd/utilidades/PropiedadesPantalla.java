@@ -4,6 +4,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 
 public class PropiedadesPantalla {
+
     private static PropiedadesPantalla instancia;
     private Rectangle2D screenBounds;
 

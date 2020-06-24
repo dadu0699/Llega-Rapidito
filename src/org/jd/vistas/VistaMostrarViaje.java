@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import org.jd.modelos.Viaje;
 import org.jd.utilidades.PropiedadesPantalla;
 
-public class VistaMostrarViaje {
+public class VistaMostrarViaje extends Stage {
 
     private static VistaMostrarViaje instancia;
 
@@ -98,13 +98,13 @@ public class VistaMostrarViaje {
         btnCopiar.setOnAction(event -> {
             final Clipboard clipboard = Clipboard.getSystemClipboard();
             final ClipboardContent content = new ClipboardContent();
-            content.putString("ID:                   " + viaje.getId()
-                    + "\nORIGEN:               " + viaje.getOrigen().toString()
+            content.putString("ID:                  " + viaje.getId()
+                    + "\nORIGEN:              " + viaje.getOrigen().toString()
                     + "\nDESTINO:             " + viaje.getDestino().toString()
-                    + "\nFECHA Y HORA:                " + viaje.getFecha()
-                    + "\nCLIENTE:              " + viaje.getCliente().toString()
-                    + "\nCONDUCTOR:             " + viaje.getConductor().toString()
-                    + "\nVEHICULO:             " + viaje.getVehiculo().toString());
+                    + "\nFECHA Y HORA:        " + viaje.getFecha()
+                    + "\nCLIENTE:             " + viaje.getCliente().toString()
+                    + "\nCONDUCTOR:           " + viaje.getConductor().toString()
+                    + "\nVEHICULO:            " + viaje.getVehiculo().toString());
             clipboard.setContent(content);
         });
         gridPane.add(btnCopiar, 0, 12);

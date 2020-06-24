@@ -93,7 +93,8 @@ public class ListaDoble {
         buscar = buscar.toLowerCase();
 
         while (aux != null) {
-            if ((aux.getViaje().getVehiculo().getPlaca() + aux.getViaje().getFecha()).replaceAll("/", "").replaceAll(" ", "").toLowerCase().contains(buscar)
+            if ((aux.getViaje().getVehiculo().getPlaca() + aux.getViaje().getFecha()).replaceAll("/", "")
+                    .replaceAll(" ", "").toLowerCase().contains(buscar)
                     || aux.getViaje().getId().toLowerCase().contains(buscar)) {
                 viajes.add(aux.getViaje());
             }

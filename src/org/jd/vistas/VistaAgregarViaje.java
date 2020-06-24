@@ -2,7 +2,6 @@ package org.jd.vistas;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -107,8 +106,10 @@ public class VistaAgregarViaje extends Stage {
                 Vehiculo temporal = new Vehiculo("AS213", "Mercedes", "AMG", "2020", "Verde", "Q.200.00", "Mecánica");
                 Ruta ruta = null;
 
-                ListaDoble.getInstancia().agregar(new Viaje(cbOrigen.getSelectionModel().getSelectedItem(), cbDestino.getSelectionModel().getSelectedItem(),
-                        cbCliente.getSelectionModel().getSelectedItem(), cbConductor.getSelectionModel().getSelectedItem(), temporal, ruta));
+                ListaDoble.getInstancia().agregar(new Viaje(cbOrigen.getSelectionModel().getSelectedItem(),
+                        cbDestino.getSelectionModel().getSelectedItem(),
+                        cbCliente.getSelectionModel().getSelectedItem(),
+                        cbConductor.getSelectionModel().getSelectedItem(), temporal, ruta));
                 VistaViaje.getInstancia().reiniciarHBox();
                 Alerta.getInstancia().mostrarNotificacion("VIAJE", "REGISTRO REALIZADO EXITOSAMENTE");
             }

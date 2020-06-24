@@ -101,8 +101,8 @@ public class VistaMostrarVehiculo extends Stage {
             content.putString("PLACA:         " + vehiculo.getPlaca()
                     + "\nMARCA:         " + vehiculo.getMarca()
                     + "\nMODELO:        " + vehiculo.getModelo()
-                    + "\nAÑO:           " + vehiculo.getAnio() 
-                    + "\nCOLOR:         " + vehiculo.getColor() 
+                    + "\nAÑO:           " + vehiculo.getAnio()
+                    + "\nCOLOR:         " + vehiculo.getColor()
                     + "\nPRECIO:        " + vehiculo.getPrecio()
                     + "\nTRANSMISIÓN:   " + vehiculo.getTransmision());
             clipboard.setContent(content);

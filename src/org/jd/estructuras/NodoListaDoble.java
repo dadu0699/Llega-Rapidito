@@ -3,7 +3,8 @@ package org.jd.estructuras;
 import org.jd.modelos.Viaje;
 
 public class NodoListaDoble {
-        private Viaje viaje;
+
+    private Viaje viaje;
     private NodoListaDoble siguiente;
     private NodoListaDoble anterior;
 

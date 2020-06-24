@@ -113,7 +113,8 @@ public class VistaVehiculo extends Stage {
         JFXTextField txtBuscar = new JFXTextField();
         txtBuscar.setPromptText("BUSCAR");
         txtBuscar.setPrefSize(x, y * 0.005);
-        txtBuscar.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+        txtBuscar.textProperty().addListener((ObservableValue<? extends String> observable,
+                String oldValue, String newValue) -> {
             actualizarItemsTabla(txtBuscar.getText().trim());
         });
         gridPane.add(txtBuscar, 0, 0);
@@ -205,7 +206,8 @@ public class VistaVehiculo extends Stage {
         tableView.setOnMouseClicked(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
-                vBoxCRUD.getChildren().add(0, VistaMostrarVehiculo.getInstancia().getGridPane((Vehiculo) tableView.getSelectionModel().getSelectedItem()));
+                vBoxCRUD.getChildren().add(0, VistaMostrarVehiculo.getInstancia().getGridPane(
+                        (Vehiculo) tableView.getSelectionModel().getSelectedItem()));
             }
         });
 

@@ -110,7 +110,8 @@ public class VistaConductor extends Stage {
         JFXTextField txtBuscar = new JFXTextField();
         txtBuscar.setPromptText("BUSCAR");
         txtBuscar.setPrefSize(x, y * 0.005);
-        txtBuscar.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+        txtBuscar.textProperty().addListener((ObservableValue<? extends String> observable,
+                String oldValue, String newValue) -> {
             actualizarItemsTabla(txtBuscar.getText().trim());
         });
         gridPane.add(txtBuscar, 0, 0);
@@ -142,7 +143,8 @@ public class VistaConductor extends Stage {
         btnModificar.setOnAction(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
-                vBoxCRUD.getChildren().add(0, VistaModificarConductor.getInstancia().getGridPane((Conductor) tableView.getSelectionModel().getSelectedItem()));
+                vBoxCRUD.getChildren().add(0, VistaModificarConductor.getInstancia().getGridPane(
+                        (Conductor) tableView.getSelectionModel().getSelectedItem()));
             } else {
                 reiniciarHBox();
             }
@@ -209,7 +211,8 @@ public class VistaConductor extends Stage {
         tableView.setOnMouseClicked(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
-                vBoxCRUD.getChildren().add(0, VistaMostrarConductor.getInstancia().getGridPane((Conductor) tableView.getSelectionModel().getSelectedItem()));
+                vBoxCRUD.getChildren().add(0, VistaMostrarConductor.getInstancia().getGridPane(
+                        (Conductor) tableView.getSelectionModel().getSelectedItem()));
             }
         });
 

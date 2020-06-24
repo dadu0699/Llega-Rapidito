@@ -223,8 +223,10 @@ public class ListaCircular {
         if (conductores.length > 1) {
             for (String conductor : conductores) {
                 atributos = conductor.split("%");
-                conductorInsertado = agregar(new Conductor(atributos[0].trim(), atributos[1].trim(), atributos[2].trim(), atributos[3].trim(),
-                        atributos[4].trim(), atributos[5].trim(), atributos[6].trim(), atributos[7].trim()));
+                conductorInsertado = agregar(new Conductor(atributos[0].trim(),
+                        atributos[1].trim(), atributos[2].trim(), atributos[3].trim(),
+                        atributos[4].trim(), atributos[5].trim(), atributos[6].trim(),
+                        atributos[7].trim()));
 
                 if (!conductorInsertado) {
                     Alerta.getInstancia().mostrarNotificacion("ERROR", "EL CONDUCTOR FUE REGISTRADO PREVIAMENTE");

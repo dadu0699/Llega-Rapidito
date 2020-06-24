@@ -104,7 +104,8 @@ public class Viaje {
 
     @Override
     public String toString() {
-        return (id + " |  " + origen.toString() + " |  " + destino.toString() + " | " + fecha + " | " + cliente.toString() + " | " + conductor.toString() 
-                + " | " + vehiculo.toString());
+        return (id + " |  " + origen.toString() + " |  " + destino.toString()
+                + " | " + fecha + " | " + cliente.toString() + " | "
+                + conductor.toString() + " | " + vehiculo.toString());
     }
 }

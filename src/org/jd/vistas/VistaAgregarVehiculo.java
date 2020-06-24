@@ -93,7 +93,7 @@ public class VistaAgregarVehiculo extends Stage {
         buttonAdd.setPrefSize(x, y * 0.04);
         buttonAdd.setOnAction(event -> {
             if (jFTPlaca.getText().length() == 0
-                    || jFTMarca.getText().length() == 0 
+                    || jFTMarca.getText().length() == 0
                     || jFTModelo.getText().length() == 0
                     || jFTAnio.getText().length() == 0
                     || jFTColor.getText().length() == 0

@@ -111,7 +111,8 @@ public class VistaRuta extends Stage {
         JFXTextField txtBuscar = new JFXTextField();
         txtBuscar.setPromptText("BUSCAR");
         txtBuscar.setPrefSize(x, y * 0.005);
-        txtBuscar.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+        txtBuscar.textProperty().addListener((ObservableValue<? extends String> observable,
+                String oldValue, String newValue) -> {
             actualizarItemsTabla(txtBuscar.getText().trim());
         });
         gridPane.add(txtBuscar, 0, 0);
@@ -189,7 +190,8 @@ public class VistaRuta extends Stage {
         tableView.setOnMouseClicked(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
-                vBoxCRUD.getChildren().add(0, VistaMostrarRuta.getInstancia().getGridPane((Ruta) tableView.getSelectionModel().getSelectedItem()));
+                vBoxCRUD.getChildren().add(0, VistaMostrarRuta.getInstancia().getGridPane(
+                        (Ruta) tableView.getSelectionModel().getSelectedItem()));
             }
         });
         tableView.setPrefSize(x, y * 0.995);
