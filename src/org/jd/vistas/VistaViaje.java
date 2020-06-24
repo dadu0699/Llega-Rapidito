@@ -3,6 +3,7 @@ package org.jd.vistas;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.TableColumn;
@@ -14,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jd.estructuras.ListaDoble;
 import org.jd.modelos.Viaje;
 import org.jd.utilidades.ManejoDeArchivos;
 import org.jd.utilidades.PropiedadesPantalla;
@@ -47,7 +49,7 @@ public class VistaViaje extends Stage {
         if (observableList != null) {
             observableList.clear();
         }
-        //     observableList = FXCollections.observableArrayList(ListaDoble.getInstancia().obtenerDatos());
+        observableList = FXCollections.observableArrayList(ListaDoble.getInstancia().obtenerDatos());
     }
 
     public void actualizarItemsTabla() {
@@ -57,7 +59,7 @@ public class VistaViaje extends Stage {
 
     // Lista de busqueda
     private void actualizarObsList(String buscar) {
-        //      observableList = FXCollections.observableArrayList(ListaDoble.getInstancia().buscarViaje(buscar));
+        observableList = FXCollections.observableArrayList(ListaDoble.getInstancia().buscarViaje(buscar));
     }
 
     public void actualizarItemsTabla(String search) {
@@ -177,13 +179,9 @@ public class VistaViaje extends Stage {
         colDestino.setPrefWidth(x / 10);
         colDestino.setCellValueFactory(new PropertyValueFactory<>("destino"));
 
-        TableColumn<Viaje, String> colFecha = new TableColumn<>("FECHA");
-        colFecha.setPrefWidth(x / 10);
-        colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-
-        TableColumn<Viaje, String> colHora = new TableColumn<>("HORA");
-        colHora.setPrefWidth(x / 10);
-        colHora.setCellValueFactory(new PropertyValueFactory<>("hora"));
+        TableColumn<Viaje, String> colFechaHora = new TableColumn<>("FECHA Y HORA");
+        colFechaHora.setPrefWidth(x / 10);
+        colFechaHora.setCellValueFactory(new PropertyValueFactory<>("fecha"));
 
         TableColumn<Viaje, String> colCliente = new TableColumn<>("CLIENTE");
         colCliente.setPrefWidth(x / 10);
@@ -203,7 +201,7 @@ public class VistaViaje extends Stage {
 
         actualizarObsList();
         tableView = new TableView<>(observableList);
-        tableView.getColumns().addAll(colOrigen, colDestino, colFecha, colHora, colCliente, colConductor, colVehiculo,
+        tableView.getColumns().addAll(colOrigen, colDestino, colFechaHora, colCliente, colConductor, colVehiculo,
                 colRuta);
 
         tableView.setOnMouseClicked(event -> {

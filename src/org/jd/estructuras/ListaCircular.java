@@ -189,7 +189,6 @@ public class ListaCircular {
                 conductores.add(aux.getConductor());
                 aux = aux.getSiguiente();
             }
-            System.out.println();
         } while (aux != primero);
 
         return conductores;
@@ -212,7 +211,6 @@ public class ListaCircular {
                 }
                 aux = aux.getSiguiente();
             }
-            System.out.println();
         } while (aux != primero);
 
         return conductores;

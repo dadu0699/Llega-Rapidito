@@ -35,4 +35,9 @@ public class Vertice {
     public void setSiguiente(Vertice siguiente) {
         this.siguiente = siguiente;
     }
+
+    @Override
+    public String toString() {
+        return lugar;
+    }
 }

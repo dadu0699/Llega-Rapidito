@@ -242,4 +242,16 @@ public class ListaAdyacencia {
         stringBuilder.append("\n}");
         return stringBuilder.toString();
     }
+
+    public ArrayList<Vertice> obtenerLugares() {
+        ArrayList<Vertice> lugares = new ArrayList<>();
+        Vertice vertice = primero;
+        Arista arista;
+
+        while (vertice != null) {
+            lugares.add(vertice);
+            vertice = vertice.getSiguiente();
+        }
+        return lugares;
+    }
 }

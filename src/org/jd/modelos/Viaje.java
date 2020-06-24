@@ -1,26 +1,30 @@
 package org.jd.modelos;
 
-public class Viaje {
-    private  String id; // incriptado con MD5 o SH1
-    private String origen;
-    private String destino;
-    private String fecha;
-    private String hora;
-    private Cliente cliente;
-    private  Conductor conductor;
-    private  Vehiculo vehiculo;
-    private  Ruta ruta;  // ruta mas corta
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.jd.estructuras.Vertice;
+import org.jd.utilidades.Encriptamiento;
 
-    public Viaje(String id, String origen, String destino, String fecha, String hora, Cliente cliente, Conductor conductor, Vehiculo vehiculo, Ruta ruta) {
-        this.id = id;
+public class Viaje {
+
+    private String id; // incriptado con MD5 o SH1
+    private Vertice origen;
+    private Vertice destino;
+    private String fecha;
+    private Cliente cliente;
+    private Conductor conductor;
+    private Vehiculo vehiculo;
+    private Ruta ruta;  // ruta mas corta
+
+    public Viaje(Vertice origen, Vertice destino, Cliente cliente, Conductor conductor, Vehiculo vehiculo, Ruta ruta) {
         this.origen = origen;
         this.destino = destino;
-        this.fecha = fecha;
-        this.hora = hora;
+        this.fecha = obtenerFechaHora();
         this.cliente = cliente;
         this.conductor = conductor;
         this.vehiculo = vehiculo;
         this.ruta = ruta;
+        this.id = encriptarLlave();
     }
 
     public String getId() {
@@ -31,19 +35,19 @@ public class Viaje {
         this.id = id;
     }
 
-    public String getOrigen() {
+    public Vertice getOrigen() {
         return origen;
     }
 
-    public void setOrigen(String origen) {
+    public void setOrigen(Vertice origen) {
         this.origen = origen;
     }
 
-    public String getDestino() {
+    public Vertice getDestino() {
         return destino;
     }
 
-    public void setDestino(String destino) {
+    public void setDestino(Vertice destino) {
         this.destino = destino;
     }
 
@@ -53,14 +57,6 @@ public class Viaje {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
-    }
-
-    public String getHora() {
-        return hora;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
     }
 
     public Cliente getCliente() {
@@ -93,5 +89,22 @@ public class Viaje {
 
     public void setRuta(Ruta ruta) {
         this.ruta = ruta;
-    }   
+    }
+
+    private String obtenerFechaHora() {
+        Date fechaActual = new Date();
+        SimpleDateFormat darFormato = new SimpleDateFormat("dd/MM/yy HH:mm");
+        return darFormato.format(fechaActual);
+    }
+
+    private String encriptarLlave() {
+        Encriptamiento encriptar = new Encriptamiento();
+        return encriptar.encode(vehiculo.getPlaca() + fecha.replaceAll("/", "").replaceAll(" ", ""));
+    }
+
+    @Override
+    public String toString() {
+        return (id + " |  " + origen.toString() + " |  " + destino.toString() + " | " + fecha + " | " + cliente.toString() + " | " + conductor.toString() 
+                + " | " + vehiculo.toString());
+    }
 }

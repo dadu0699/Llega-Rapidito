@@ -1,5 +1,6 @@
 package org.jd.estructuras;
 
+import java.util.ArrayList;
 import org.jd.modelos.Viaje;
 
 public class ListaDoble {
@@ -49,6 +50,7 @@ public class ListaDoble {
             ultimo.setSiguiente(nuevo);
         }
         ultimo = nuevo;
+        System.out.println(nuevo.getViaje().toString());
     }
 
     public Viaje buscar(String id) {
@@ -73,5 +75,30 @@ public class ListaDoble {
             }
             System.out.println();
         } while (aux != ultimo.getSiguiente());
+    }
+
+    public ArrayList<Viaje> obtenerDatos() {
+        ArrayList<Viaje> viajes = new ArrayList<>();
+        NodoListaDoble aux = primero;
+        while (aux != null) {
+            viajes.add(aux.getViaje());
+            aux = aux.getSiguiente();
+        }
+        return viajes;
+    }
+
+    public ArrayList<Viaje> buscarViaje(String buscar) {
+        ArrayList<Viaje> viajes = new ArrayList<>();
+        NodoListaDoble aux = primero;
+        buscar = buscar.toLowerCase();
+
+        while (aux != null) {
+            if ((aux.getViaje().getVehiculo().getPlaca() + aux.getViaje().getFecha()).replaceAll("/", "").replaceAll(" ", "").toLowerCase().contains(buscar)
+                    || aux.getViaje().getId().toLowerCase().contains(buscar)) {
+                viajes.add(aux.getViaje());
+            }
+            aux = aux.getSiguiente();
+        }
+        return viajes;
     }
 }

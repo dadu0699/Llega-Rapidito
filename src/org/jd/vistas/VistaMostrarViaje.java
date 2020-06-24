@@ -49,14 +49,14 @@ public class VistaMostrarViaje {
         jFTID.setEditable(false);
         gridPane.add(jFTID, 0, 5);
 
-        JFXTextField jFTOrigen = new JFXTextField(viaje.getOrigen());
+        JFXTextField jFTOrigen = new JFXTextField(viaje.getOrigen().toString());
         jFTOrigen.setPromptText("ORIGEN");
         jFTOrigen.setLabelFloat(true);
         jFTOrigen.setPrefWidth(x);
         jFTOrigen.setEditable(false);
         gridPane.add(jFTOrigen, 0, 6);
 
-        JFXTextField jFTDestino = new JFXTextField(viaje.getDestino());
+        JFXTextField jFTDestino = new JFXTextField(viaje.getDestino().toString());
         jFTDestino.setPromptText("DESTINO");
         jFTDestino.setLabelFloat(true);
         jFTDestino.setPrefWidth(x);
@@ -64,39 +64,32 @@ public class VistaMostrarViaje {
         gridPane.add(jFTDestino, 0, 7);
 
         JFXTextField jFTFecha = new JFXTextField(viaje.getFecha());
-        jFTFecha.setPromptText("FECHA");
+        jFTFecha.setPromptText("FECHA Y HORA");
         jFTFecha.setLabelFloat(true);
         jFTFecha.setPrefWidth(x);
         jFTFecha.setEditable(false);
         gridPane.add(jFTFecha, 0, 8);
 
-        JFXTextField jFTHora = new JFXTextField(viaje.getHora());
-        jFTHora.setPromptText("HORA");
-        jFTHora.setLabelFloat(true);
-        jFTHora.setPrefWidth(x);
-        jFTHora.setEditable(false);
-        gridPane.add(jFTHora, 0, 9);
-
-        JFXTextField jFTCliente = new JFXTextField(viaje.getCliente().getDPI());
+        JFXTextField jFTCliente = new JFXTextField(viaje.getCliente().toString());
         jFTCliente.setPromptText("CLIENTE");
         jFTCliente.setLabelFloat(true);
         jFTCliente.setPrefWidth(x);
         jFTCliente.setEditable(false);
-        gridPane.add(jFTCliente, 0, 10);
+        gridPane.add(jFTCliente, 0, 9);
 
-        JFXTextField jFTConductor = new JFXTextField(viaje.getConductor().getDPI());
+        JFXTextField jFTConductor = new JFXTextField(viaje.getConductor().toString());
         jFTConductor.setPromptText("CONDUCTOR");
         jFTConductor.setLabelFloat(true);
         jFTConductor.setPrefWidth(x);
         jFTConductor.setEditable(false);
-        gridPane.add(jFTConductor, 0, 11);
+        gridPane.add(jFTConductor, 0, 10);
 
-        JFXTextField jFTVehiculo = new JFXTextField(viaje.getVehiculo().getPlaca());
+        JFXTextField jFTVehiculo = new JFXTextField(viaje.getVehiculo().toString());
         jFTVehiculo.setPromptText("VEHICULO");
         jFTVehiculo.setLabelFloat(true);
         jFTVehiculo.setPrefWidth(x);
         jFTVehiculo.setEditable(false);
-        gridPane.add(jFTVehiculo, 0, 12);
+        gridPane.add(jFTVehiculo, 0, 11);
 
         JFXButton btnCopiar = new JFXButton("COPIAR");
         btnCopiar.getStyleClass().addAll("customButton", "primaryButton");
@@ -106,13 +99,12 @@ public class VistaMostrarViaje {
             final Clipboard clipboard = Clipboard.getSystemClipboard();
             final ClipboardContent content = new ClipboardContent();
             content.putString("ID:                   " + viaje.getId()
-                    + "\nORIGEN:               " + viaje.getOrigen()
-                    + "\nDESTINO:             " + viaje.getDestino()
-                    + "\nFECHA:                " + viaje.getFecha()
-                    + "\nHORA:      " + viaje.getHora()
-                    + "\nCLIENTE:              " + viaje.getCliente().getDPI()
-                    + "\nCONDUCTOR:             " + viaje.getConductor().getDPI()
-                    + "\nVEHICULO:             " + viaje.getVehiculo().getPlaca());
+                    + "\nORIGEN:               " + viaje.getOrigen().toString()
+                    + "\nDESTINO:             " + viaje.getDestino().toString()
+                    + "\nFECHA Y HORA:                " + viaje.getFecha()
+                    + "\nCLIENTE:              " + viaje.getCliente().toString()
+                    + "\nCONDUCTOR:             " + viaje.getConductor().toString()
+                    + "\nVEHICULO:             " + viaje.getVehiculo().toString());
             clipboard.setContent(content);
         });
         gridPane.add(btnCopiar, 0, 12);
