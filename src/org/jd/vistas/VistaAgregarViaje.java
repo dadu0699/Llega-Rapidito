@@ -50,7 +50,7 @@ public class VistaAgregarViaje extends Stage {
         Text txtTitulo = new Text("AGREGAR");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(25));
-        gridPane.add(txtTitulo, 0, 3);
+        gridPane.add(txtTitulo, 0, 6);
 
         ObservableList obsOrigen = FXCollections.observableArrayList(ListaAdyacencia.getInstancia().obtenerLugares());
         ObservableList<Vertice> origenL = obsOrigen;
@@ -58,7 +58,7 @@ public class VistaAgregarViaje extends Stage {
         cbOrigen.setPromptText("ORIGEN");
         cbOrigen.setLabelFloat(true);
         cbOrigen.setPrefWidth(x);
-        gridPane.add(cbOrigen, 0, 4);
+        gridPane.add(cbOrigen, 0, 7);
 
         ObservableList obsDestino = FXCollections.observableArrayList(ListaAdyacencia.getInstancia().obtenerLugares());
         ObservableList<Vertice> destinoL = obsDestino;
@@ -66,7 +66,7 @@ public class VistaAgregarViaje extends Stage {
         cbDestino.setPromptText("DESTINO");
         cbDestino.setLabelFloat(true);
         cbDestino.setPrefWidth(x);
-        gridPane.add(cbDestino, 0, 5);
+        gridPane.add(cbDestino, 0, 8);
 
         ObservableList obsClientes = FXCollections.observableArrayList(TablaHash.getInstancia().obtenerDatos());
         ObservableList<Cliente> clientesL = obsClientes;
@@ -74,7 +74,7 @@ public class VistaAgregarViaje extends Stage {
         cbCliente.setPromptText("CLIENTE");
         cbCliente.setLabelFloat(true);
         cbCliente.setPrefWidth(x);
-        gridPane.add(cbCliente, 0, 6);
+        gridPane.add(cbCliente, 0, 9);
 
         ObservableList obsConductor = FXCollections.observableArrayList(ListaCircular.getInstancia().obtenerDatos());
         ObservableList<Conductor> conductorL = obsConductor;
@@ -82,7 +82,7 @@ public class VistaAgregarViaje extends Stage {
         cbConductor.setPromptText("CONDUCTOR");
         cbConductor.setLabelFloat(true);
         cbConductor.setPrefWidth(x);
-        gridPane.add(cbConductor, 0, 7);
+        gridPane.add(cbConductor, 0, 10);
 
         /*
         ObservableList obsVehiculo = FXCollections.observableArrayList(ArbolB.getInstancia().obtenerDatos());
@@ -113,7 +113,7 @@ public class VistaAgregarViaje extends Stage {
                 Alerta.getInstancia().mostrarNotificacion("VIAJE", "REGISTRO REALIZADO EXITOSAMENTE");
             }
         });
-        gridPane.add(buttonAdd, 0, 9);
+        gridPane.add(buttonAdd, 0, 11);
         return gridPane;
     }
 }
