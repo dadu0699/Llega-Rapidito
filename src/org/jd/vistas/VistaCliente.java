@@ -14,7 +14,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
-import java.util.ArrayList;
 import javafx.beans.value.ObservableValue;
 import org.jd.estructuras.TablaHash;
 import org.jd.modelos.Cliente;
@@ -127,6 +126,8 @@ public class VistaCliente extends Stage {
             ManejoDeArchivos.getInstancia().subirArchivo("Archivo de Clientes", "*.txt");
             TablaHash.getInstancia().agregarArchivo(ManejoDeArchivos.getInstancia().leerArchivo());
             actualizarItemsTabla();
+            ManejoDeArchivos.getInstancia().escribirArchivo(TablaHash.getInstancia().contenidoGrafica(), "clientes.dot", "reportes");
+ManejoDeArchivos.getInstancia().compilarDOT("clientes", "reportes");
         });
 
         JFXButton btnAgregar = new JFXButton("AGREGAR");

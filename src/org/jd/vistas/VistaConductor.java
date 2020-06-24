@@ -170,35 +170,35 @@ public class VistaConductor extends Stage {
         gridPane.add(hBoxBotones, 0, 1);
 
         TableColumn<Conductor, String> colDPI = new TableColumn<>("DPI");
-        colDPI.setPrefWidth(x / 10);
+        colDPI.setPrefWidth(x * 7 / 80);
         colDPI.setCellValueFactory(new PropertyValueFactory<>("DPI"));
 
         TableColumn<Conductor, String> colNombres = new TableColumn<>("NOMBRES");
-        colNombres.setPrefWidth(x / 10);
+        colNombres.setPrefWidth(x * 7 / 80);
         colNombres.setCellValueFactory(new PropertyValueFactory<>("nombres"));
 
         TableColumn<Conductor, String> colApellidos = new TableColumn<>("APELLIDOS");
-        colApellidos.setPrefWidth(x / 10);
+        colApellidos.setPrefWidth(x * 7 / 80);
         colApellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
 
         TableColumn<Conductor, String> colLicencia = new TableColumn<>("LICENCIA");
-        colLicencia.setPrefWidth(x / 10);
+        colLicencia.setPrefWidth(x * 7 / 80);
         colLicencia.setCellValueFactory(new PropertyValueFactory<>("licencia"));
 
         TableColumn<Conductor, String> colGenero = new TableColumn<>("GENERO");
-        colGenero.setPrefWidth(x / 10);
+        colGenero.setPrefWidth(x * 7 / 80);
         colGenero.setCellValueFactory(new PropertyValueFactory<>("genero"));
 
         TableColumn<Conductor, String> colFechaNacimiento = new TableColumn<>("FECHA NACIMIENTO");
-        colFechaNacimiento.setPrefWidth(x / 10);
+        colFechaNacimiento.setPrefWidth(x * 7 / 80);
         colFechaNacimiento.setCellValueFactory(new PropertyValueFactory<>("fechaNacimiento"));
 
         TableColumn<Conductor, String> colTelefono = new TableColumn<>("TELEFONO");
-        colTelefono.setPrefWidth(x / 10);
+        colTelefono.setPrefWidth(x * 7 / 80);
         colTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
 
         TableColumn<Conductor, String> colDireccion = new TableColumn<>("DIRECCION");
-        colDireccion.setPrefWidth(x / 10);
+        colDireccion.setPrefWidth(x * 7 / 80);
         colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
 
         actualizarObsList();

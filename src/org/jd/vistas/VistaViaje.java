@@ -3,7 +3,6 @@ package org.jd.vistas;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.TableColumn;
@@ -15,7 +14,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.jd.estructuras.ListaDoble;
 import org.jd.modelos.Viaje;
 import org.jd.utilidades.ManejoDeArchivos;
 import org.jd.utilidades.PropiedadesPantalla;
@@ -49,7 +47,7 @@ public class VistaViaje extends Stage {
         if (observableList != null) {
             observableList.clear();
         }
-   //     observableList = FXCollections.observableArrayList(ListaDoble.getInstancia().obtenerDatos());
+        //     observableList = FXCollections.observableArrayList(ListaDoble.getInstancia().obtenerDatos());
     }
 
     public void actualizarItemsTabla() {
@@ -59,7 +57,7 @@ public class VistaViaje extends Stage {
 
     // Lista de busqueda
     private void actualizarObsList(String buscar) {
-  //      observableList = FXCollections.observableArrayList(ListaDoble.getInstancia().buscarViaje(buscar));
+        //      observableList = FXCollections.observableArrayList(ListaDoble.getInstancia().buscarViaje(buscar));
     }
 
     public void actualizarItemsTabla(String search) {
@@ -122,7 +120,7 @@ public class VistaViaje extends Stage {
         btnArchivo.setPrefSize(x, y);
         btnArchivo.setOnAction(event -> {
             ManejoDeArchivos.getInstancia().subirArchivo("Archivo de Viajes", "*.txt");
-      //      ListaDoble.getInstancia().agregarArchivo(ManejoDeArchivos.getInstancia().leerArchivo());
+            //      ListaDoble.getInstancia().agregarArchivo(ManejoDeArchivos.getInstancia().leerArchivo());
             actualizarItemsTabla();
         });
 
@@ -143,13 +141,13 @@ public class VistaViaje extends Stage {
         btnModificar.setOnAction(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
-             //   vBoxCRUD.getChildren().add(0, VistaModificarViaje.getInstancia().getGridPane((Viaje) tableView.getSelectionModel().getSelectedItem()));
+                //   vBoxCRUD.getChildren().add(0, VistaModificarViaje.getInstancia().getGridPane((Viaje) tableView.getSelectionModel().getSelectedItem()));
             } else {
                 reiniciarHBox();
             }
-        }); 
+        });
 
-       JFXButton btnEliminar = new JFXButton("ELIMINAR");
+        JFXButton btnEliminar = new JFXButton("ELIMINAR");
         btnEliminar.getStyleClass().addAll("customButton", "dangerButton");
         btnEliminar.setButtonType(JFXButton.ButtonType.FLAT);
         btnEliminar.setPrefSize(x, y);
@@ -157,19 +155,19 @@ public class VistaViaje extends Stage {
         btnEliminar.setOnAction(event -> {
             Viaje viaje = (Viaje) tableView.getSelectionModel().getSelectedItem();
             if (viaje != null) {
-            //    ListaDoble.getInstancia().eliminar(viaje.getId());
+                //    ListaDoble.getInstancia().eliminar(viaje.getId());
                 reiniciarHBox();
                 VistaViaje.this.actualizarItemsTabla();
                 Alerta.getInstancia().mostrarNotificacion("VIAJES", "VIAJE ELIMINADO EXITOSAMENTE");
             }
-        }); 
+        });
 
         hBoxBotones.getChildren().addAll(btnArchivo, btnAgregar, btnModificar, btnEliminar);
         hBoxBotones.setPrefSize(x, y * 0.005);
         hBoxBotones.setMargin(btnArchivo, new Insets(0, 5, 0, 0));
         hBoxBotones.setMargin(btnAgregar, new Insets(0, 5, 0, 0));
         hBoxBotones.setMargin(btnModificar, new Insets(0, 5, 0, 0));
-        gridPane.add(hBoxBotones, 0, 1); 
+        gridPane.add(hBoxBotones, 0, 1);
 
         TableColumn<Viaje, String> colOrigen = new TableColumn<>("ORIGEN");
         colOrigen.setPrefWidth(x / 10);

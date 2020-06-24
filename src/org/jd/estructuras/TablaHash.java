@@ -47,7 +47,7 @@ public class TablaHash {
             }
 
             tablaHash[funcionHash(new Long(llave))].agregar(cliente);
-           // cantidadDatos++;
+            // cantidadDatos++;
 
             if ((cantidadDatos * 100 / m) >= 72) {
                 m += 37;
@@ -164,8 +164,9 @@ public class TablaHash {
             while (auxiliar != null) {
                 if (auxiliar.getSiguiente() != null) {
                     stringBuilder.append("\n\tN").append(auxiliar.getSiguiente().getCliente().getDPI()).append("[label =\"")
-                            .append(auxiliar.getSiguiente().getCliente().getNombres()).append("\\n")
-                            .append(auxiliar.getSiguiente().getCliente().getApellidos()).append(" ")
+                            .append(auxiliar.getSiguiente().getCliente().getDPI()).append("\\n")
+                            .append(auxiliar.getSiguiente().getCliente().getNombres()).append(" ")
+                            .append(auxiliar.getSiguiente().getCliente().getApellidos()).append("\\n")
                             .append(auxiliar.getSiguiente().getCliente().getGenero()).append("\\n")
                             .append(auxiliar.getSiguiente().getCliente().getFechaNacimiento()).append("\\n")
                             .append(auxiliar.getSiguiente().getCliente().getTelefono()).append("\\n")

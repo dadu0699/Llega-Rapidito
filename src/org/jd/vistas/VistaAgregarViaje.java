@@ -11,12 +11,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.jd.estructuras.ListaCircular;
-import org.jd.estructuras.ListaDoble;
 import org.jd.estructuras.TablaHash;
-import org.jd.utilidades.ManejoDeArchivos;
 import org.jd.utilidades.PropiedadesPantalla;
 
-public class VistaAgregarViaje {
+public class VistaAgregarViaje extends Stage {
 
     private static VistaAgregarViaje instancia;
 
@@ -78,36 +76,23 @@ public class VistaAgregarViaje {
         cbCliente.setPrefWidth(x);
         gridPane.add(cbCliente, 0, 8);
 
-        JFXTextField jFTCliente = new JFXTextField();
-        jFTCliente.setPromptText("CLIENTE");
-        jFTCliente.setLabelFloat(true);
-        jFTCliente.setPrefWidth(x);
-        jFTCliente.setVisible(false);
-        gridPane.add(jFTCliente, 0, 8);
-
-/*        ObservableList obsConductor = FXCollections.observableArrayList(ListaDoble.getInstancia().obtenerDatos());
-//        ObservableList<String> conductorL = obsConductor;
+        ObservableList obsConductor = FXCollections.observableArrayList(ListaCircular.getInstancia().obtenerDatos());
+        ObservableList<String> conductorL = obsConductor;
         JFXComboBox<String> cbConductor = new JFXComboBox<>(conductorL);
         cbConductor.setPromptText("CONDUCTOR");
         cbConductor.setLabelFloat(true);
         cbConductor.setPrefWidth(x);
-        gridPane.add(cbConductor, 0, 9); */
+        gridPane.add(cbConductor, 0, 9);
 
-        JFXTextField jFTConductor = new JFXTextField();
-        jFTConductor.setPromptText("CONDUCTOR");
-        jFTConductor.setLabelFloat(true);
-        jFTConductor.setPrefWidth(x);
-        jFTConductor.setVisible(false);
-        gridPane.add(jFTConductor, 0, 9);
-
-/*        ObservableList obsVehiculo = FXCollections.observableArrayList(ArbolB.getInstancia().obtenerDatos());
-//        ObservableList<String> vehiculoL = obsVehiculo;
+        /*
+        ObservableList obsVehiculo = FXCollections.observableArrayList(ArbolB.getInstancia().obtenerDatos());
+        ObservableList<String> vehiculoL = obsVehiculo;
         JFXComboBox<String> cbVehiculo = new JFXComboBox<>(vehiculoL);
         cbVehiculo.setPromptText("VEHICULO");
         cbVehiculo.setLabelFloat(true);
         cbVehiculo.setPrefWidth(x);
-        gridPane.add(cbVehiculo, 0, 10); */
-
+        gridPane.add(cbVehiculo, 0, 10);
+         */
         JFXTextField jFTVehiculo = new JFXTextField();
         jFTVehiculo.setPromptText("VEHICULO");
         jFTVehiculo.setLabelFloat(true);

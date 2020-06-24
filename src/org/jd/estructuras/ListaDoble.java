@@ -3,17 +3,17 @@ package org.jd.estructuras;
 import org.jd.modelos.Viaje;
 
 public class ListaDoble {
-    
+
     private static ListaDoble instancia;
     private NodoListaDoble primero;
     private NodoListaDoble ultimo;
 
     public ListaDoble() {
-    primero = null;
-    ultimo = null;
+        primero = null;
+        ultimo = null;
     }
-    
-    public static  ListaDoble getInstancia(){
+
+    public static ListaDoble getInstancia() {
         if (instancia == null) {
             instancia = new ListaDoble();
         }
@@ -36,42 +36,42 @@ public class ListaDoble {
         this.ultimo = ultimo;
     }
 
-private boolean estaVacia(){
-    return primero == null;
-}
-    
-public void agregar(Viaje viaje){
-    NodoListaDoble nuevo = new NodoListaDoble(viaje);
-    if (estaVacia()) {
-        primero = nuevo;
-    } else {
-        nuevo.setAnterior(ultimo);
-        ultimo.setSiguiente(nuevo);
+    private boolean estaVacia() {
+        return primero == null;
     }
-    ultimo = nuevo;
-}
 
-public Viaje buscar(String id){
-    NodoListaDoble aux = primero;
-    do {        
-        if (aux != null) {
-            if (aux.getViaje().getId().equalsIgnoreCase(id)) {
-                return aux.getViaje();
+    public void agregar(Viaje viaje) {
+        NodoListaDoble nuevo = new NodoListaDoble(viaje);
+        if (estaVacia()) {
+            primero = nuevo;
+        } else {
+            nuevo.setAnterior(ultimo);
+            ultimo.setSiguiente(nuevo);
+        }
+        ultimo = nuevo;
+    }
+
+    public Viaje buscar(String id) {
+        NodoListaDoble aux = primero;
+        do {
+            if (aux != null) {
+                if (aux.getViaje().getId().equalsIgnoreCase(id)) {
+                    return aux.getViaje();
+                }
+                aux = aux.getSiguiente();
             }
-            aux = aux.getSiguiente();
-        }
-    } while (aux != ultimo.getSiguiente());
-    return null;
-}
-    
-public void leer(){
-    NodoListaDoble aux = primero;
-    do {        
-        if (aux != null) {
-            System.out.println(aux.getViaje().getId() + " --> ");
-            aux = aux.getSiguiente();
-        }
-        System.out.println();
-    } while (aux != ultimo.getSiguiente());
-}
+        } while (aux != ultimo.getSiguiente());
+        return null;
+    }
+
+    public void leer() {
+        NodoListaDoble aux = primero;
+        do {
+            if (aux != null) {
+                System.out.println(aux.getViaje().getId() + " --> ");
+                aux = aux.getSiguiente();
+            }
+            System.out.println();
+        } while (aux != ultimo.getSiguiente());
+    }
 }
