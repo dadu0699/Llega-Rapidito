@@ -12,6 +12,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.jd.estructuras.TablaHash;
 import org.jd.modelos.Cliente;
+import org.jd.utilidades.ManejoDeArchivos;
 import org.jd.utilidades.PropiedadesPantalla;
 
 public class VistaModificarCliente extends Stage {
@@ -48,7 +49,7 @@ public class VistaModificarCliente extends Stage {
         jFTDPI.setPromptText("DPI");
         jFTDPI.setLabelFloat(true);
         jFTDPI.setPrefWidth(x);
-        jFTDPI.setEditable(false);
+        jFTDPI.setEditable(true);
         gridPane.add(jFTDPI, 0, 5, 2, 1);
 
         JFXTextField jFTNombres = new JFXTextField(cliente.getNombres());
@@ -105,15 +106,24 @@ public class VistaModificarCliente extends Stage {
                     || jFTDireccion.getText().length() == 0) {
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
-                Cliente clienteModificar = TablaHash.getInstancia().buscar(cliente.getDPI());
-                if (clienteModificar != null) {
-                    clienteModificar.setNombres(jFTNombres.getText());
-                    clienteModificar.setApellidos(jFTApellidos.getText());
-                    clienteModificar.setGenero(cbGenero.getSelectionModel().getSelectedItem());
-                    clienteModificar.setFechaNacimiento(jFTFNacimiento.getText());
-                    clienteModificar.setTelefono(jFTTelefono.getText());
-                    clienteModificar.setDireccion(jFTDireccion.getText());
+                cliente.setNombres(jFTNombres.getText().trim());
+                cliente.setApellidos(jFTApellidos.getText().trim());
+                cliente.setGenero(cbGenero.getSelectionModel().getSelectedItem().trim());
+                cliente.setFechaNacimiento(jFTFNacimiento.getText().trim());
+                cliente.setTelefono(jFTTelefono.getText().trim());
+                cliente.setDireccion(jFTDireccion.getText().trim());
+
+                if (cliente.getDPI().equalsIgnoreCase(jFTDPI.getText().trim())) {
                     Alerta.getInstancia().mostrarNotificacion("CLIENTES", "CLIENTE ACTUALIZADO EXITOSAMENTE");
+                } else {
+                    if (TablaHash.getInstancia().buscar(jFTDPI.getText().trim()) == null) {
+                        TablaHash.getInstancia().eliminar(cliente.getDPI());
+                        cliente.setDPI(jFTDPI.getText().trim());
+                        TablaHash.getInstancia().insertar(cliente);
+                        Alerta.getInstancia().mostrarNotificacion("CLIENTES", "CLIENTE ACTUALIZADO EXITOSAMENTE");
+                    } else {
+                        Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "ERROR AL MODIFICAR DPI");
+                    }
                 }
                 VistaCliente.getInstancia().actualizarItemsTabla();
             }

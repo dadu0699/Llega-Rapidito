@@ -111,11 +111,26 @@ public class VistaModificarConductor extends Stage {
                     || jFTDireccion.getText().length() == 0) {
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
-                ListaCircular.getInstancia().modificar(jFTDPI.getText(), jFTNombres.getText(),
-                        jFTApellidos.getText(), jFTLicencia.getText(),
-                        cbGenero.getSelectionModel().getSelectedItem(),
-                        jFTFNacimiento.getText(), jFTTelefono.getText(), jFTDireccion.getText());
-                Alerta.getInstancia().mostrarNotificacion("CONDUCTORES", "CONDUCTOR ACTUALIZADO EXITOSAMENTE");
+                conductor.setNombres(jFTNombres.getText().trim());
+                conductor.setApellidos(jFTApellidos.getText().trim());
+                conductor.setLicencia(jFTLicencia.getText().trim());
+                conductor.setGenero(cbGenero.getSelectionModel().getSelectedItem());
+                conductor.setFechaNacimiento(jFTFNacimiento.getText().trim());
+                conductor.setTelefono(jFTTelefono.getText().trim());
+                conductor.setDireccion(jFTDireccion.getText().trim());
+
+                if (conductor.getDPI().equalsIgnoreCase(jFTDPI.getText().trim())) {
+                    Alerta.getInstancia().mostrarNotificacion("CONDUCTORES", "CONDUCTOR ACTUALIZADO EXITOSAMENTE");
+                } else {
+                    if (ListaCircular.getInstancia().buscar(jFTDPI.getText().trim()) == null) {
+                        ListaCircular.getInstancia().eliminar(conductor.getDPI());
+                        conductor.setDPI(jFTDPI.getText().trim());
+                        ListaCircular.getInstancia().agregar(conductor);
+                        Alerta.getInstancia().mostrarNotificacion("CONDUCTORES", "CONDUCTOR ACTUALIZADO EXITOSAMENTE");
+                    } else {
+                        Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "ERROR AL MODIFICAR DPI");
+                    }
+                }
                 VistaConductor.getInstancia().actualizarItemsTabla();
             }
         });
