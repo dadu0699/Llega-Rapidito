@@ -187,7 +187,7 @@ public class ListaAdyacencia {
         while (vertice != null) {
             arista = vertice.getAristas().getPrimero();
             while (arista != null) {
-                if (!buscarRutaEnLista(arista.getDestino().getLugar(), vertice.getLugar(), rutas)) {
+                if (buscarRutaEnLista(arista.getDestino().getLugar(), vertice.getLugar(), rutas) != null) {
                     rutas.add(new Ruta(vertice.getLugar(), arista.getDestino().getLugar(), String.valueOf(arista.getPeso())));
                 }
                 arista = arista.getSiguiente();
@@ -197,13 +197,13 @@ public class ListaAdyacencia {
         return rutas;
     }
 
-    private boolean buscarRutaEnLista(String origen, String destino, ArrayList<Ruta> rutas) {
+    public Ruta buscarRutaEnLista(String origen, String destino, ArrayList<Ruta> rutas) {
         for (Ruta ruta : rutas) {
             if (ruta.getOrigen().equalsIgnoreCase(origen) && ruta.getDestino().equalsIgnoreCase(destino)) {
-                return true;
+                return ruta;
             }
         }
-        return false;
+        return null;
     }
 
     public String contenidoGrafo() {
@@ -246,7 +246,6 @@ public class ListaAdyacencia {
     public ArrayList<Vertice> obtenerLugares() {
         ArrayList<Vertice> lugares = new ArrayList<>();
         Vertice vertice = primero;
-        Arista arista;
 
         while (vertice != null) {
             lugares.add(vertice);

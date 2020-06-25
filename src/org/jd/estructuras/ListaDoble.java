@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import org.jd.modelos.Vehiculo;
 import org.jd.modelos.Viaje;
 import org.jd.utilidades.Encriptamiento;
+import org.jd.utilidades.ManejoDeArchivos;
 
 public class ListaDoble {
 
@@ -56,6 +57,9 @@ public class ListaDoble {
         ultimo = nuevo;
         System.out.println(nuevo.getViaje().toString());
         ordenar();
+
+        ManejoDeArchivos.getInstancia().escribirArchivo(nuevo.getViaje().getRuta().contenidoGrafica(encriptar.decode(nuevo.getViaje().getId())), "camino.dot", "reportes");
+        ManejoDeArchivos.getInstancia().compilarDOT("camino", "reportes");
     }
 
     public Viaje buscar(String id) {
@@ -152,7 +156,8 @@ public class ListaDoble {
                         .append("FECHA: ").append(aux.getViaje().getFecha()).append("\\n")
                         .append("CLIENTE: ").append(aux.getViaje().getCliente().toString()).append("\\n")
                         .append("CONDUCTOR: ").append(aux.getViaje().getConductor().toString()).append("\\n")
-                        .append("VEHICULO: ").append(aux.getViaje().getVehiculo().toString()).append("\"];");
+                        .append("VEHICULO: ").append(aux.getViaje().getVehiculo().toString()).append("\\n")
+                        .append("RUTA: ").append(aux.getViaje().getRuta().toString()).append("\"];");
 
                 if (aux != ultimo) {
                     stringBuilder.append("\n\tN").append(encriptar.decode(aux.getViaje().getId()).replaceAll(":", "")).append(" -> N")
@@ -170,5 +175,4 @@ public class ListaDoble {
         stringBuilder.append("\n}");
         return stringBuilder.toString();
     }
-
 }

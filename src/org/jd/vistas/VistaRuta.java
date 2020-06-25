@@ -41,7 +41,7 @@ public class VistaRuta extends Stage {
     public void reiniciarHBox() {
         hBoxPaneles.getChildren().clear();
         vBoxCRUD.getChildren().clear();
-        vBoxCRUD.getChildren().add(VistaAgregarRuta.getInstancia().getFormulario());
+        vBoxCRUD.getChildren().add(VistaMostrarRuta.getInstancia().getGridPane(null));
         hBoxPaneles.getChildren().addAll(getTablaRuta(), vBoxCRUD);
     }
 
@@ -91,7 +91,7 @@ public class VistaRuta extends Stage {
 
         vBoxCRUD = new VBox();
         vBoxCRUD.setPrefSize(x * 0.30, y * 0.995);
-        vBoxCRUD.getChildren().add(VistaAgregarRuta.getInstancia().getFormulario());
+        vBoxCRUD.getChildren().add(VistaMostrarRuta.getInstancia().getGridPane(null));
 
         hBoxPaneles.getChildren().addAll(getTablaRuta(), vBoxCRUD);
         vBox.getChildren().addAll(gridPaneTitulo, hBoxPaneles);
@@ -125,7 +125,7 @@ public class VistaRuta extends Stage {
         btnArchivo.setOnAction(event -> {
             ManejoDeArchivos.getInstancia().subirArchivo("Archivo de Rutas", "*.txt");
             ListaAdyacencia.getInstancia().agregarArchivo(ManejoDeArchivos.getInstancia().leerArchivo());
-            actualizarItemsTabla();
+            reiniciarHBox();
 
             ManejoDeArchivos.getInstancia().escribirArchivo(ListaAdyacencia.getInstancia().contenidoGrafica(), "listaAdyacencia.dot", "reportes");
             ManejoDeArchivos.getInstancia().compilarDOT("listaAdyacencia", "reportes");
@@ -149,7 +149,8 @@ public class VistaRuta extends Stage {
         btnModificar.setOnAction(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
-                vBoxCRUD.getChildren().add(0, VistaModificarRuta.getInstancia().getGridPane((Ruta) tableView.getSelectionModel().getSelectedItem()));
+                vBoxCRUD.getChildren().add(0, VistaModificarRuta.getInstancia().getGridPane(
+                        (Ruta) tableView.getSelectionModel().getSelectedItem()));
             } else {
                 reiniciarHBox();
             }
@@ -170,12 +171,13 @@ public class VistaRuta extends Stage {
             }
         });
 
-        hBoxBotones.getChildren().addAll(btnArchivo, btnAgregar, btnModificar, btnEliminar);
-        hBoxBotones.setPrefSize(x, y * 0.005);
-        hBoxBotones.setMargin(btnArchivo, new Insets(0, 5, 0, 0));
-        hBoxBotones.setMargin(btnAgregar, new Insets(0, 5, 0, 0));
-        hBoxBotones.setMargin(btnModificar, new Insets(0, 5, 0, 0));
-        gridPane.add(hBoxBotones, 0, 1);
+        if (ListaAdyacencia.getInstancia().getPrimero() == null) {
+            hBoxBotones.getChildren().addAll(btnArchivo);
+            hBoxBotones.setPrefSize(x, y * 0.005);
+            gridPane.add(hBoxBotones, 0, 1);
+        } else {
+            Panel.getInstancia().activarBotones();
+        }
 
         TableColumn<Ruta, String> colOrigen = new TableColumn<>("ORIGEN");
         colOrigen.setPrefWidth(x * 7 / 30);

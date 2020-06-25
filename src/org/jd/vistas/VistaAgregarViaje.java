@@ -121,17 +121,14 @@ public class VistaAgregarViaje extends Stage {
                         ListaDoble.getInstancia().agregar(new Viaje(cbOrigen.getSelectionModel().getSelectedItem(),
                                 cbDestino.getSelectionModel().getSelectedItem(),
                                 cbCliente.getSelectionModel().getSelectedItem(),
-                                cbConductor.getSelectionModel().getSelectedItem(), 
-                                cbVehiculo.getSelectionModel().getSelectedItem(), 
+                                cbConductor.getSelectionModel().getSelectedItem(),
+                                cbVehiculo.getSelectionModel().getSelectedItem(),
                                 camino));
                         VistaViaje.getInstancia().reiniciarHBox();
                         Alerta.getInstancia().mostrarNotificacion("VIAJE", "REGISTRO REALIZADO EXITOSAMENTE");
                     } else {
                         Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "NO ES POSIBLE ENCONTRAR UN CAMINO AL DESTINO SELECCIONADO");
                     }
-
-                    ManejoDeArchivos.getInstancia().escribirArchivo(ListaDoble.getInstancia().contenidoGrafica(), "viajes.dot", "reportes");
-                    ManejoDeArchivos.getInstancia().compilarDOT("viajes", "reportes");
                 } else {
                     Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "NO ES POSIBLE CREAR UN VIAJE CON EL MISMO ORIGEN Y DESTINO");
                 }

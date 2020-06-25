@@ -76,7 +76,7 @@ public class TablaDijkstra {
         }
         // System.out.println();
 
-        imprimirTabla();
+        // imprimirTabla();
         return camino;
     }
 

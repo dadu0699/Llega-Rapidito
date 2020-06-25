@@ -117,15 +117,6 @@ public class VistaViaje extends Stage {
         gridPane.add(txtBuscar, 0, 0);
 
         HBox hBoxBotones = new HBox();
-        JFXButton btnArchivo = new JFXButton("ARCHIVO");
-        btnArchivo.getStyleClass().addAll("customButton", "primaryButton");
-        btnArchivo.setButtonType(JFXButton.ButtonType.FLAT);
-        btnArchivo.setPrefSize(x, y);
-        btnArchivo.setOnAction(event -> {
-            ManejoDeArchivos.getInstancia().subirArchivo("Archivo de Viajes", "*.txt");
-            //      ListaDoble.getInstancia().agregarArchivo(ManejoDeArchivos.getInstancia().leerArchivo());
-            actualizarItemsTabla();
-        });
 
         JFXButton btnAgregar = new JFXButton("AGREGAR");
         btnAgregar.getStyleClass().addAll("customButton", "primaryButton");
@@ -165,9 +156,8 @@ public class VistaViaje extends Stage {
             }
         });
 
-        hBoxBotones.getChildren().addAll(btnArchivo, btnAgregar, btnModificar, btnEliminar);
+        hBoxBotones.getChildren().addAll(btnAgregar, btnModificar, btnEliminar);
         hBoxBotones.setPrefSize(x, y * 0.005);
-        hBoxBotones.setMargin(btnArchivo, new Insets(0, 5, 0, 0));
         hBoxBotones.setMargin(btnAgregar, new Insets(0, 5, 0, 0));
         hBoxBotones.setMargin(btnModificar, new Insets(0, 5, 0, 0));
         gridPane.add(hBoxBotones, 0, 1);

@@ -42,26 +42,32 @@ class VistaMostrarRuta extends Stage {
         txtTitulo.setFont(new Font(25));
         gridPane.add(txtTitulo, 0, 6);
 
-        JFXTextField jFTOrigen = new JFXTextField(ruta.getOrigen());
+        JFXTextField jFTOrigen = new JFXTextField();
         jFTOrigen.setPromptText("ORIGEN");
         jFTOrigen.setLabelFloat(true);
         jFTOrigen.setPrefWidth(x);
         jFTOrigen.setEditable(false);
         gridPane.add(jFTOrigen, 0, 7);
 
-        JFXTextField jFTDestino = new JFXTextField(ruta.getDestino());
+        JFXTextField jFTDestino = new JFXTextField();
         jFTDestino.setPromptText("DESTINO");
         jFTDestino.setLabelFloat(true);
         jFTDestino.setPrefWidth(x);
         jFTDestino.setEditable(false);
         gridPane.add(jFTDestino, 0, 8);
 
-        JFXTextField jFTTiempoRuta = new JFXTextField(ruta.getTiempoRuta());
+        JFXTextField jFTTiempoRuta = new JFXTextField();
         jFTTiempoRuta.setPromptText("TIEMPO RUTA");
         jFTTiempoRuta.setLabelFloat(true);
         jFTTiempoRuta.setPrefWidth(x);
         jFTTiempoRuta.setEditable(false);
         gridPane.add(jFTTiempoRuta, 0, 9);
+
+        if (ruta != null) {
+            jFTOrigen.setText(ruta.getOrigen());
+            jFTDestino.setText(ruta.getDestino());
+            jFTTiempoRuta.setText(ruta.getTiempoRuta());
+        }
 
         JFXButton btnCopiar = new JFXButton("COPIAR");
         btnCopiar.getStyleClass().addAll("customButton", "primaryButton");
