@@ -2,12 +2,20 @@ package org.jd.estructuras;
 
 public class TablaDijkstra {
 
+    private static TablaDijkstra instancia;
     private NodoTablaDijkstra primero;
     private NodoTablaDijkstra ultimo;
 
     public TablaDijkstra() {
         primero = null;
         ultimo = null;
+    }
+
+    public static TablaDijkstra getInstancia() {
+        if (instancia == null) {
+            instancia = new TablaDijkstra();
+        }
+        return instancia;
     }
 
     public NodoTablaDijkstra getPrimero() {
@@ -26,7 +34,7 @@ public class TablaDijkstra {
         this.ultimo = ultimo;
     }
 
-    public void llenarTabla() {
+    private void llenarTabla() {
         Vertice vertice = ListaAdyacencia.getInstancia().getPrimero();
         while (vertice != null) {
             agregar(vertice);
@@ -46,7 +54,7 @@ public class TablaDijkstra {
         ultimo = nuevo;
     }
 
-    public NodoTablaDijkstra buscarNodo(Vertice vertice) {
+    private NodoTablaDijkstra buscarNodo(Vertice vertice) {
         NodoTablaDijkstra auxiliar = primero;
         while (auxiliar != null && auxiliar.getVertice() != vertice) {
             auxiliar = auxiliar.getSiguiente();
@@ -54,15 +62,22 @@ public class TablaDijkstra {
         return auxiliar;
     }
 
-    public void recorrer(Vertice origen, Vertice destino) {
-        llenarTabla();
-        NodoTablaDijkstra auxDijkstra = buscarNodo(origen);
+    public void buscarRuta(Vertice origen, Vertice destino) {
+        primero = null;
+        ultimo = null;
+        recorridos(origen);
 
-        if (auxDijkstra != null) {
-            auxDijkstra.setCosto(0);
-            visitar(auxDijkstra);
+        NodoTablaDijkstra aux = buscarNodo(destino);
+        while (aux != null) {            
+            System.out.print(aux.getVertice().getLugar() + " | ");
+            aux = buscarNodo(aux.getCamino());
         }
+        System.out.println();
 
+        imprimirTabla();
+    }
+
+    public void imprimirTabla() {
         NodoTablaDijkstra aux = primero;
         System.out.println("----Tabla Dijkstra");
         while (aux != null) {
@@ -71,7 +86,17 @@ public class TablaDijkstra {
         }
     }
 
-    public void visitar(NodoTablaDijkstra auxDijkstra) {
+    private void recorridos(Vertice origen) {
+        llenarTabla();
+        NodoTablaDijkstra auxDijkstra = buscarNodo(origen);
+
+        if (auxDijkstra != null) {
+            auxDijkstra.setCosto(0);
+            visitar(auxDijkstra);
+        }
+    }
+
+    private void visitar(NodoTablaDijkstra auxDijkstra) {
         if (auxDijkstra != null && !auxDijkstra.getVisitado()) {
             auxDijkstra.setVisitado(true);
             // System.out.println("VISITAR: " + auxDijkstra.getVertice().getLugar() + " | " + auxDijkstra.getVisitado() + " | " + auxDijkstra.getCosto() + " | " + auxDijkstra.getCamino());
@@ -79,7 +104,7 @@ public class TablaDijkstra {
             Vertice vertice = auxDijkstra.getVertice();
             Arista arista = vertice.getAristas().getPrimero();
             while (arista != null) {
-                costoCamino(arista.getDestino(), auxDijkstra.getCosto() + arista.getPeso(), vertice.getLugar());
+                costoCamino(arista.getDestino(), auxDijkstra.getCosto() + arista.getPeso(), vertice);
                 arista = arista.getSiguiente();
             }
 
@@ -91,7 +116,7 @@ public class TablaDijkstra {
         }
     }
 
-    private void costoCamino(Vertice vertice, Integer nuevoCosto, String camino) {
+    private void costoCamino(Vertice vertice, Integer nuevoCosto, Vertice camino) {
         NodoTablaDijkstra auxDijkstra = buscarNodo(vertice);
 
         if (auxDijkstra != null) {

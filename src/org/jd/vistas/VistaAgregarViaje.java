@@ -108,7 +108,7 @@ public class VistaAgregarViaje extends Stage {
                 Ruta ruta = null;
                 
                 TablaDijkstra tb = new TablaDijkstra();
-                tb.recorrer(cbOrigen.getSelectionModel().getSelectedItem(), cbDestino.getSelectionModel().getSelectedItem());
+                tb.buscarRuta(cbOrigen.getSelectionModel().getSelectedItem(), cbDestino.getSelectionModel().getSelectedItem());
                 
                 ListaDoble.getInstancia().agregar(new Viaje(cbOrigen.getSelectionModel().getSelectedItem(),
                         cbDestino.getSelectionModel().getSelectedItem(),

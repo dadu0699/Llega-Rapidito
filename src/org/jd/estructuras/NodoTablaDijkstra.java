@@ -5,7 +5,7 @@ public class NodoTablaDijkstra {
     private Vertice vertice;
     private Boolean visitado;
     private Integer costo;
-    private String camino;
+    private Vertice camino;
     private NodoTablaDijkstra siguiente;
     private NodoTablaDijkstra anterior;
 
@@ -13,7 +13,7 @@ public class NodoTablaDijkstra {
         this.vertice = vertice;
         this.visitado = false;
         this.costo = null;
-        this.camino = "-1";
+        this.camino = null;
         this.siguiente = null;
         this.anterior = null;
     }
@@ -42,11 +42,11 @@ public class NodoTablaDijkstra {
         this.costo = costo;
     }
 
-    public String getCamino() {
+    public Vertice getCamino() {
         return camino;
     }
 
-    public void setCamino(String camino) {
+    public void setCamino(Vertice camino) {
         this.camino = camino;
     }
 
@@ -64,5 +64,13 @@ public class NodoTablaDijkstra {
 
     public void setAnterior(NodoTablaDijkstra anterior) {
         this.anterior = anterior;
+    }
+
+    public void datosPorDefecto() {
+        this.visitado = false;
+        this.costo = null;
+        this.camino = null;
+        this.siguiente = null;
+        this.anterior = null;
     }
 }
