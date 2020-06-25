@@ -1,17 +1,21 @@
 package org.jd.estructuras;
 
 import java.util.ArrayList;
+import org.jd.modelos.Vehiculo;
 import org.jd.modelos.Viaje;
+import org.jd.utilidades.Encriptamiento;
 
 public class ListaDoble {
 
     private static ListaDoble instancia;
     private NodoListaDoble primero;
     private NodoListaDoble ultimo;
+    private Encriptamiento encriptar;
 
     public ListaDoble() {
         primero = null;
         ultimo = null;
+        encriptar = new Encriptamiento();
     }
 
     public static ListaDoble getInstancia() {
@@ -51,6 +55,7 @@ public class ListaDoble {
         }
         ultimo = nuevo;
         System.out.println(nuevo.getViaje().toString());
+        ordenar();
     }
 
     public Viaje buscar(String id) {
@@ -68,13 +73,39 @@ public class ListaDoble {
 
     public void leer() {
         NodoListaDoble aux = primero;
-        do {
-            if (aux != null) {
-                System.out.println(aux.getViaje().getId() + " --> ");
+
+        while (aux != null) {
+            System.out.print(encriptar.decode(aux.getViaje().getId()) + " " + aux.getViaje().getId() + " --> ");
+            aux = aux.getSiguiente();
+        }
+    }
+
+    public void ordenar() {
+        if (!estaVacia()) {
+            NodoListaDoble aux = primero;
+            NodoListaDoble ayuda = null;
+            Vehiculo tempVehiculo = new Vehiculo("", "", "", "", "", "", "");
+            NodoListaDoble temporal = new NodoListaDoble(new Viaje(null, null, null, null, tempVehiculo, null));
+            String idAux, idAyuda;
+
+            while (aux.getSiguiente() != null) {
+                ayuda = aux.getSiguiente();
+                while (ayuda != null) {
+                    idAux = encriptar.decode(aux.getViaje().getId());
+                    idAyuda = encriptar.decode(ayuda.getViaje().getId());
+
+                    if (idAux.compareToIgnoreCase(idAyuda) > 0) {
+                        temporal.setViaje(aux.getViaje());
+
+                        aux.setViaje(ayuda.getViaje());
+
+                        ayuda.setViaje(temporal.getViaje());
+                    }
+                    ayuda = ayuda.getSiguiente();
+                }
                 aux = aux.getSiguiente();
             }
-            System.out.println();
-        } while (aux != ultimo.getSiguiente());
+        }
     }
 
     public ArrayList<Viaje> obtenerDatos() {
@@ -102,4 +133,43 @@ public class ListaDoble {
         }
         return viajes;
     }
+
+    public String contenidoGrafica() {
+        StringBuilder stringBuilder = new StringBuilder();
+        NodoListaDoble aux = primero;
+
+        stringBuilder.append("digraph G {");
+        stringBuilder.append("\n\tgraph [bgcolor=transparent];");
+        stringBuilder.append("\n\trankdir = LR;");
+        stringBuilder.append("\n\tnode[shape=record, style=filled color=\"#393C4BFF\""
+                + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");
+
+        if (!estaVacia()) {
+            do {
+                stringBuilder.append("\n\tN").append(encriptar.decode(aux.getViaje().getId()).replaceAll(":", "")).append("[label =\"")
+                        .append("LLAVE: ").append(aux.getViaje().getId()).append("\\n")
+                        .append("ORIGEN: ").append(aux.getViaje().getOrigen()).append("\\n")
+                        .append("DESTINO: ").append(aux.getViaje().getDestino()).append("\\n")
+                        .append("FECHA: ").append(aux.getViaje().getFecha()).append("\\n")
+                        .append("CLIENTE: ").append(aux.getViaje().getCliente().toString()).append("\\n")
+                        .append("CONDUCTOR: ").append(aux.getViaje().getConductor().toString()).append("\\n")
+                        .append("VEHICULO: ").append(aux.getViaje().getVehiculo().toString()).append("\"];");
+
+                if (aux != ultimo) {
+                    stringBuilder.append("\n\tN").append(encriptar.decode(aux.getViaje().getId()).replaceAll(":", "")).append(" -> N")
+                            .append(encriptar.decode(aux.getSiguiente().getViaje().getId()).replaceAll(":", "")).append("[color=\"#E91E63\"];");
+                }
+                if (aux != primero) {
+                    stringBuilder.append("\n\tN").append(encriptar.decode(aux.getViaje().getId()).replaceAll(":", "")).append(" -> N")
+                            .append(encriptar.decode(aux.getAnterior().getViaje().getId()).replaceAll(":", "")).append("[color=\"#E91E63\"];");
+                }
+
+                aux = aux.getSiguiente();
+            } while (aux != ultimo.getSiguiente());
+        }
+
+        stringBuilder.append("\n}");
+        return stringBuilder.toString();
+    }
+
 }

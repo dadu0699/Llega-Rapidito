@@ -264,7 +264,6 @@ public class ListaCircular {
                 stringBuilder.append("\n\tN").append(aux.getConductor().getDPI()).append(" -> N")
                         .append(aux.getAnterior().getConductor().getDPI()).append("[color=\"#E91E63\"];");
                 aux = aux.getSiguiente();
-                System.out.println();
             } while (aux != primero);
         }
 

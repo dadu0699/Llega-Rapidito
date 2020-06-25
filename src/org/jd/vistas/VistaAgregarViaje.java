@@ -2,6 +2,7 @@ package org.jd.vistas;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -20,6 +21,7 @@ import org.jd.modelos.Conductor;
 import org.jd.modelos.Ruta;
 import org.jd.modelos.Vehiculo;
 import org.jd.modelos.Viaje;
+import org.jd.utilidades.ManejoDeArchivos;
 import org.jd.utilidades.PropiedadesPantalla;
 
 public class VistaAgregarViaje extends Stage {
@@ -84,15 +86,19 @@ public class VistaAgregarViaje extends Stage {
         cbConductor.setPrefWidth(x);
         gridPane.add(cbConductor, 0, 10);
 
-        /*
-        ObservableList obsVehiculo = FXCollections.observableArrayList(ArbolB.getInstancia().obtenerDatos());
-        ObservableList<String> vehiculoL = obsVehiculo;
-        JFXComboBox<String> cbVehiculo = new JFXComboBox<>(vehiculoL);
+        ArrayList<Vehiculo> vehiculosTemporales = new ArrayList<>();
+        vehiculosTemporales.add(new Vehiculo("AS213", "Mercedes", "AMG", "2020", "Verde", "Q.200.00", "Mecánica"));
+        vehiculosTemporales.add(new Vehiculo("P21332SD", "BMW", "E30", "1980", "Negro", "Q.200.00", "Mecánica"));
+        vehiculosTemporales.add(new Vehiculo("M123JK", "Volvo", "S40", "2020", "Gris", "Q.200.00", "Mecánica"));
+
+        ObservableList obsVehiculo = FXCollections.observableArrayList(/*ArbolB.getInstancia().obtenerDatos()*/vehiculosTemporales);
+        ObservableList<Vehiculo> vehiculoL = obsVehiculo;
+        JFXComboBox<Vehiculo> cbVehiculo = new JFXComboBox<>(vehiculoL);
         cbVehiculo.setPromptText("VEHICULO");
         cbVehiculo.setLabelFloat(true);
         cbVehiculo.setPrefWidth(x);
-        gridPane.add(cbVehiculo, 0, 8);
-         */
+        gridPane.add(cbVehiculo, 0, 11);
+
         JFXButton buttonAdd = new JFXButton("AGREGAR");
         buttonAdd.getStyleClass().addAll("customButton", "primaryButton");
         buttonAdd.setButtonType(JFXButton.ButtonType.FLAT);
@@ -101,24 +107,27 @@ public class VistaAgregarViaje extends Stage {
             if (cbOrigen.getSelectionModel().getSelectedItem() == null
                     || cbDestino.getSelectionModel().getSelectedItem() == null
                     || cbCliente.getSelectionModel().getSelectedItem() == null
+                    || cbVehiculo.getSelectionModel().getSelectedItem() == null
                     || cbConductor.getSelectionModel().getSelectedItem() == null) { //falta agregar comprobacion de cbVehiculo
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
-                Vehiculo temporal = new Vehiculo("AS213", "Mercedes", "AMG", "2020", "Verde", "Q.200.00", "Mecánica");
                 Ruta ruta = null;
-                
+
                 TablaDijkstra tb = new TablaDijkstra();
                 tb.buscarRuta(cbOrigen.getSelectionModel().getSelectedItem(), cbDestino.getSelectionModel().getSelectedItem());
-                
+
                 ListaDoble.getInstancia().agregar(new Viaje(cbOrigen.getSelectionModel().getSelectedItem(),
                         cbDestino.getSelectionModel().getSelectedItem(),
                         cbCliente.getSelectionModel().getSelectedItem(),
-                        cbConductor.getSelectionModel().getSelectedItem(), temporal, ruta));
+                        cbConductor.getSelectionModel().getSelectedItem(), cbVehiculo.getSelectionModel().getSelectedItem(), ruta));
                 VistaViaje.getInstancia().reiniciarHBox();
                 Alerta.getInstancia().mostrarNotificacion("VIAJE", "REGISTRO REALIZADO EXITOSAMENTE");
+
+                ManejoDeArchivos.getInstancia().escribirArchivo(ListaDoble.getInstancia().contenidoGrafica(), "viajes.dot", "reportes");
+                ManejoDeArchivos.getInstancia().compilarDOT("viajes", "reportes");
             }
         });
-        gridPane.add(buttonAdd, 0, 11);
+        gridPane.add(buttonAdd, 0, 12);
         return gridPane;
     }
 }
