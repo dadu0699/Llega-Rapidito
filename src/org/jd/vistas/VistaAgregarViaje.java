@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import org.jd.estructuras.ListaAdyacencia;
 import org.jd.estructuras.ListaCircular;
 import org.jd.estructuras.ListaDoble;
+import org.jd.estructuras.TablaDijkstra;
 import org.jd.estructuras.TablaHash;
 import org.jd.estructuras.Vertice;
 import org.jd.modelos.Cliente;
@@ -105,7 +106,10 @@ public class VistaAgregarViaje extends Stage {
             } else {
                 Vehiculo temporal = new Vehiculo("AS213", "Mercedes", "AMG", "2020", "Verde", "Q.200.00", "Mecánica");
                 Ruta ruta = null;
-
+                
+                TablaDijkstra tb = new TablaDijkstra();
+                tb.recorrer(cbOrigen.getSelectionModel().getSelectedItem(), cbDestino.getSelectionModel().getSelectedItem());
+                
                 ListaDoble.getInstancia().agregar(new Viaje(cbOrigen.getSelectionModel().getSelectedItem(),
                         cbDestino.getSelectionModel().getSelectedItem(),
                         cbCliente.getSelectionModel().getSelectedItem(),

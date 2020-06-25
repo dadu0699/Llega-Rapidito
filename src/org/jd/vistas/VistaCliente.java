@@ -126,8 +126,6 @@ public class VistaCliente extends Stage {
             ManejoDeArchivos.getInstancia().subirArchivo("Archivo de Clientes", "*.txt");
             TablaHash.getInstancia().agregarArchivo(ManejoDeArchivos.getInstancia().leerArchivo());
             actualizarItemsTabla();
-            ManejoDeArchivos.getInstancia().escribirArchivo(TablaHash.getInstancia().contenidoGrafica(), "clientes.dot", "reportes");
-            ManejoDeArchivos.getInstancia().compilarDOT("clientes", "reportes");
         });
 
         JFXButton btnAgregar = new JFXButton("AGREGAR");

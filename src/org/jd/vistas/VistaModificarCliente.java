@@ -12,7 +12,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.jd.estructuras.TablaHash;
 import org.jd.modelos.Cliente;
-import org.jd.utilidades.ManejoDeArchivos;
 import org.jd.utilidades.PropiedadesPantalla;
 
 public class VistaModificarCliente extends Stage {

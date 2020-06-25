@@ -29,6 +29,7 @@ public class ListadoAristas {
             ultimo.setSiguiente(arista);
         }
         ultimo = arista;
+        ordenar();
     }
 
     public void leer() {
@@ -90,5 +91,29 @@ public class ListadoAristas {
             }
         }
         return false;
+    }
+
+    private void ordenar() {
+        Arista actual = primero;
+        Arista auxiliar;
+        Arista temporal = new Arista(0, null);
+
+        while (actual != null) {
+            auxiliar = actual.getSiguiente();
+            while (auxiliar != null) {
+                if (actual.getPeso() > auxiliar.getPeso()) {
+                    temporal.setPeso(actual.getPeso());
+                    temporal.setDestino(actual.getDestino());
+                    
+                    actual.setPeso(auxiliar.getPeso());
+                    actual.setDestino(auxiliar.getDestino());
+                    
+                    auxiliar.setPeso(temporal.getPeso());
+                    auxiliar.setDestino(temporal.getDestino());
+                }
+                auxiliar = auxiliar.getSiguiente();
+            }
+            actual = actual.getSiguiente();
+        }
     }
 }
