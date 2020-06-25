@@ -197,7 +197,7 @@ public class VistaViaje extends Stage {
         colVehiculo.setCellValueFactory(new PropertyValueFactory<>("vehiculo"));
 
         TableColumn<Viaje, String> colRuta = new TableColumn<>("RUTA");
-        colRuta.setPrefWidth(x / 10);
+        colRuta.setPrefWidth(x / 5);
         colRuta.setCellValueFactory(new PropertyValueFactory<>("ruta"));
 
         actualizarObsList();
