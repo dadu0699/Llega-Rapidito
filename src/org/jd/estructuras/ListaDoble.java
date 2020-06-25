@@ -84,7 +84,7 @@ public class ListaDoble {
         if (!estaVacia()) {
             NodoListaDoble aux = primero;
             NodoListaDoble ayuda = null;
-            Vehiculo tempVehiculo = new Vehiculo("", "", "", "", "", "", "");
+            Vehiculo tempVehiculo = new Vehiculo("temp", "", "", "", "", "", "");
             NodoListaDoble temporal = new NodoListaDoble(new Viaje(null, null, null, null, tempVehiculo, null));
             String idAux, idAyuda;
 
@@ -93,7 +93,6 @@ public class ListaDoble {
                 while (ayuda != null) {
                     idAux = encriptar.decode(aux.getViaje().getId());
                     idAyuda = encriptar.decode(ayuda.getViaje().getId());
-
                     if (idAux.compareToIgnoreCase(idAyuda) > 0) {
                         temporal.setViaje(aux.getViaje());
 

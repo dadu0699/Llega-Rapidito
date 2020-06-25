@@ -2,6 +2,7 @@ package org.jd.modelos;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.jd.estructuras.Camino;
 import org.jd.estructuras.Vertice;
 import org.jd.utilidades.Encriptamiento;
 
@@ -14,9 +15,9 @@ public class Viaje {
     private Cliente cliente;
     private Conductor conductor;
     private Vehiculo vehiculo;
-    private Ruta ruta;  // ruta mas corta
+    private Camino ruta;  // ruta mas corta
 
-    public Viaje(Vertice origen, Vertice destino, Cliente cliente, Conductor conductor, Vehiculo vehiculo, Ruta ruta) {
+    public Viaje(Vertice origen, Vertice destino, Cliente cliente, Conductor conductor, Vehiculo vehiculo, Camino ruta) {
         this.origen = origen;
         this.destino = destino;
         this.fecha = obtenerFechaHora();
@@ -83,11 +84,11 @@ public class Viaje {
         this.vehiculo = vehiculo;
     }
 
-    public Ruta getRuta() {
+    public Camino getRuta() {
         return ruta;
     }
 
-    public void setRuta(Ruta ruta) {
+    public void setRuta(Camino ruta) {
         this.ruta = ruta;
     }
 
@@ -106,6 +107,7 @@ public class Viaje {
     public String toString() {
         return (id + " |  " + origen.toString() + " |  " + destino.toString()
                 + " | " + fecha + " | " + cliente.toString() + " | "
-                + conductor.toString() + " | " + vehiculo.toString());
+                + conductor.toString() + " | " + vehiculo.toString() + " | "
+                + ruta.toString());
     }
 }

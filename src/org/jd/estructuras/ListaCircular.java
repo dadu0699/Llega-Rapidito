@@ -146,33 +146,11 @@ public class ListaCircular {
                 ayuda = aux.getSiguiente();
                 while (ayuda != primero) {
                     if (Long.parseLong(aux.getConductor().getDPI()) > Long.parseLong(ayuda.getConductor().getDPI())) {
+                        temporal.setConductor(aux.getConductor());
 
-                        temporal.getConductor().setDPI(aux.getConductor().getDPI());
-                        temporal.getConductor().setNombres(aux.getConductor().getNombres());
-                        temporal.getConductor().setApellidos(aux.getConductor().getApellidos());
-                        temporal.getConductor().setLicencia(aux.getConductor().getLicencia());
-                        temporal.getConductor().setGenero(aux.getConductor().getGenero());
-                        temporal.getConductor().setFechaNacimiento(aux.getConductor().getFechaNacimiento());
-                        temporal.getConductor().setTelefono(aux.getConductor().getTelefono());
-                        temporal.getConductor().setDireccion(aux.getConductor().getDireccion());
+                        aux.setConductor(ayuda.getConductor());
 
-                        aux.getConductor().setDPI(ayuda.getConductor().getDPI());
-                        aux.getConductor().setNombres(ayuda.getConductor().getNombres());
-                        aux.getConductor().setApellidos(ayuda.getConductor().getApellidos());
-                        aux.getConductor().setLicencia(ayuda.getConductor().getLicencia());
-                        aux.getConductor().setGenero(ayuda.getConductor().getGenero());
-                        aux.getConductor().setFechaNacimiento(ayuda.getConductor().getFechaNacimiento());
-                        aux.getConductor().setTelefono(ayuda.getConductor().getTelefono());
-                        aux.getConductor().setDireccion(ayuda.getConductor().getDireccion());
-
-                        ayuda.getConductor().setDPI(temporal.getConductor().getDPI());
-                        ayuda.getConductor().setNombres(temporal.getConductor().getNombres());
-                        ayuda.getConductor().setApellidos(temporal.getConductor().getApellidos());
-                        ayuda.getConductor().setLicencia(temporal.getConductor().getLicencia());
-                        ayuda.getConductor().setGenero(temporal.getConductor().getGenero());
-                        ayuda.getConductor().setFechaNacimiento(temporal.getConductor().getFechaNacimiento());
-                        ayuda.getConductor().setTelefono(temporal.getConductor().getTelefono());
-                        ayuda.getConductor().setDireccion(temporal.getConductor().getDireccion());
+                        ayuda.setConductor(temporal.getConductor());
                     }
                     ayuda = ayuda.getSiguiente();
                 }

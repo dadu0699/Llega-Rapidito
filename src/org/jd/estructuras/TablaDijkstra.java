@@ -1,39 +1,39 @@
 package org.jd.estructuras;
 
 public class TablaDijkstra {
-
+    
     private static TablaDijkstra instancia;
     private NodoTablaDijkstra primero;
     private NodoTablaDijkstra ultimo;
-
+    
     public TablaDijkstra() {
         primero = null;
         ultimo = null;
     }
-
+    
     public static TablaDijkstra getInstancia() {
         if (instancia == null) {
             instancia = new TablaDijkstra();
         }
         return instancia;
     }
-
+    
     public NodoTablaDijkstra getPrimero() {
         return primero;
     }
-
+    
     public void setPrimero(NodoTablaDijkstra primero) {
         this.primero = primero;
     }
-
+    
     public NodoTablaDijkstra getUltimo() {
         return ultimo;
     }
-
+    
     public void setUltimo(NodoTablaDijkstra ultimo) {
         this.ultimo = ultimo;
     }
-
+    
     private void llenarTabla() {
         Vertice vertice = ListaAdyacencia.getInstancia().getPrimero();
         while (vertice != null) {
@@ -41,10 +41,10 @@ public class TablaDijkstra {
             vertice = vertice.getSiguiente();
         }
     }
-
+    
     private void agregar(Vertice vertice) {
         NodoTablaDijkstra nuevo = new NodoTablaDijkstra(vertice);
-
+        
         if (primero == null) {
             primero = nuevo;
         } else {
@@ -53,7 +53,7 @@ public class TablaDijkstra {
         }
         ultimo = nuevo;
     }
-
+    
     private NodoTablaDijkstra buscarNodo(Vertice vertice) {
         NodoTablaDijkstra auxiliar = primero;
         while (auxiliar != null && auxiliar.getVertice() != vertice) {
@@ -61,22 +61,25 @@ public class TablaDijkstra {
         }
         return auxiliar;
     }
-
-    public void buscarRuta(Vertice origen, Vertice destino) {
+    
+    public Camino buscarRuta(Vertice origen, Vertice destino) {
+        Camino camino = new Camino();
         primero = null;
         ultimo = null;
         recorridos(origen);
-
+        
         NodoTablaDijkstra aux = buscarNodo(destino);
-        while (aux != null) {            
-            System.out.print(aux.getVertice().getLugar() + " | ");
+        while (aux != null && aux.getVisitado()) {
+            // System.out.print(aux.getVertice().getLugar() + " | ");
+            camino.agregar(aux.getVertice());
             aux = buscarNodo(aux.getCamino());
         }
-        System.out.println();
-
+        // System.out.println();
+        
         imprimirTabla();
+        return camino;
     }
-
+    
     public void imprimirTabla() {
         NodoTablaDijkstra aux = primero;
         System.out.println("----Tabla Dijkstra");
@@ -85,17 +88,17 @@ public class TablaDijkstra {
             aux = aux.getSiguiente();
         }
     }
-
+    
     private void recorridos(Vertice origen) {
         llenarTabla();
         NodoTablaDijkstra auxDijkstra = buscarNodo(origen);
-
+        
         if (auxDijkstra != null) {
             auxDijkstra.setCosto(0);
             visitar(auxDijkstra);
         }
     }
-
+    
     private void visitar(NodoTablaDijkstra auxDijkstra) {
         if (auxDijkstra != null && !auxDijkstra.getVisitado()) {
             auxDijkstra.setVisitado(true);
@@ -107,7 +110,7 @@ public class TablaDijkstra {
                 costoCamino(arista.getDestino(), auxDijkstra.getCosto() + arista.getPeso(), vertice);
                 arista = arista.getSiguiente();
             }
-
+            
             arista = vertice.getAristas().getPrimero();
             while (arista != null) {
                 visitar(buscarNodo(arista.getDestino()));
@@ -115,10 +118,10 @@ public class TablaDijkstra {
             }
         }
     }
-
+    
     private void costoCamino(Vertice vertice, Integer nuevoCosto, Vertice camino) {
         NodoTablaDijkstra auxDijkstra = buscarNodo(vertice);
-
+        
         if (auxDijkstra != null) {
             // System.out.println("-- COSTO: " + auxDijkstra.getVertice().getLugar() + " | " + auxDijkstra.getVisitado() + " | " + auxDijkstra.getCosto() + " | " + auxDijkstra.getCamino());
             // if (!auxDijkstra.getVisitado()) {

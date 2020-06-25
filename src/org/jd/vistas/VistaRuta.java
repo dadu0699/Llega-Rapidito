@@ -126,6 +126,11 @@ public class VistaRuta extends Stage {
             ManejoDeArchivos.getInstancia().subirArchivo("Archivo de Rutas", "*.txt");
             ListaAdyacencia.getInstancia().agregarArchivo(ManejoDeArchivos.getInstancia().leerArchivo());
             actualizarItemsTabla();
+
+            ManejoDeArchivos.getInstancia().escribirArchivo(ListaAdyacencia.getInstancia().contenidoGrafica(), "listaAdyacencia.dot", "reportes");
+            ManejoDeArchivos.getInstancia().compilarDOT("listaAdyacencia", "reportes");
+            ManejoDeArchivos.getInstancia().escribirArchivo(ListaAdyacencia.getInstancia().contenidoGrafo(), "rutas.sfdp", "reportes");
+            ManejoDeArchivos.getInstancia().compilarSFDP("rutas", "reportes");
         });
 
         JFXButton btnAgregar = new JFXButton("AGREGAR");

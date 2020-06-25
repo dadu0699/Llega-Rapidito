@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jd.estructuras.Camino;
 import org.jd.estructuras.ListaAdyacencia;
 import org.jd.estructuras.ListaCircular;
 import org.jd.estructuras.ListaDoble;
@@ -111,20 +112,29 @@ public class VistaAgregarViaje extends Stage {
                     || cbConductor.getSelectionModel().getSelectedItem() == null) { //falta agregar comprobacion de cbVehiculo
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
-                Ruta ruta = null;
+                if (cbOrigen.getSelectionModel().getSelectedItem() != cbDestino.getSelectionModel().getSelectedItem()) {
+                    Camino camino = TablaDijkstra.getInstancia().buscarRuta(
+                            cbOrigen.getSelectionModel().getSelectedItem(),
+                            cbDestino.getSelectionModel().getSelectedItem());
 
-                TablaDijkstra tb = new TablaDijkstra();
-                tb.buscarRuta(cbOrigen.getSelectionModel().getSelectedItem(), cbDestino.getSelectionModel().getSelectedItem());
+                    if (camino.getPrimero() != null) {
+                        ListaDoble.getInstancia().agregar(new Viaje(cbOrigen.getSelectionModel().getSelectedItem(),
+                                cbDestino.getSelectionModel().getSelectedItem(),
+                                cbCliente.getSelectionModel().getSelectedItem(),
+                                cbConductor.getSelectionModel().getSelectedItem(), 
+                                cbVehiculo.getSelectionModel().getSelectedItem(), 
+                                camino));
+                        VistaViaje.getInstancia().reiniciarHBox();
+                        Alerta.getInstancia().mostrarNotificacion("VIAJE", "REGISTRO REALIZADO EXITOSAMENTE");
+                    } else {
+                        Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "NO ES POSIBLE ENCONTRAR UN CAMINO AL DESTINO SELECCIONADO");
+                    }
 
-                ListaDoble.getInstancia().agregar(new Viaje(cbOrigen.getSelectionModel().getSelectedItem(),
-                        cbDestino.getSelectionModel().getSelectedItem(),
-                        cbCliente.getSelectionModel().getSelectedItem(),
-                        cbConductor.getSelectionModel().getSelectedItem(), cbVehiculo.getSelectionModel().getSelectedItem(), ruta));
-                VistaViaje.getInstancia().reiniciarHBox();
-                Alerta.getInstancia().mostrarNotificacion("VIAJE", "REGISTRO REALIZADO EXITOSAMENTE");
-
-                ManejoDeArchivos.getInstancia().escribirArchivo(ListaDoble.getInstancia().contenidoGrafica(), "viajes.dot", "reportes");
-                ManejoDeArchivos.getInstancia().compilarDOT("viajes", "reportes");
+                    ManejoDeArchivos.getInstancia().escribirArchivo(ListaDoble.getInstancia().contenidoGrafica(), "viajes.dot", "reportes");
+                    ManejoDeArchivos.getInstancia().compilarDOT("viajes", "reportes");
+                } else {
+                    Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "NO ES POSIBLE CREAR UN VIAJE CON EL MISMO ORIGEN Y DESTINO");
+                }
             }
         });
         gridPane.add(buttonAdd, 0, 12);
