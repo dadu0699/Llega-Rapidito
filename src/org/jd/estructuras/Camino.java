@@ -32,6 +32,26 @@ public class Camino {
         primero = nuevo;
     }
 
+    public void agregarCola(Vertice vertice) {
+        NodoCamino nuevo = new NodoCamino(vertice);
+        if (estaVacia()) {
+            primero = nuevo;
+        } else {
+            ultimo.setSiguiente(nuevo);
+        }
+        ultimo = nuevo;
+    }
+
+    public Vertice eliminarCola() {
+        Vertice vertice = null;
+        if (!estaVacia()) {
+            vertice = primero.getVertice();
+            primero = primero.getSiguiente();
+            return vertice;
+        }
+        return vertice;
+    }
+
     @Override
     public String toString() {
         NodoCamino aux = primero;

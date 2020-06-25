@@ -4,10 +4,10 @@ Oviedo		/	Bilbao		/	304	%
 Bilbao		/	Zaragoza	/	324	%
 Bilbao		/	Madrid		/	395	%
 Bilbao		/	Valladolid	/	280	%
-Zaragoza	/	Barcelona	/	296	%
+Zaragoza	/	Barcelona	/	50	%
 Zaragoza	/	Madrid		/	325	%
 Barcelona	/	Gerona		/	100	%
-Barcelona	/	Valencia	/	349	%
+Barcelona	/	Valencia	/	75	%
 Valencia	/	Albacete	/	191	%
 Valencia	/	Murcia		/	150	%
 Madrid		/	Valladolid	/	193	%

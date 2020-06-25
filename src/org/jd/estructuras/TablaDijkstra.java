@@ -5,10 +5,9 @@ public class TablaDijkstra {
     private static TablaDijkstra instancia;
     private NodoTablaDijkstra primero;
     private NodoTablaDijkstra ultimo;
+    private Camino colaVertices;
 
     public TablaDijkstra() {
-        primero = null;
-        ultimo = null;
     }
 
     public static TablaDijkstra getInstancia() {
@@ -66,6 +65,7 @@ public class TablaDijkstra {
         Camino camino = new Camino();
         primero = null;
         ultimo = null;
+        colaVertices = new Camino();
         recorridos(origen);
 
         NodoTablaDijkstra aux = buscarNodo(destino);
@@ -100,22 +100,27 @@ public class TablaDijkstra {
     }
 
     private void visitar(NodoTablaDijkstra auxDijkstra) {
-        if (auxDijkstra != null) {
-            auxDijkstra.setVisitado(true);
+        if (auxDijkstra != null && !auxDijkstra.getVisitado()) {
             // System.out.println("VISITAR: " + auxDijkstra.getVertice().getLugar() + " | " + auxDijkstra.getVisitado() + " | " + auxDijkstra.getCosto() + " | " + auxDijkstra.getCamino());
+            auxDijkstra.setVisitado(true);
+            actualizarCaminosHijos(auxDijkstra);
+        }
+        
+        Vertice vertice = colaVertices.eliminarCola();
+        if (vertice != null) {
+            visitar(buscarNodo(vertice));
+        }
+    }
 
-            Vertice vertice = auxDijkstra.getVertice();
-            Arista arista = vertice.getAristas().getPrimero();
-            while (arista != null) {
-                costoCamino(arista.getDestino(), auxDijkstra.getCosto() + arista.getPeso(), vertice);
-                arista = arista.getSiguiente();
+    private void actualizarCaminosHijos(NodoTablaDijkstra auxDijkstra) {
+        Vertice vertice = auxDijkstra.getVertice();
+        Arista arista = vertice.getAristas().getPrimero();
+        while (arista != null) {
+            costoCamino(arista.getDestino(), auxDijkstra.getCosto() + arista.getPeso(), vertice);
+            if (!buscarNodo(arista.getDestino()).getVisitado()) {
+                colaVertices.agregarCola(arista.getDestino());
             }
-
-            arista = vertice.getAristas().getPrimero();
-            while (arista != null) {
-                visitar(buscarNodo(arista.getDestino()));
-                arista = arista.getSiguiente();
-            }
+            arista = arista.getSiguiente();
         }
     }
 
