@@ -207,7 +207,6 @@ public class VistaConductor extends Stage {
         tableView = new TableView<>(observableList);
         tableView.getColumns().addAll(colDPI, colNombres, colApellidos, colLicencia, colGenero, colFechaNacimiento, colTelefono,
                 colDireccion);
-
         tableView.setOnMouseClicked(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
@@ -215,10 +214,9 @@ public class VistaConductor extends Stage {
                         (Conductor) tableView.getSelectionModel().getSelectedItem()));
             }
         });
-
         tableView.setPrefSize(x, y * 0.995);
-
-        gridPane.add(tableView, 0, 3);
+        gridPane.add(tableView, 0, 2);
+        
         return gridPane;
     }
 }

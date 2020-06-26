@@ -19,11 +19,10 @@ import org.jd.estructuras.TablaHash;
 import org.jd.estructuras.Vertice;
 import org.jd.modelos.Cliente;
 import org.jd.modelos.Conductor;
-import org.jd.modelos.Ruta;
 import org.jd.modelos.Vehiculo;
 import org.jd.modelos.Viaje;
-import org.jd.utilidades.ManejoDeArchivos;
 import org.jd.utilidades.PropiedadesPantalla;
+import org.jd.utilidades.Reportes;
 
 public class VistaAgregarViaje extends Stage {
 
@@ -132,6 +131,10 @@ public class VistaAgregarViaje extends Stage {
                 } else {
                     Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "NO ES POSIBLE CREAR UN VIAJE CON EL MISMO ORIGEN Y DESTINO");
                 }
+                System.out.println(Reportes.getInstancia().TopViajesLargos());
+                System.out.println(Reportes.getInstancia().TopClientes());
+                System.out.println(Reportes.getInstancia().TopConductores());
+                System.out.println(Reportes.getInstancia().TopVehiculos());
             }
         });
         gridPane.add(buttonAdd, 0, 12);

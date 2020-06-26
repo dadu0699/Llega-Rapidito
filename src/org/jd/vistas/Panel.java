@@ -34,17 +34,15 @@ public class Panel extends Stage {
         vBox.setPrefSize(x, y);
         hBoxBotones.setPrefSize(x, y * 0.005);
         vBoxPaneles.setPrefSize(x, y * 0.995);
-        vBoxPaneles.getChildren().add(VistaCliente.getInstancia().getVistaCliente());
+        vBoxPaneles.getChildren().add(VistaRuta.getInstancia().getVistaRuta());
 
         JFXButton btnEncabezado = new JFXButton("LLEGA RAPIDITO"); // Asignacion del nombre al boton
         btnEncabezado.setDisable(true); // Desactivar boton
-        btnEncabezado.getStyleClass().addAll("headerNavButton", "panelButton"); // Diseños del panel de botones y de
-        // boton
+        btnEncabezado.getStyleClass().addAll("headerNavButton", "panelButton"); // Diseños del panel de botones y de boton
         btnEncabezado.setPrefSize(2 * x / 8, y); // Tamaño del boton
         btnEncabezado.setButtonType(JFXButton.ButtonType.FLAT); // Tipo de boton
 
-        JFXButton btnClientes = new JFXButton("CLIENTES");
-        selectButton(btnClientes); // Boton seleccionado al iniciar
+        JFXButton btnClientes = new JFXButton("CLIENTES");        
         btnClientes.setId("btnClientes"); // Asignacion de id al boton
         btnClientes.getStyleClass().addAll("panelButton", "primaryButton");
         btnClientes.setPrefSize(x / 8, y);
@@ -54,6 +52,7 @@ public class Panel extends Stage {
             vBoxPaneles.getChildren().clear(); // Limpieza del panel para agregar los nuevos atributos
             vBoxPaneles.getChildren().add(VistaCliente.getInstancia().getVistaCliente());
         });
+        btnClientes.setDisable(true); // Desactivar boton
 
         JFXButton btnVehiculos = new JFXButton("VEHÍCULOS");
         btnVehiculos.setId("btnVehiculos");
@@ -65,6 +64,7 @@ public class Panel extends Stage {
             vBoxPaneles.getChildren().clear();
             vBoxPaneles.getChildren().add(VistaVehiculo.getInstancia().getVistaVehiculo());
         });
+        btnVehiculos.setDisable(true); // Desactivar boton
 
         JFXButton btnConductores = new JFXButton("CONDUCTORES");
         btnConductores.setId("btnConductores");
@@ -76,6 +76,7 @@ public class Panel extends Stage {
             vBoxPaneles.getChildren().clear();
             vBoxPaneles.getChildren().add(VistaConductor.getInstancia().getVistaConductor());
         });
+        btnConductores.setDisable(true); // Desactivar boton
 
         JFXButton btnViajes = new JFXButton("VIAJES");
         btnViajes.setId("btnViajes");
@@ -87,6 +88,7 @@ public class Panel extends Stage {
             vBoxPaneles.getChildren().clear();
             vBoxPaneles.getChildren().add(VistaViaje.getInstancia().getVistaViaje());
         });
+        btnViajes.setDisable(true); // Desactivar boton
 
         JFXButton btnRutas = new JFXButton("RUTAS");
         btnRutas.setId("btnRutas");
@@ -98,6 +100,7 @@ public class Panel extends Stage {
             vBoxPaneles.getChildren().clear();
             vBoxPaneles.getChildren().add(VistaRuta.getInstancia().getVistaRuta());
         });
+        selectButton(btnRutas); // Boton seleccionado al iniciar
 
         JFXButton btnReportes = new JFXButton("REPORTES");
         btnReportes.setId("btnReportes");
@@ -108,6 +111,7 @@ public class Panel extends Stage {
             selectButton(btnReportes);
             vBoxPaneles.getChildren().clear();
         });
+        btnReportes.setDisable(true); // Desactivar boton
 
         hBoxBotones.getChildren().addAll(btnEncabezado, btnClientes, btnVehiculos, btnConductores, btnViajes, btnRutas,
                 btnReportes); // Asignacion de botones al contenedor
@@ -115,8 +119,7 @@ public class Panel extends Stage {
         return vBox;
     }
 
-    // Metodo para quitar el estilo de boton seleccionado y asignarlo al boton
-    // presionado
+    // Metodo para quitar el estilo de boton seleccionado y asignarlo al boton presionado
     private void selectButton(JFXButton jfxButton) {
         for (Node node : hBoxBotones.getChildren()) { // Se recorren todos los nodos del contenedor botones
             if (node instanceof JFXButton) { // Se verifica que el nodo sea una instancia del objeto JFXButton
@@ -128,5 +131,16 @@ public class Panel extends Stage {
         }
         jfxButton.getStyleClass().remove("primaryButton"); // Se remueve el estilo inicial al boton presionado
         jfxButton.getStyleClass().add("selectedPanelNavButton"); // Se agrega el estilo de seleccion al boton presionado
+    }
+
+    // Metodo para activar los botones despues de subir archivo de rutas
+    public void activarBotones() {
+        for (Node node : hBoxBotones.getChildren()) { // Se recorren todos los nodos del contenedor botones
+            if (node instanceof JFXButton) { // Se verifica que el nodo sea una instancia del objeto JFXButton
+                if (node.getId() != null) { // Se verifica que el boton contenga un id
+                    node.setDisable(false);
+                }
+            }
+        }
     }
 }

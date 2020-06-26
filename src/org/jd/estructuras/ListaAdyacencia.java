@@ -253,4 +253,57 @@ public class ListaAdyacencia {
         }
         return lugares;
     }
+
+    public String grafoRuta(NodoCamino camino) {
+        StringBuilder stringBuilder = new StringBuilder();
+        ArrayList<Ruta> rutas = new ArrayList<>();
+        Vertice vertice = primero;
+        Arista arista;
+        NodoCamino caminoAux = camino;
+
+        stringBuilder.append("digraph G {");
+        stringBuilder.append("\n\tgraph [bgcolor=transparent];");
+        stringBuilder.append("\n\trankdir = LR;");
+        stringBuilder.append("\n\tnode[style=filled, color=\"#393C4BFF\""
+                + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");
+
+        while (vertice != null) {
+            stringBuilder.append("\n\tN").append(vertice.getLugar().replaceAll(" ", "_"))
+                    .append("[label =\"").append(vertice.getLugar()).append("\"];");
+            vertice = vertice.getSiguiente();
+        }
+
+        while (caminoAux != null) {
+            if (caminoAux.getSiguiente() != null) {
+                rutas.add(new Ruta(caminoAux.getVertice().getLugar(),
+                        caminoAux.getSiguiente().getVertice().getLugar(), ""));
+            }
+            caminoAux = caminoAux.getSiguiente();
+        }
+
+        vertice = primero;
+        while (vertice != null) {
+            arista = vertice.getAristas().getPrimero();
+            while (arista != null) {
+                stringBuilder.append("\n\tN")
+                        .append(vertice.getLugar().replaceAll(" ", "_"))
+                        .append(" -> N")
+                        .append(arista.getDestino().getLugar().replaceAll(" ", "_"))
+                        .append("[label=\"")
+                        .append(arista.getPeso());
+
+                if (buscarRutaEnLista(vertice.getLugar(), arista.getDestino().getLugar(), rutas) != null) {
+                    stringBuilder.append("\",color=\"green\", fontcolor = \"#F8F8F2FF\"];");
+                } else {
+                    stringBuilder.append("\",color=\"#E91E63\", fontcolor = \"#F8F8F2FF\"];");
+                }
+
+                arista = arista.getSiguiente();
+            }
+            vertice = vertice.getSiguiente();
+        }
+
+        stringBuilder.append("\n}");
+        return stringBuilder.toString();
+    }
 }

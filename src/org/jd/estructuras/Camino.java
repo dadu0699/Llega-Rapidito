@@ -7,10 +7,12 @@ public class Camino {
 
     private NodoCamino primero;
     private NodoCamino ultimo;
+    private Integer cantidadDestinos;
 
     public Camino() {
         primero = null;
         ultimo = null;
+        cantidadDestinos = 0;
     }
 
     public NodoCamino getPrimero() {
@@ -19,6 +21,10 @@ public class Camino {
 
     public NodoCamino getUltimo() {
         return ultimo;
+    }
+
+    public Integer getCantidadDestinos() {
+        return cantidadDestinos - 1;
     }
 
     private boolean estaVacia() {
@@ -33,6 +39,7 @@ public class Camino {
             nuevo.setSiguiente(primero);
         }
         primero = nuevo;
+        cantidadDestinos++;
     }
 
     public void agregarCola(Vertice vertice) {
@@ -84,7 +91,7 @@ public class Camino {
                 + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");
 
         while (aux != null) {
-            stringBuilder.append("\n\tN").append(llave).append(aux.getVertice().getLugar()).append("[label =\"")
+            stringBuilder.append("\n\tN").append(llave).append(aux.getVertice().getLugar().replaceAll(" ", "_")).append("[label =\"")
                     .append("LUGAR: ").append(aux.getVertice().getLugar()).append("\\n")
                     .append("TIEMPO: ").append(tiempo).append("\"];");
 
@@ -93,10 +100,10 @@ public class Camino {
                         aux.getVertice().getLugar(), aux.getSiguiente().getVertice().getLugar(),
                         rutas);
                 tiempo += Integer.parseInt(ruta.getTiempoRuta());
-                
-                stringBuilder.append("\n\tN").append(llave).append(aux.getVertice().getLugar())
+
+                stringBuilder.append("\n\tN").append(llave).append(aux.getVertice().getLugar().replaceAll(" ", "_"))
                         .append(" -> N")
-                        .append(llave).append(aux.getSiguiente().getVertice().getLugar())
+                        .append(llave).append(aux.getSiguiente().getVertice().getLugar().replaceAll(" ", "_"))
                         .append("[color=\"#E91E63\"];");
             }
             aux = aux.getSiguiente();
@@ -104,5 +111,9 @@ public class Camino {
 
         stringBuilder.append("\n}");
         return stringBuilder.toString();
+    }
+
+    public String contenidoGrafo() {
+        return ListaAdyacencia.getInstancia().grafoRuta(primero);
     }
 }

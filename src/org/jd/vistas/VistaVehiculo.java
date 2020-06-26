@@ -202,7 +202,6 @@ public class VistaVehiculo extends Stage {
         actualizarObsList();
         tableView = new TableView<>(observableList);
         tableView.getColumns().addAll(colPlaca, colMarca, colModelo, colAnio, colColor, colPrecio, colTransmision);
-
         tableView.setOnMouseClicked(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
@@ -210,10 +209,9 @@ public class VistaVehiculo extends Stage {
                         (Vehiculo) tableView.getSelectionModel().getSelectedItem()));
             }
         });
-
         tableView.setPrefSize(x, y * 0.995);
-
-        gridPane.add(tableView, 0, 3);
+        gridPane.add(tableView, 0, 2);
+        
         return gridPane;
     }
 }

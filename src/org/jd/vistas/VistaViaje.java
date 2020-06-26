@@ -17,7 +17,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.jd.estructuras.ListaDoble;
 import org.jd.modelos.Viaje;
-import org.jd.utilidades.ManejoDeArchivos;
 import org.jd.utilidades.PropiedadesPantalla;
 
 public class VistaViaje extends Stage {
@@ -194,7 +193,6 @@ public class VistaViaje extends Stage {
         tableView = new TableView<>(observableList);
         tableView.getColumns().addAll(colOrigen, colDestino, colFechaHora, colCliente, colConductor, colVehiculo,
                 colRuta);
-
         tableView.setOnMouseClicked(event -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 vBoxCRUD.getChildren().remove(0);
@@ -202,10 +200,9 @@ public class VistaViaje extends Stage {
                         (Viaje) tableView.getSelectionModel().getSelectedItem()));
             }
         });
-
         tableView.setPrefSize(x, y * 0.995);
+        gridPane.add(tableView, 0, 2);
 
-        gridPane.add(tableView, 0, 3);
         return gridPane;
     }
 }

@@ -126,11 +126,6 @@ public class VistaRuta extends Stage {
             ManejoDeArchivos.getInstancia().subirArchivo("Archivo de Rutas", "*.txt");
             ListaAdyacencia.getInstancia().agregarArchivo(ManejoDeArchivos.getInstancia().leerArchivo());
             reiniciarHBox();
-
-            ManejoDeArchivos.getInstancia().escribirArchivo(ListaAdyacencia.getInstancia().contenidoGrafica(), "listaAdyacencia.dot", "reportes");
-            ManejoDeArchivos.getInstancia().compilarDOT("listaAdyacencia", "reportes");
-            ManejoDeArchivos.getInstancia().escribirArchivo(ListaAdyacencia.getInstancia().contenidoGrafo(), "rutas.sfdp", "reportes");
-            ManejoDeArchivos.getInstancia().compilarSFDP("rutas", "reportes");
         });
 
         JFXButton btnAgregar = new JFXButton("AGREGAR");
@@ -171,14 +166,6 @@ public class VistaRuta extends Stage {
             }
         });
 
-        if (ListaAdyacencia.getInstancia().getPrimero() == null) {
-            hBoxBotones.getChildren().addAll(btnArchivo);
-            hBoxBotones.setPrefSize(x, y * 0.005);
-            gridPane.add(hBoxBotones, 0, 1);
-        } else {
-            Panel.getInstancia().activarBotones();
-        }
-
         TableColumn<Ruta, String> colOrigen = new TableColumn<>("ORIGEN");
         colOrigen.setPrefWidth(x * 7 / 30);
         colOrigen.setCellValueFactory(new PropertyValueFactory<>("origen"));
@@ -203,7 +190,16 @@ public class VistaRuta extends Stage {
         });
         tableView.setPrefSize(x, y * 0.995);
 
-        gridPane.add(tableView, 0, 3);
+        if (ListaAdyacencia.getInstancia().getPrimero() == null) {
+            hBoxBotones.getChildren().addAll(btnArchivo);
+            hBoxBotones.setPrefSize(x, y * 0.005);
+            gridPane.add(hBoxBotones, 0, 1);
+            gridPane.add(tableView, 0, 2);
+        } else {
+            Panel.getInstancia().activarBotones();
+            gridPane.add(tableView, 0, 1);
+        }
+
         return gridPane;
     }
 }

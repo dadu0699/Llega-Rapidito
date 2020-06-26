@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import org.jd.modelos.Vehiculo;
 import org.jd.modelos.Viaje;
 import org.jd.utilidades.Encriptamiento;
-import org.jd.utilidades.ManejoDeArchivos;
 
 public class ListaDoble {
 
@@ -57,9 +56,6 @@ public class ListaDoble {
         ultimo = nuevo;
         System.out.println(nuevo.getViaje().toString());
         ordenar();
-
-        ManejoDeArchivos.getInstancia().escribirArchivo(nuevo.getViaje().getRuta().contenidoGrafica(encriptar.decode(nuevo.getViaje().getId())), "camino.dot", "reportes");
-        ManejoDeArchivos.getInstancia().compilarDOT("camino", "reportes");
     }
 
     public Viaje buscar(String id) {
