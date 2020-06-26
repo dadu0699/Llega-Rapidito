@@ -42,7 +42,7 @@ public class Panel extends Stage {
         btnEncabezado.setPrefSize(2 * x / 8, y); // Tamaño del boton
         btnEncabezado.setButtonType(JFXButton.ButtonType.FLAT); // Tipo de boton
 
-        JFXButton btnClientes = new JFXButton("CLIENTES");        
+        JFXButton btnClientes = new JFXButton("CLIENTES");
         btnClientes.setId("btnClientes"); // Asignacion de id al boton
         btnClientes.getStyleClass().addAll("panelButton", "primaryButton");
         btnClientes.setPrefSize(x / 8, y);
@@ -110,6 +110,7 @@ public class Panel extends Stage {
         btnReportes.setOnAction(event -> {
             selectButton(btnReportes);
             vBoxPaneles.getChildren().clear();
+            vBoxPaneles.getChildren().add(VistaReporte.getInstancia().getVistaReporte());
         });
         btnReportes.setDisable(true); // Desactivar boton
 

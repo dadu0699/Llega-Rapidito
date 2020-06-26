@@ -131,10 +131,6 @@ public class VistaAgregarViaje extends Stage {
                 } else {
                     Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "NO ES POSIBLE CREAR UN VIAJE CON EL MISMO ORIGEN Y DESTINO");
                 }
-                System.out.println(Reportes.getInstancia().TopViajesLargos());
-                System.out.println(Reportes.getInstancia().TopClientes());
-                System.out.println(Reportes.getInstancia().TopConductores());
-                System.out.println(Reportes.getInstancia().TopVehiculos());
             }
         });
         gridPane.add(buttonAdd, 0, 12);

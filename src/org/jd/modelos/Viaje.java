@@ -94,7 +94,7 @@ public class Viaje {
 
     private String obtenerFechaHora() {
         Date fechaActual = new Date();
-        SimpleDateFormat darFormato = new SimpleDateFormat("dd/MM/yy HH:mm");
+        SimpleDateFormat darFormato = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
         return darFormato.format(fechaActual);
     }
 
