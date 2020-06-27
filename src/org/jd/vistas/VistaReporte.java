@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXAlert;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXTextField;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -250,13 +251,11 @@ public class VistaReporte extends Stage {
             gridAlerta.setVgap(25);
             gridAlerta.setPadding(new Insets(20));
 
-            ObservableList obsViajes = FXCollections.observableArrayList(ListaDoble.getInstancia().obtenerDatos());
-            ObservableList<Viaje> viajeLista = obsViajes;
-            JFXComboBox<Viaje> cbViaje = new JFXComboBox<>(viajeLista);
-            cbViaje.setPromptText("VIAJE");
-            cbViaje.setLabelFloat(true);
-            cbViaje.setPrefWidth(x);
-            gridAlerta.add(cbViaje, 0, 0, 2, 1);
+            JFXTextField jFTLlave = new JFXTextField();
+            jFTLlave.setPromptText("LLAVE");
+            jFTLlave.setLabelFloat(true);
+            jFTLlave.setPrefWidth(x);
+            gridAlerta.add(jFTLlave, 0, 0, 2, 1);
 
             JFXDialogLayout layout = new JFXDialogLayout();
             layout.setHeading(new Label("VIAJES"));
@@ -272,25 +271,29 @@ public class VistaReporte extends Stage {
             btnAceptar.getStyleClass().addAll("customButton", "primaryButton");
             btnAceptar.setButtonType(JFXButton.ButtonType.FLAT);
             btnAceptar.setOnAction(eventoAceptar -> {
-                if (cbViaje.getSelectionModel().getSelectedItem() == null) {
-                    Alerta.getInstancia().mostrarAlerta(gridAlerta, "ERROR", "NO SE SELECCIONO UN VIAJE");
+                if (jFTLlave.getText().length() == 0) {
+                    Alerta.getInstancia().mostrarAlerta(gridAlerta, "ERROR", "NO SE HA INGRESADO UN VIAJE");
                 } else {
-                    Viaje viajeSeleccionado = cbViaje.getSelectionModel().getSelectedItem();
-                    ManejoDeArchivos.getInstancia().escribirArchivo(viajeSeleccionado.getRuta()
-                            .reporteListaSimple(encriptar.decode(viajeSeleccionado.getId())),
-                            "caminoListaSimple.dot", "reportes");
-                    ManejoDeArchivos.getInstancia().compilarDOT("caminoListaSimple", "reportes");
+                    Viaje viajeSeleccionado = ListaDoble.getInstancia().buscar(jFTLlave.getText().trim());
+                    if (viajeSeleccionado != null) {
+                        ManejoDeArchivos.getInstancia().escribirArchivo(viajeSeleccionado.getRuta()
+                                .reporteListaSimple(encriptar.decode(viajeSeleccionado.getId())),
+                                "caminoListaSimple.dot", "reportes");
+                        ManejoDeArchivos.getInstancia().compilarDOT("caminoListaSimple", "reportes");
 
-                    String ruta = System.getProperty("user.dir") + "\\reportes\\caminoListaSimple.png";
-                    File directory = new File(ruta);
-                    if (directory.exists()) {
-                        try {
-                            Image image = new Image(new FileInputStream(ruta));
-                            imageView.setImage(image);
-                            alerta.hideWithAnimation();
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
+                        String ruta = System.getProperty("user.dir") + "\\reportes\\caminoListaSimple.png";
+                        File directory = new File(ruta);
+                        if (directory.exists()) {
+                            try {
+                                Image image = new Image(new FileInputStream(ruta));
+                                imageView.setImage(image);
+                                alerta.hideWithAnimation();
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
                         }
+                    } else {
+                        Alerta.getInstancia().mostrarAlerta(gridAlerta, "ERROR", "VIAJE NO ENCONTRADO");
                     }
                 }
             });
@@ -313,13 +316,11 @@ public class VistaReporte extends Stage {
             gridAlerta.setVgap(25);
             gridAlerta.setPadding(new Insets(20));
 
-            ObservableList obsViajes = FXCollections.observableArrayList(ListaDoble.getInstancia().obtenerDatos());
-            ObservableList<Viaje> viajeLista = obsViajes;
-            JFXComboBox<Viaje> cbViaje = new JFXComboBox<>(viajeLista);
-            cbViaje.setPromptText("VIAJE");
-            cbViaje.setLabelFloat(true);
-            cbViaje.setPrefWidth(x);
-            gridAlerta.add(cbViaje, 0, 0, 2, 1);
+            JFXTextField jFTLlave = new JFXTextField();
+            jFTLlave.setPromptText("LLAVE");
+            jFTLlave.setLabelFloat(true);
+            jFTLlave.setPrefWidth(x);
+            gridAlerta.add(jFTLlave, 0, 0, 2, 1);
 
             JFXDialogLayout layout = new JFXDialogLayout();
             layout.setHeading(new Label("VIAJES"));
@@ -335,25 +336,30 @@ public class VistaReporte extends Stage {
             btnAceptar.getStyleClass().addAll("customButton", "primaryButton");
             btnAceptar.setButtonType(JFXButton.ButtonType.FLAT);
             btnAceptar.setOnAction(eventoAceptar -> {
-                if (cbViaje.getSelectionModel().getSelectedItem() == null) {
-                    Alerta.getInstancia().mostrarAlerta(gridAlerta, "ERROR", "NO SE SELECCIONO UN VIAJE");
+                if (jFTLlave.getText().length() == 0) {
+                    Alerta.getInstancia().mostrarAlerta(gridAlerta, "ERROR", "NO SE HA INGRESADO UN VIAJE");
                 } else {
-                    Viaje viajeSeleccionado = cbViaje.getSelectionModel().getSelectedItem();
-                    ManejoDeArchivos.getInstancia().escribirArchivo(viajeSeleccionado.getRuta().contenidoGrafo(),
-                            "caminoGrafo.sfdp", "reportes");
-                    ManejoDeArchivos.getInstancia().compilarSFDP("caminoGrafo", "reportes");
+                    Viaje viajeSeleccionado = ListaDoble.getInstancia().buscar(jFTLlave.getText().trim());
+                    if (viajeSeleccionado != null) {
+                        ManejoDeArchivos.getInstancia().escribirArchivo(viajeSeleccionado.getRuta().contenidoGrafo(),
+                                "caminoGrafo.sfdp", "reportes");
+                        ManejoDeArchivos.getInstancia().compilarSFDP("caminoGrafo", "reportes");
 
-                    String ruta = System.getProperty("user.dir") + "\\reportes\\caminoGrafo.png";
-                    File directory = new File(ruta);
-                    if (directory.exists()) {
-                        try {
-                            Image image = new Image(new FileInputStream(ruta));
-                            imageView.setImage(image);
-                            alerta.hideWithAnimation();
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
+                        String ruta = System.getProperty("user.dir") + "\\reportes\\caminoGrafo.png";
+                        File directory = new File(ruta);
+                        if (directory.exists()) {
+                            try {
+                                Image image = new Image(new FileInputStream(ruta));
+                                imageView.setImage(image);
+                                alerta.hideWithAnimation();
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
                         }
+                    } else {
+                        Alerta.getInstancia().mostrarAlerta(gridAlerta, "ERROR", "VIAJE NO ENCONTRADO");
                     }
+
                 }
             });
 
