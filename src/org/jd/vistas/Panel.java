@@ -39,13 +39,13 @@ public class Panel extends Stage {
         JFXButton btnEncabezado = new JFXButton("LLEGA RAPIDITO"); // Asignacion del nombre al boton
         btnEncabezado.setDisable(true); // Desactivar boton
         btnEncabezado.getStyleClass().addAll("headerNavButton", "panelButton"); // Diseños del panel de botones y de boton
-        btnEncabezado.setPrefSize(2 * x / 8, y); // Tamaño del boton
+        btnEncabezado.setPrefSize(2 * x / 9, y); // Tamaño del boton
         btnEncabezado.setButtonType(JFXButton.ButtonType.FLAT); // Tipo de boton
 
         JFXButton btnClientes = new JFXButton("CLIENTES");
         btnClientes.setId("btnClientes"); // Asignacion de id al boton
         btnClientes.getStyleClass().addAll("panelButton", "primaryButton");
-        btnClientes.setPrefSize(x / 8, y);
+        btnClientes.setPrefSize(x / 9, y);
         btnClientes.setButtonType(JFXButton.ButtonType.FLAT);
         btnClientes.setOnAction(event -> { // Evento clic y funcionalidad al realizarlo
             selectButton(btnClientes); // Asignacion de diseños al seleccionar el boton
@@ -57,7 +57,7 @@ public class Panel extends Stage {
         JFXButton btnVehiculos = new JFXButton("VEHÍCULOS");
         btnVehiculos.setId("btnVehiculos");
         btnVehiculos.getStyleClass().addAll("panelButton", "primaryButton");
-        btnVehiculos.setPrefSize(x / 8, y);
+        btnVehiculos.setPrefSize(x / 9, y);
         btnVehiculos.setButtonType(JFXButton.ButtonType.FLAT);
         btnVehiculos.setOnAction(event -> {
             selectButton(btnVehiculos);
@@ -69,7 +69,7 @@ public class Panel extends Stage {
         JFXButton btnConductores = new JFXButton("CONDUCTORES");
         btnConductores.setId("btnConductores");
         btnConductores.getStyleClass().addAll("panelButton", "primaryButton");
-        btnConductores.setPrefSize(x / 8, y);
+        btnConductores.setPrefSize(x / 9, y);
         btnConductores.setButtonType(JFXButton.ButtonType.FLAT);
         btnConductores.setOnAction(event -> {
             selectButton(btnConductores);
@@ -81,7 +81,7 @@ public class Panel extends Stage {
         JFXButton btnViajes = new JFXButton("VIAJES");
         btnViajes.setId("btnViajes");
         btnViajes.getStyleClass().addAll("panelButton", "primaryButton");
-        btnViajes.setPrefSize(x / 8, y);
+        btnViajes.setPrefSize(x / 9, y);
         btnViajes.setButtonType(JFXButton.ButtonType.FLAT);
         btnViajes.setOnAction(event -> {
             selectButton(btnViajes);
@@ -93,7 +93,7 @@ public class Panel extends Stage {
         JFXButton btnRutas = new JFXButton("RUTAS");
         btnRutas.setId("btnRutas");
         btnRutas.getStyleClass().addAll("panelButton", "primaryButton");
-        btnRutas.setPrefSize(x / 8, y);
+        btnRutas.setPrefSize(x / 9, y);
         btnRutas.setButtonType(JFXButton.ButtonType.FLAT);
         btnRutas.setOnAction(event -> {
             selectButton(btnRutas);
@@ -105,7 +105,7 @@ public class Panel extends Stage {
         JFXButton btnReportes = new JFXButton("REPORTES");
         btnReportes.setId("btnReportes");
         btnReportes.getStyleClass().addAll("panelButton", "primaryButton");
-        btnReportes.setPrefSize(x / 8, y);
+        btnReportes.setPrefSize(x / 9, y);
         btnReportes.setButtonType(JFXButton.ButtonType.FLAT);
         btnReportes.setOnAction(event -> {
             selectButton(btnReportes);
@@ -114,8 +114,20 @@ public class Panel extends Stage {
         });
         btnReportes.setDisable(true); // Desactivar boton
 
+        JFXButton btnReportesTexto = new JFXButton("TOPS");
+        btnReportesTexto.setId("btnTops");
+        btnReportesTexto.getStyleClass().addAll("panelButton", "primaryButton");
+        btnReportesTexto.setPrefSize(x / 9, y);
+        btnReportesTexto.setButtonType(JFXButton.ButtonType.FLAT);
+        btnReportesTexto.setOnAction(event -> {
+            selectButton(btnReportesTexto);
+            vBoxPaneles.getChildren().clear();
+            vBoxPaneles.getChildren().add(VistaTops.getInstancia().getVistaTops());
+        });
+        btnReportesTexto.setDisable(true); // Desactivar boton
+
         hBoxBotones.getChildren().addAll(btnEncabezado, btnClientes, btnVehiculos, btnConductores, btnViajes, btnRutas,
-                btnReportes); // Asignacion de botones al contenedor
+                btnReportes, btnReportesTexto); // Asignacion de botones al contenedor
         vBox.getChildren().addAll(hBoxBotones, vBoxPaneles); // Asignacion de los contenedores al panel principal
         return vBox;
     }

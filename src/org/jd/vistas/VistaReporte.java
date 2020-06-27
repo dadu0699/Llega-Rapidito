@@ -2,14 +2,11 @@ package org.jd.vistas;
 
 import com.jfoenix.controls.JFXAlert;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -31,7 +28,6 @@ import org.jd.modelos.Viaje;
 import org.jd.utilidades.Encriptamiento;
 import org.jd.utilidades.ManejoDeArchivos;
 import org.jd.utilidades.PropiedadesPantalla;
-import org.jd.utilidades.Reportes;
 
 public class VistaReporte extends Stage {
 
@@ -66,9 +62,10 @@ public class VistaReporte extends Stage {
         gridPane.setPrefSize(x, y);
         hBox.setPrefSize(x, y);
 
+        
         Text txtTitulo = new Text("REPORTES");
         txtTitulo.getStyleClass().add("textTitle");
-        txtTitulo.setFont(new Font(25));
+        txtTitulo.setFont(new Font(30));
         gridPane.add(txtTitulo, 0, 0);
 
         HBox hBoxBotonesSup = new HBox();
@@ -374,53 +371,12 @@ public class VistaReporte extends Stage {
         hBoxBotonesMed.setMargin(btnListaViajes, new Insets(0, 5, 0, 0));
         gridPane.add(hBoxBotonesMed, 0, 2, 1, 1);
 
-        HBox hBoxBotonesInf = new HBox();
-        JFXButton btnTopViajesLg = new JFXButton("TOP 10 VIAJES LARGOS");
-        btnTopViajesLg.getStyleClass().addAll("customButton", "dangerButton");
-        btnTopViajesLg.setButtonType(JFXButton.ButtonType.FLAT);
-        btnTopViajesLg.setPrefSize(x, y);
-        btnTopViajesLg.setOnAction(event -> {
-            System.out.println(Reportes.getInstancia().TopViajesLargos());
-        });
-
-        JFXButton btnTopClientes = new JFXButton("TOP 10 CLIENTES");
-        btnTopClientes.getStyleClass().addAll("customButton", "dangerButton");
-        btnTopClientes.setButtonType(JFXButton.ButtonType.FLAT);
-        btnTopClientes.setPrefSize(x, y);
-        btnTopClientes.setOnAction(event -> {
-            System.out.println(Reportes.getInstancia().TopClientes());
-        });
-
-        JFXButton btnTopConductores = new JFXButton("TOP 10 CONDUCTORES");
-        btnTopConductores.getStyleClass().addAll("customButton", "dangerButton");
-        btnTopConductores.setButtonType(JFXButton.ButtonType.FLAT);
-        btnTopConductores.setPrefSize(x, y);
-        btnTopConductores.setOnAction(event -> {
-            System.out.println(Reportes.getInstancia().TopConductores());
-        });
-
-        JFXButton btnTopVehiculos = new JFXButton("TOP 10 VEHICULOS");
-        btnTopVehiculos.getStyleClass().addAll("customButton", "dangerButton");
-        btnTopVehiculos.setButtonType(JFXButton.ButtonType.FLAT);
-        btnTopVehiculos.setPrefSize(x, y);
-        btnTopVehiculos.setOnAction(event -> {
-            System.out.println(Reportes.getInstancia().TopVehiculos());
-        });
-
-        hBoxBotonesInf.getChildren().addAll(btnTopViajesLg, btnTopClientes,
-                btnTopConductores, btnTopVehiculos);
-        hBoxBotonesInf.setPrefSize(x, y / 10);
-        hBoxBotonesInf.setMargin(btnTopViajesLg, new Insets(0, 5, 0, 0));
-        hBoxBotonesInf.setMargin(btnTopClientes, new Insets(0, 5, 0, 0));
-        hBoxBotonesInf.setMargin(btnTopConductores, new Insets(0, 5, 0, 0));
-        gridPane.add(hBoxBotonesInf, 0, 3, 1, 1);
-
         imageView.setPreserveRatio(true);
         ScrollPane sp = new ScrollPane();
-        sp.setPrefHeight(4 * y / 5);
+        sp.setPrefHeight(9 * y / 10);
         sp.setPrefWidth(x);
         sp.setContent(imageView);
-        gridPane.add(sp, 0, 4);
+        gridPane.add(sp, 0, 3);
 
         hBox.getChildren().add(gridPane);
         return hBox;
