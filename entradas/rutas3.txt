@@ -1,7 +1,7 @@
-0/1/4%
-2/1/7%
-2/5/2%
-4/7/4%
-5/1/5%
-5/6/6%
-7/6/9%
+Zona 1/Zona 2/4%
+Zona 2/Zona 1/7%
+Zona 2/Zona 5/2%
+Zona 4/Zona 7/4%
+Zona 5/Zona 1/5%
+Zona 5/Zona 6/6%
+Zona 7/Zona 6/9%

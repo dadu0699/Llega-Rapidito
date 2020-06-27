@@ -76,7 +76,31 @@ public class Camino {
         return camino;
     }
 
-    public String contenidoGrafica(String llave) {
+    public String reporteListaSimple(String llave) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("digraph G {");
+        stringBuilder.append("\n\tgraph [bgcolor=transparent];");
+        stringBuilder.append("\n\trankdir = LR;");
+        stringBuilder.append("\n\tnode[shape=record, style=filled color=\"#393C4BFF\""
+                + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");
+        stringBuilder.append(contenidoGrafica(llave));
+        stringBuilder.append("\n}");
+        return stringBuilder.toString();
+    }
+
+    public String viajesCaminos(String llave) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(contenidoGrafica(llave));
+        llave = llave.replaceAll(":", "");
+        if (primero != null) {
+            stringBuilder.append("\n\tN").append(llave).append(" -> N")
+                    .append(llave).append(primero.getVertice().getLugar().replaceAll(" ", "_"))
+                    .append("[color=\"#E91E63\"];");
+        }
+        return stringBuilder.toString();
+    }
+
+    private String contenidoGrafica(String llave) {
         StringBuilder stringBuilder = new StringBuilder();
         ArrayList<Ruta> rutas = ListaAdyacencia.getInstancia().obtenerDatos();
         Ruta ruta;
@@ -84,14 +108,9 @@ public class Camino {
         llave = llave.replaceAll(":", "");
         NodoCamino aux = primero;
 
-        stringBuilder.append("digraph G {");
-        stringBuilder.append("\n\tgraph [bgcolor=transparent];");
-        stringBuilder.append("\n\trankdir = LR;");
-        stringBuilder.append("\n\tnode[shape=record, style=filled color=\"#393C4BFF\""
-                + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");
-
         while (aux != null) {
-            stringBuilder.append("\n\tN").append(llave).append(aux.getVertice().getLugar().replaceAll(" ", "_")).append("[label =\"")
+            stringBuilder.append("\n\tN").append(llave)
+                    .append(aux.getVertice().getLugar().replaceAll(" ", "_")).append("[label =\"")
                     .append("LUGAR: ").append(aux.getVertice().getLugar()).append("\\n")
                     .append("TIEMPO: ").append(tiempo).append("\"];");
 
@@ -109,7 +128,6 @@ public class Camino {
             aux = aux.getSiguiente();
         }
 
-        stringBuilder.append("\n}");
         return stringBuilder.toString();
     }
 

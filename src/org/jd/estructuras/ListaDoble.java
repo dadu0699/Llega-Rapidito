@@ -133,15 +133,21 @@ public class ListaDoble {
         return viajes;
     }
 
-    public String contenidoGrafica() {
+    public String reporteListaDoble() {
         StringBuilder stringBuilder = new StringBuilder();
-        NodoListaDoble aux = primero;
-
         stringBuilder.append("digraph G {");
         stringBuilder.append("\n\tgraph [bgcolor=transparent];");
         stringBuilder.append("\n\trankdir = LR;");
         stringBuilder.append("\n\tnode[shape=record, style=filled color=\"#393C4BFF\""
                 + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");
+        stringBuilder.append(contenidoGrafica());
+        stringBuilder.append("\n}");
+        return stringBuilder.toString();
+    }
+
+    public String contenidoGrafica() {
+        StringBuilder stringBuilder = new StringBuilder();
+        NodoListaDoble aux = primero;
 
         if (!estaVacia()) {
             do {
@@ -168,7 +174,6 @@ public class ListaDoble {
             } while (aux != ultimo.getSiguiente());
         }
 
-        stringBuilder.append("\n}");
         return stringBuilder.toString();
     }
 }

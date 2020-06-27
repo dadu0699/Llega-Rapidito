@@ -126,16 +126,22 @@ public class ListaAdyacencia {
         }
     }
 
+    public String reporteListaAdyacencia() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("digraph G {");
+        stringBuilder.append("\n\tgraph [bgcolor=transparent];");
+        stringBuilder.append("\n\trankdir = LR;");
+        stringBuilder.append("\n\tnode[shape=record, style=filled color=\"#393C4BFF\""
+                + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");
+        stringBuilder.append(contenidoGrafica());
+        stringBuilder.append("\n}");
+        return stringBuilder.toString();
+    }
+
     public String contenidoGrafica() {
         StringBuilder stringBuilder = new StringBuilder();
         Vertice vertice = primero;
         Arista arista;
-
-        stringBuilder.append("digraph G {");
-        stringBuilder.append("\n\tgraph [bgcolor=transparent];");
-        stringBuilder.append("\n\trankdir = LR;");
-        stringBuilder.append("\n\tnode[shape=record, style=filled, color=\"#393C4BFF\""
-                + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");
 
         while (vertice != null) {
             stringBuilder.append("\n\tN").append(vertice.getLugar().replaceAll(" ", "_"))
@@ -146,8 +152,8 @@ public class ListaAdyacencia {
                 stringBuilder.append("\n\tN").append(vertice.getLugar().replaceAll(" ", "_"))
                         .append(arista.getDestino().getLugar().replaceAll(" ", "_"))
                         .append(arista.getPeso()).append("[label =\"")
-                        .append(arista.getDestino().getLugar()).append("\\n")
-                        .append(arista.getPeso()).append("\"];");
+                        .append("LUGAR: ").append(arista.getDestino().getLugar()).append("\\n")
+                        .append("TIEMPO: ").append(arista.getPeso()).append("\"];");
 
                 stringBuilder.append("\n\tN").append(vertice.getLugar().replaceAll(" ", "_")).append(" -> N")
                         .append(vertice.getLugar().replaceAll(" ", "_"))
@@ -159,8 +165,8 @@ public class ListaAdyacencia {
                     stringBuilder.append("\n\tN").append(vertice.getLugar().replaceAll(" ", "_"))
                             .append(arista.getSiguiente().getDestino().getLugar().replaceAll(" ", "_"))
                             .append(arista.getSiguiente().getPeso()).append("[label =\"")
-                            .append(arista.getSiguiente().getDestino().getLugar()).append("\\n")
-                            .append(arista.getSiguiente().getPeso()).append("\"];");
+                            .append("LUGAR: ").append(arista.getSiguiente().getDestino().getLugar()).append("\\n")
+                            .append("TIEMPO: ").append(arista.getSiguiente().getPeso()).append("\"];");
 
                     stringBuilder.append("\n\tN")
                             .append(vertice.getLugar().replaceAll(" ", "_"))
@@ -174,8 +180,6 @@ public class ListaAdyacencia {
             }
             vertice = vertice.getSiguiente();
         }
-
-        stringBuilder.append("\n}");
         return stringBuilder.toString();
     }
 
@@ -206,19 +210,25 @@ public class ListaAdyacencia {
         return null;
     }
 
+    public String reporteGrafo() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("digraph G {");
+        stringBuilder.append("\n\tgraph [bgcolor=transparent];");
+        stringBuilder.append("\n\trankdir = LR;");
+        stringBuilder.append("\n\tnode[shape=record, style=filled color=\"#393C4BFF\""
+                + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");
+        stringBuilder.append(contenidoGrafo());
+        stringBuilder.append("\n}");
+        return stringBuilder.toString();
+    }
+
     public String contenidoGrafo() {
         StringBuilder stringBuilder = new StringBuilder();
         Vertice vertice = primero;
         Arista arista;
 
-        stringBuilder.append("digraph G {");
-        stringBuilder.append("\n\tgraph [bgcolor=transparent];");
-        stringBuilder.append("\n\trankdir = LR;");
-        stringBuilder.append("\n\tnode[style=filled, color=\"#393C4BFF\""
-                + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");
-
         while (vertice != null) {
-            stringBuilder.append("\n\tN").append(vertice.getLugar().replaceAll(" ", "_"))
+            stringBuilder.append("\n\tNG").append(vertice.getLugar().replaceAll(" ", "_"))
                     .append("[label =\"").append(vertice.getLugar()).append("\"];");
             vertice = vertice.getSiguiente();
         }
@@ -227,9 +237,9 @@ public class ListaAdyacencia {
         while (vertice != null) {
             arista = vertice.getAristas().getPrimero();
             while (arista != null) {
-                stringBuilder.append("\n\tN")
+                stringBuilder.append("\n\tNG")
                         .append(vertice.getLugar().replaceAll(" ", "_"))
-                        .append(" -> N")
+                        .append(" -> NG")
                         .append(arista.getDestino().getLugar().replaceAll(" ", "_"))
                         .append("[label=\"")
                         .append(arista.getPeso())
@@ -238,8 +248,6 @@ public class ListaAdyacencia {
             }
             vertice = vertice.getSiguiente();
         }
-
-        stringBuilder.append("\n}");
         return stringBuilder.toString();
     }
 

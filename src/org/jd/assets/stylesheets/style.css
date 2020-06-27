@@ -1,16 +1,16 @@
 .root {
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Century Gothic";
     -fx-background-color: #282A36FF;
 }
 
 .textTitle {
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Century Gothic";
     -fx-fill: #F8F8F2FF;
 }
 
 .texthref,
 .textTitlehref {
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Century Gothic";
     -fx-font-size: 13;
     -fx-fill: #9E9BA3;
 }
@@ -25,13 +25,13 @@
 }
 
 .label {
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Century Gothic";
     -fx-text-fill: #F8F8F2FF;
 }
 
 .text-field,
 .password-field {
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Century Gothic";
     -fx-text-fill: #F8F8F2FF;
 }
 
@@ -54,7 +54,7 @@
   Button Skin
 ****************************************************************/
 .customButton {
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Century Gothic";
     -fx-background-radius: 0;
     -fx-background-color: #393C4BFF;
     -fx-text-fill: #F8F8F2FF;
@@ -66,7 +66,7 @@
 }
 
 .panelButton {
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Century Gothic";
     -fx-background-radius: 0;
     -fx-background-color: #393C4BFF;
     -fx-text-fill: #F8F8F2FF;
@@ -113,7 +113,7 @@
 }
 
 .jfx-toggle-button {
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Century Gothic";
     -fx-text-fill: #F8F8F2FF;
     -jfx-toggle-color: #2a4b8d;
     -jfx-untoggle-color: #393C4BFF;
@@ -174,7 +174,7 @@
 
 .table-view .column-header .label {
     -fx-font-size: 15;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Century Gothic";
     -fx-text-fill: #f8f9fa;
     -fx-alignment: center-left;
     -fx-opacity: 1;
@@ -208,7 +208,7 @@
   ComboBox Skin
 ****************************************************************/
 .combo-box {
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Century Gothic";
     -jfx-focus-color: #E91E63;
 }
 
@@ -350,7 +350,7 @@
   Dialog Skin
 ****************************************************************/
 .jfx-dialog-layout {
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Century Gothic";
     -fx-background-color: #2B2E3AFF;
 }
 
@@ -358,7 +358,7 @@
   Spinner Skin
 ****************************************************************/
 .spinner {
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Century Gothic";
     -fx-prompt-text-fill: #4d4d4d;
     -fx-text-fill: #4d4d4d;
     -fx-background-color: none;
@@ -420,7 +420,7 @@
   card Skin
 ****************************************************************/
 .customCard {
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Century Gothic";
     -fx-background-color: #282A36FF;
     -fx-effect: dropshadow(three-pass-box, #161616, 10, 0, 0, 0);
     -fx-text-fill: #f8f9fa;

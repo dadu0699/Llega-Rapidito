@@ -215,37 +215,42 @@ public class ListaCircular {
         }
     }
 
-    public String contenidoGrafica() {
+    public String reporteListaCircular() {
         StringBuilder stringBuilder = new StringBuilder();
-        NodoListaCircular aux = primero;
-
         stringBuilder.append("digraph G {");
         stringBuilder.append("\n\tgraph [bgcolor=transparent];");
         stringBuilder.append("\n\trankdir = LR;");
         stringBuilder.append("\n\tnode[shape=record, style=filled color=\"#393C4BFF\""
                 + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");
+        stringBuilder.append(contenidoGrafica());
+        stringBuilder.append("\n}");
+        return stringBuilder.toString();
+    }
+
+    public String contenidoGrafica() {
+        StringBuilder stringBuilder = new StringBuilder();
+        NodoListaCircular aux = primero;
 
         if (!estaVacia()) {
             do {
-                stringBuilder.append("\n\tN").append(aux.getConductor().getDPI()).append("[label =\"")
-                        .append(aux.getConductor().getDPI()).append("\\n")
-                        .append(aux.getConductor().getNombres()).append(" ")
+                stringBuilder.append("\n\tNCON").append(aux.getConductor().getDPI()).append("[label =\"")
+                        .append("DPI: ").append(aux.getConductor().getDPI()).append("\\n")
+                        .append("NOMBRES Y APELLIDOS: ").append(aux.getConductor().getNombres()).append(" ")
                         .append(aux.getConductor().getApellidos()).append("\\n")
-                        .append(aux.getConductor().getGenero()).append("\\n")
-                        .append(aux.getConductor().getFechaNacimiento()).append("\\n")
-                        .append(aux.getConductor().getTelefono()).append("\\n")
-                        .append(aux.getConductor().getLicencia()).append("\\n")
-                        .append(aux.getConductor().getDireccion()).append("\"];");
+                        .append("GENERO: ").append(aux.getConductor().getGenero()).append("\\n")
+                        .append("FECHA NACIMIENTO: ").append(aux.getConductor().getFechaNacimiento()).append("\\n")
+                        .append("TELEFONO: ").append(aux.getConductor().getTelefono()).append("\\n")
+                        .append("LICENCIA: ").append(aux.getConductor().getLicencia()).append("\\n")
+                        .append("DIRECCION: ").append(aux.getConductor().getDireccion()).append("\"];");
 
-                stringBuilder.append("\n\tN").append(aux.getConductor().getDPI()).append(" -> N")
+                stringBuilder.append("\n\tNCON").append(aux.getConductor().getDPI()).append(" -> NCON")
                         .append(aux.getSiguiente().getConductor().getDPI()).append("[color=\"#E91E63\"];");
-                stringBuilder.append("\n\tN").append(aux.getConductor().getDPI()).append(" -> N")
+                stringBuilder.append("\n\tNCON").append(aux.getConductor().getDPI()).append(" -> NCON")
                         .append(aux.getAnterior().getConductor().getDPI()).append("[color=\"#E91E63\"];");
                 aux = aux.getSiguiente();
             } while (aux != primero);
         }
 
-        stringBuilder.append("\n}");
         return stringBuilder.toString();
     }
 }

@@ -21,10 +21,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.jd.estructuras.Camino;
 import org.jd.estructuras.ListaAdyacencia;
 import org.jd.estructuras.ListaCircular;
 import org.jd.estructuras.ListaDoble;
+import org.jd.estructuras.NodoListaDoble;
 import org.jd.estructuras.TablaHash;
 import org.jd.modelos.Viaje;
 import org.jd.utilidades.Encriptamiento;
@@ -38,6 +38,11 @@ public class VistaReporte extends Stage {
     private HBox hBox;
     private GridPane gridPane;
     private ImageView imageView;
+    private Encriptamiento encriptar;
+
+    public VistaReporte() {
+        encriptar = new Encriptamiento();
+    }
 
     public static VistaReporte getInstancia() {
         if (instancia == null) {
@@ -71,7 +76,8 @@ public class VistaReporte extends Stage {
         btnTablaClientes.setButtonType(JFXButton.ButtonType.FLAT);
         btnTablaClientes.setPrefSize(x, y);
         btnTablaClientes.setOnAction(event -> {
-            ManejoDeArchivos.getInstancia().escribirArchivo(TablaHash.getInstancia().contenidoGrafica(), "clientes.dot", "reportes");
+            ManejoDeArchivos.getInstancia().escribirArchivo(TablaHash.getInstancia().reporteTablaHash(),
+                    "clientes.dot", "reportes");
             ManejoDeArchivos.getInstancia().compilarDOT("clientes", "reportes");
 
             String ruta = System.getProperty("user.dir") + "\\reportes\\clientes.png";
@@ -98,7 +104,8 @@ public class VistaReporte extends Stage {
         btnConductores.setButtonType(JFXButton.ButtonType.FLAT);
         btnConductores.setPrefSize(x, y);
         btnConductores.setOnAction(event -> {
-            ManejoDeArchivos.getInstancia().escribirArchivo(ListaCircular.getInstancia().contenidoGrafica(), "conductores.dot", "reportes");
+            ManejoDeArchivos.getInstancia().escribirArchivo(ListaCircular.getInstancia().reporteListaCircular(),
+                    "conductores.dot", "reportes");
             ManejoDeArchivos.getInstancia().compilarDOT("conductores", "reportes");
 
             String ruta = System.getProperty("user.dir") + "\\reportes\\conductores.png";
@@ -118,7 +125,8 @@ public class VistaReporte extends Stage {
         btnViajes.setButtonType(JFXButton.ButtonType.FLAT);
         btnViajes.setPrefSize(x, y);
         btnViajes.setOnAction(event -> {
-            ManejoDeArchivos.getInstancia().escribirArchivo(ListaDoble.getInstancia().contenidoGrafica(), "viajes.dot", "reportes");
+            ManejoDeArchivos.getInstancia().escribirArchivo(ListaDoble.getInstancia().reporteListaDoble(),
+                    "viajes.dot", "reportes");
             ManejoDeArchivos.getInstancia().compilarDOT("viajes", "reportes");
 
             String ruta = System.getProperty("user.dir") + "\\reportes\\viajes.png";
@@ -138,7 +146,8 @@ public class VistaReporte extends Stage {
         btnRutasListaAdyacencia.setButtonType(JFXButton.ButtonType.FLAT);
         btnRutasListaAdyacencia.setPrefSize(x, y);
         btnRutasListaAdyacencia.setOnAction(event -> {
-            ManejoDeArchivos.getInstancia().escribirArchivo(ListaAdyacencia.getInstancia().contenidoGrafica(), "rutasListaAdyacencia.dot", "reportes");
+            ManejoDeArchivos.getInstancia().escribirArchivo(ListaAdyacencia.getInstancia().reporteListaAdyacencia(),
+                    "rutasListaAdyacencia.dot", "reportes");
             ManejoDeArchivos.getInstancia().compilarDOT("rutasListaAdyacencia", "reportes");
 
             String ruta = System.getProperty("user.dir") + "\\reportes\\rutasListaAdyacencia.png";
@@ -158,7 +167,8 @@ public class VistaReporte extends Stage {
         btnRutasGrafo.setButtonType(JFXButton.ButtonType.FLAT);
         btnRutasGrafo.setPrefSize(x, y);
         btnRutasGrafo.setOnAction(event -> {
-            ManejoDeArchivos.getInstancia().escribirArchivo(ListaAdyacencia.getInstancia().contenidoGrafo(), "rutasGrafo.sfdp", "reportes");
+            ManejoDeArchivos.getInstancia().escribirArchivo(ListaAdyacencia.getInstancia().reporteGrafo(),
+                    "rutasGrafo.sfdp", "reportes");
             ManejoDeArchivos.getInstancia().compilarSFDP("rutasGrafo", "reportes");
 
             String ruta = System.getProperty("user.dir") + "\\reportes\\rutasGrafo.png";
@@ -189,6 +199,42 @@ public class VistaReporte extends Stage {
         btnEstructura.setButtonType(JFXButton.ButtonType.FLAT);
         btnEstructura.setPrefSize(x, y);
         btnEstructura.setOnAction(event -> {
+            StringBuilder contenido = new StringBuilder();
+
+            contenido.append("digraph G {");
+            contenido.append("\n\tgraph [bgcolor=transparent];");
+            contenido.append("\n\trankdir = LR;");
+            contenido.append("\n\tnode[shape=record, style=filled color=\"#393C4BFF\""
+                    + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");
+            contenido.append(TablaHash.getInstancia().contenidoGrafica());
+            contenido.append(ListaCircular.getInstancia().contenidoGrafica());
+            contenido.append(ListaAdyacencia.getInstancia().contenidoGrafica());
+
+            contenido.append(ListaDoble.getInstancia().contenidoGrafica());
+            NodoListaDoble aux = ListaDoble.getInstancia().getPrimero();
+            String llave;
+            while (aux != null) {
+                contenido.append(aux.getViaje().getRuta()
+                        .viajesCaminos(encriptar.decode(aux.getViaje().getId())));
+                aux = aux.getSiguiente();
+            }
+
+            contenido.append(ListaAdyacencia.getInstancia().contenidoGrafo());
+            contenido.append("\n}");
+
+            ManejoDeArchivos.getInstancia().escribirArchivo(contenido.toString(), "estructuraCompleta.dot", "reportes");
+            ManejoDeArchivos.getInstancia().compilarDOT("estructuraCompleta", "reportes");
+
+            String ruta = System.getProperty("user.dir") + "\\reportes\\estructuraCompleta.png";
+            File directory = new File(ruta);
+            if (directory.exists()) {
+                try {
+                    Image image = new Image(new FileInputStream(ruta));
+                    imageView.setImage(image);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
         });
 
         JFXButton btnListaViajes = new JFXButton("CAMINO CORTO (LISTA SIMPLE)");
@@ -229,9 +275,10 @@ public class VistaReporte extends Stage {
                 if (cbViaje.getSelectionModel().getSelectedItem() == null) {
                     Alerta.getInstancia().mostrarAlerta(gridAlerta, "ERROR", "NO SE SELECCIONO UN VIAJE");
                 } else {
-                    Encriptamiento encriptar = new Encriptamiento();
                     Viaje viajeSeleccionado = cbViaje.getSelectionModel().getSelectedItem();
-                    ManejoDeArchivos.getInstancia().escribirArchivo(viajeSeleccionado.getRuta().contenidoGrafica(encriptar.decode(viajeSeleccionado.getId())), "caminoListaSimple.dot", "reportes");
+                    ManejoDeArchivos.getInstancia().escribirArchivo(viajeSeleccionado.getRuta()
+                            .reporteListaSimple(encriptar.decode(viajeSeleccionado.getId())),
+                            "caminoListaSimple.dot", "reportes");
                     ManejoDeArchivos.getInstancia().compilarDOT("caminoListaSimple", "reportes");
 
                     String ruta = System.getProperty("user.dir") + "\\reportes\\caminoListaSimple.png";
@@ -247,7 +294,7 @@ public class VistaReporte extends Stage {
                     }
                 }
             });
-            
+
             layout.setActions(btnAceptar, btnCancelar);
             alerta.setContent(layout);
             alerta.show();
@@ -291,9 +338,9 @@ public class VistaReporte extends Stage {
                 if (cbViaje.getSelectionModel().getSelectedItem() == null) {
                     Alerta.getInstancia().mostrarAlerta(gridAlerta, "ERROR", "NO SE SELECCIONO UN VIAJE");
                 } else {
-                    Encriptamiento encriptar = new Encriptamiento();
                     Viaje viajeSeleccionado = cbViaje.getSelectionModel().getSelectedItem();
-                    ManejoDeArchivos.getInstancia().escribirArchivo(viajeSeleccionado.getRuta().contenidoGrafo(), "caminoGrafo.sfdp", "reportes");
+                    ManejoDeArchivos.getInstancia().escribirArchivo(viajeSeleccionado.getRuta().contenidoGrafo(),
+                            "caminoGrafo.sfdp", "reportes");
                     ManejoDeArchivos.getInstancia().compilarSFDP("caminoGrafo", "reportes");
 
                     String ruta = System.getProperty("user.dir") + "\\reportes\\caminoGrafo.png";
@@ -309,7 +356,7 @@ public class VistaReporte extends Stage {
                     }
                 }
             });
-            
+
             layout.setActions(btnAceptar, btnCancelar);
             alerta.setContent(layout);
             alerta.show();
