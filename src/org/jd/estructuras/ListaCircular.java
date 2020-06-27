@@ -195,7 +195,7 @@ public class ListaCircular {
     }
 
     public void agregarArchivo(String contenido) {
-        String[] conductores = contenido.split(";");
+        String[] conductores = contenido.replace(System.getProperty("line.separator"), "").split(";");
         String[] atributos;
         boolean conductorInsertado;
         if (conductores.length > 1) {

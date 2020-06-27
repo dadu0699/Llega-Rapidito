@@ -8,10 +8,10 @@ public class NodoHuffman {
     private NodoHuffman ramaCero;
     private NodoHuffman ramaUno;
 
-    public NodoHuffman(String letra) {
+    public NodoHuffman(String letra, int frecuencia, String codigo) {
         this.letra = letra;
-        this.frecuencia = -1;
-        this.codigo = "";
+        this.frecuencia = frecuencia;
+        this.codigo = codigo;
         this.ramaCero = null;
         this.ramaUno = null;
     }

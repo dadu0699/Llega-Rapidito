@@ -32,6 +32,7 @@ public class Huffman {
             listaCaracteres.set(i, TablaCodificacion.getInstancia().getCodigo(listaCaracteres.get(i)));
         }
         contenido = String.join(" ", listaCaracteres);
+        TablaCodificacion.getInstancia().generarReporteTabla();
         return contenido;
     }
 
@@ -41,7 +42,6 @@ public class Huffman {
             listaCaracteres.set(i, TablaCodificacion.getInstancia().getCaracter(listaCaracteres.get(i)));
         }
         contenido = String.join("", listaCaracteres);
-        System.out.println(contenido);
         return contenido;
     }
 
@@ -71,8 +71,7 @@ public class Huffman {
             cola.add(new NodoHuffman(ramaCero, rama1));
         }
 
+        TablaCodificacion.getInstancia().limpiarTabla();
         cola.peek().actualizarCodigos("");
-        // System.out.println("Codificacion: ");
-        // TablaCodificacion.getInstancia().obtenerDatos();
     }
 }

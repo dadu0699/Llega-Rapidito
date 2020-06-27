@@ -13,6 +13,7 @@ import org.jd.modelos.Conductor;
 import org.jd.modelos.Reporte;
 import org.jd.modelos.Vehiculo;
 import org.jd.modelos.Viaje;
+import org.jd.vistas.Alerta;
 
 public class Reportes {
 
@@ -28,7 +29,7 @@ public class Reportes {
         return instancia;
     }
 
-    public ArrayList<Reporte> TopViajesLargos() {
+    public ArrayList<Reporte> topViajesLargos() {
         ArrayList<Reporte> reporte = new ArrayList<>();
         ArrayList<Viaje> viajes = new ArrayList<>();
         Comparator<Viaje> comparador = (Viaje arg0, Viaje arg1) -> arg0.getRuta().getCantidadDestinos() - arg1.getRuta().getCantidadDestinos();
@@ -51,12 +52,12 @@ public class Reportes {
         }
         ManejoDeArchivos.getInstancia().escribirArchivo(contenido.toString(), "TOP10VIAJES.edd", "reportes");
         ManejoDeArchivos.getInstancia().escribirArchivo(Huffman.getInstancia().comprimirContenido(contenido.toString()),
-                "TOP10VIAJESCOMPRIMIDO.edd", "reportes");
-        Huffman.getInstancia().descomprimirContenido(Huffman.getInstancia().comprimirContenido(contenido.toString()));
+                "top10ViajesCOMPRIMIDO.edd", "reportes");
+        Alerta.getInstancia().mostrarNotificacion("TOP", "REPORTE Y ARCHIVO COMPRIMIDO GENERADO");
         return reporte;
     }
 
-    public ArrayList<Reporte> TopClientes() {
+    public ArrayList<Reporte> topClientes() {
         ArrayList<Reporte> reporte = new ArrayList<>();
         ArrayList<Viaje> viajes = new ArrayList<>();
         ArrayList<Cliente> clientes = new ArrayList<>();
@@ -86,10 +87,13 @@ public class Reportes {
         });
 
         ManejoDeArchivos.getInstancia().escribirArchivo(contenido.toString(), "TOP10CLIENTES.edd", "reportes");
+        ManejoDeArchivos.getInstancia().escribirArchivo(Huffman.getInstancia().comprimirContenido(contenido.toString()),
+                "top10ClientesCOMPRIMIDO.edd", "reportes");
+        Alerta.getInstancia().mostrarNotificacion("TOP", "REPORTE Y ARCHIVO COMPRIMIDO GENERADO");
         return reporte;
     }
 
-    public ArrayList<Reporte> TopConductores() {
+    public ArrayList<Reporte> topConductores() {
         ArrayList<Reporte> reporte = new ArrayList<>();
         ArrayList<Viaje> viajes = new ArrayList<>();
         ArrayList<Conductor> conductores = new ArrayList<>();
@@ -121,10 +125,13 @@ public class Reportes {
         });
 
         ManejoDeArchivos.getInstancia().escribirArchivo(contenido.toString(), "TOP10CONDUCTORES.edd", "reportes");
+        ManejoDeArchivos.getInstancia().escribirArchivo(Huffman.getInstancia().comprimirContenido(contenido.toString()),
+                "top10ConductoresCOMPRIMIDO.edd", "reportes");
+        Alerta.getInstancia().mostrarNotificacion("TOP", "REPORTE Y ARCHIVO COMPRIMIDO GENERADO");
         return reporte;
     }
 
-    public ArrayList<Reporte> TopVehiculos() {
+    public ArrayList<Reporte> topVehiculos() {
         ArrayList<Reporte> reporte = new ArrayList<>();
         ArrayList<Viaje> viajes = new ArrayList<>();
         ArrayList<Vehiculo> vehiculos = new ArrayList<>();
@@ -156,6 +163,15 @@ public class Reportes {
         });
 
         ManejoDeArchivos.getInstancia().escribirArchivo(contenido.toString(), "TOP10VEHICULOSS.edd", "reportes");
+        ManejoDeArchivos.getInstancia().escribirArchivo(Huffman.getInstancia().comprimirContenido(contenido.toString()),
+                "top10VehiculosCOMPRIMIDO.edd", "reportes");
+        Alerta.getInstancia().mostrarNotificacion("TOP", "REPORTE Y ARCHIVO COMPRIMIDO GENERADO");
         return reporte;
+    }
+
+    public void descromprimir(String contenido) {
+        contenido = Huffman.getInstancia().descomprimirContenido(contenido);
+        ManejoDeArchivos.getInstancia().escribirArchivo(contenido, "descomprimido.edd", "reportes");
+        Alerta.getInstancia().mostrarNotificacion("HUFFMAN", "ARCHIVO DESCOMPRIMIDO");
     }
 }

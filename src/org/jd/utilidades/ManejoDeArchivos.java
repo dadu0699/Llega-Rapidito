@@ -46,7 +46,7 @@ public class ManejoDeArchivos {
     }
 
     public String leerArchivo() {
-        String contenidoArchivo = "";
+        StringBuilder contenidoArchivo = new StringBuilder();
         String linea;
         try {
             if (fileControl != null) {
@@ -54,14 +54,15 @@ public class ManejoDeArchivos {
                         new FileInputStream(fileControl), StandardCharsets.UTF_8));
                 while ((linea = bufferedReader.readLine()) != null) {
                     // System.out.println(linea);
-                    contenidoArchivo += linea;
+                    contenidoArchivo.append(linea);
+                    contenidoArchivo.append(System.getProperty("line.separator"));
                 }
-                return contenidoArchivo;
+                return contenidoArchivo.toString();
             }
         } catch (IOException ex) {
             System.out.println("El archivo no se encontró");
         }
-        return contenidoArchivo;
+        return contenidoArchivo.toString();
     }
 
     public void escribirArchivo(String contenido, String nombre, String ruta) {

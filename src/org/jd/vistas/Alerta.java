@@ -47,7 +47,7 @@ public class Alerta extends Stage {
     }
 
     public void mostrarNotificacion(String title, String description) {
-        Notifications.create().title(title).text(description).hideAfter(Duration.millis(2500)).position(TOP_RIGHT)
+        Notifications.create().title(title).text(description).hideAfter(Duration.millis(2000)).position(TOP_RIGHT)
                 .owner(LlegaRapidito.getStage()).show();
     }
 }

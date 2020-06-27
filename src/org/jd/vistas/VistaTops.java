@@ -12,7 +12,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jd.estructuras.TablaCodificacion;
 import org.jd.modelos.Reporte;
+import org.jd.utilidades.ManejoDeArchivos;
 import org.jd.utilidades.PropiedadesPantalla;
 import org.jd.utilidades.Reportes;
 
@@ -52,7 +54,7 @@ public class VistaTops extends Stage {
         txtTitulo.setFont(new Font(30));
         gridPane.add(txtTitulo, 0, 0);
 
-        HBox hBoxBotonesInf = new HBox();
+        HBox hBoxBotonesTop = new HBox();
         JFXButton btnTopViajesLg = new JFXButton("TOP 10 VIAJES LARGOS");
         btnTopViajesLg.getStyleClass().addAll("customButton", "dangerButton");
         btnTopViajesLg.setButtonType(JFXButton.ButtonType.FLAT);
@@ -61,7 +63,7 @@ public class VistaTops extends Stage {
             if (observableList != null) {
                 observableList.clear();
             }
-            observableList = FXCollections.observableArrayList(Reportes.getInstancia().TopViajesLargos());
+            observableList = FXCollections.observableArrayList(Reportes.getInstancia().topViajesLargos());
             tableView.setItems(observableList);
         });
 
@@ -73,7 +75,7 @@ public class VistaTops extends Stage {
             if (observableList != null) {
                 observableList.clear();
             }
-            observableList = FXCollections.observableArrayList(Reportes.getInstancia().TopClientes());
+            observableList = FXCollections.observableArrayList(Reportes.getInstancia().topClientes());
             tableView.setItems(observableList);
         });
 
@@ -85,7 +87,7 @@ public class VistaTops extends Stage {
             if (observableList != null) {
                 observableList.clear();
             }
-            observableList = FXCollections.observableArrayList(Reportes.getInstancia().TopConductores());
+            observableList = FXCollections.observableArrayList(Reportes.getInstancia().topConductores());
             tableView.setItems(observableList);
         });
 
@@ -97,17 +99,42 @@ public class VistaTops extends Stage {
             if (observableList != null) {
                 observableList.clear();
             }
-            observableList = FXCollections.observableArrayList(Reportes.getInstancia().TopVehiculos());
+            observableList = FXCollections.observableArrayList(Reportes.getInstancia().topVehiculos());
             tableView.setItems(observableList);
         });
 
-        hBoxBotonesInf.getChildren().addAll(btnTopViajesLg, btnTopClientes,
+        hBoxBotonesTop.getChildren().addAll(btnTopViajesLg, btnTopClientes,
                 btnTopConductores, btnTopVehiculos);
-        hBoxBotonesInf.setPrefSize(x, y / 10);
-        hBoxBotonesInf.setMargin(btnTopViajesLg, new Insets(0, 5, 0, 0));
-        hBoxBotonesInf.setMargin(btnTopClientes, new Insets(0, 5, 0, 0));
-        hBoxBotonesInf.setMargin(btnTopConductores, new Insets(0, 5, 0, 0));
-        gridPane.add(hBoxBotonesInf, 0, 1, 1, 1);
+        hBoxBotonesTop.setPrefSize(x, y / 10);
+        hBoxBotonesTop.setMargin(btnTopViajesLg, new Insets(0, 5, 0, 0));
+        hBoxBotonesTop.setMargin(btnTopClientes, new Insets(0, 5, 0, 0));
+        hBoxBotonesTop.setMargin(btnTopConductores, new Insets(0, 5, 0, 0));
+        gridPane.add(hBoxBotonesTop, 0, 1);
+
+        HBox hBoxDecodificar = new HBox();
+        JFXButton btnCargarTabla = new JFXButton("CARGAR TABLA DE CODIFICACION");
+        btnCargarTabla.getStyleClass().addAll("customButton", "dangerButton");
+        btnCargarTabla.setButtonType(JFXButton.ButtonType.FLAT);
+        btnCargarTabla.setPrefSize(x, y);
+        btnCargarTabla.setOnAction(event -> {
+            ManejoDeArchivos.getInstancia().subirArchivo("Tabla de codificacion", "*.edd");
+            TablaCodificacion.getInstancia().agregarArchivo(ManejoDeArchivos.getInstancia().leerArchivo());
+            Alerta.getInstancia().mostrarNotificacion("HUFFMAN", "TABLA DE CODIFICACION CARGADA");
+        });
+
+        JFXButton btnCargarArchivo = new JFXButton("DECODIFICAR ARCHIVO");
+        btnCargarArchivo.getStyleClass().addAll("customButton", "dangerButton");
+        btnCargarArchivo.setButtonType(JFXButton.ButtonType.FLAT);
+        btnCargarArchivo.setPrefSize(x, y);
+        btnCargarArchivo.setOnAction(event -> {
+            ManejoDeArchivos.getInstancia().subirArchivo("Tabla de codificacion", "*.edd");
+            Reportes.getInstancia().descromprimir(ManejoDeArchivos.getInstancia().leerArchivo());
+        });
+
+        hBoxDecodificar.getChildren().addAll(btnCargarTabla, btnCargarArchivo);
+        hBoxDecodificar.setPrefSize(x, y / 10);
+        hBoxDecodificar.setMargin(btnCargarTabla, new Insets(0, 5, 0, 0));
+        gridPane.add(hBoxDecodificar, 0, 2);
 
         TableColumn<Reporte, Integer> cantidad = new TableColumn<>("Cantidad");
         cantidad.setPrefWidth(x / 10);
@@ -120,7 +147,7 @@ public class VistaTops extends Stage {
         tableView = new TableView<>(observableList);
         tableView.getColumns().addAll(cantidad, colInformacion);
         tableView.setPrefSize(x, y * 0.995);
-        gridPane.add(tableView, 0, 2);
+        gridPane.add(tableView, 0, 3);
 
         hBox.getChildren().add(gridPane);
         return hBox;

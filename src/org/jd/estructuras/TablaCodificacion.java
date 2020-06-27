@@ -1,6 +1,7 @@
 package org.jd.estructuras;
 
 import java.util.ArrayList;
+import org.jd.utilidades.ManejoDeArchivos;
 
 public class TablaCodificacion {
 
@@ -17,7 +18,7 @@ public class TablaCodificacion {
         }
         return instancia;
     }
-    
+
     public void limpiarTabla() {
         tablaCodificacion.clear();
     }
@@ -50,5 +51,29 @@ public class TablaCodificacion {
             }
         }
         return "";
+    }
+
+    public void generarReporteTabla() {
+        StringBuilder contenido = new StringBuilder();
+        tablaCodificacion.forEach((nodo) -> {
+            contenido.append(nodo.getLetra()).append("%")
+                    .append(nodo.getFrecuencia()).append("%")
+                    .append(nodo.getCodigo()).append(";");
+        });
+        ManejoDeArchivos.getInstancia().escribirArchivo(contenido.toString(), "tablaCodificada.edd", "reportes");
+    }
+
+    public void agregarArchivo(String contenido) {
+        String[] nodosHuffman = contenido.replace(System.getProperty("line.separator"), "").split(";");
+        String[] atributos;
+        
+        tablaCodificacion.clear();
+        if (nodosHuffman.length > 1) {
+            for (String nodoHuffman : nodosHuffman) {
+                atributos = nodoHuffman.split("%");
+                agregar(new NodoHuffman(atributos[0], Integer.parseInt(atributos[1]),
+                        atributos[2]));
+            }
+        }
     }
 }

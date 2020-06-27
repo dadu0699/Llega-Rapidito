@@ -109,7 +109,7 @@ public class ListaAdyacencia {
     }
 
     public void agregarArchivo(String contenido) {
-        String[] rutas = contenido.split("%");
+        String[] rutas = contenido.replace(System.getProperty("line.separator"), "").split("%");
         String[] atributos;
         boolean rutaInsertada;
         if (rutas.length > 1) {

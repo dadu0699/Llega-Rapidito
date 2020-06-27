@@ -115,7 +115,7 @@ public class TablaHash {
     }
 
     public void agregarArchivo(String contenido) {
-        String[] clientes = contenido.split(";");
+        String[] clientes = contenido.replace(System.getProperty("line.separator"), "").split(";");
         String[] atributos;
         boolean clienteInsertado;
         if (clientes.length > 1) {
