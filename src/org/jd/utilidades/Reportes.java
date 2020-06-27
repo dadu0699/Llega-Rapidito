@@ -50,6 +50,9 @@ public class Reportes {
             }
         }
         ManejoDeArchivos.getInstancia().escribirArchivo(contenido.toString(), "TOP10VIAJES.edd", "reportes");
+        ManejoDeArchivos.getInstancia().escribirArchivo(Huffman.getInstancia().comprimirContenido(contenido.toString()),
+                "TOP10VIAJESCOMPRIMIDO.edd", "reportes");
+        Huffman.getInstancia().descomprimirContenido(Huffman.getInstancia().comprimirContenido(contenido.toString()));
         return reporte;
     }
 
