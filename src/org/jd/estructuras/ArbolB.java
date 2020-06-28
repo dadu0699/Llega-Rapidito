@@ -25,6 +25,7 @@ public class ArbolB {
     }
 
     private Vehiculo buscar(NodoArbolB nodo, String placa) {
+        Vehiculo vehiculo = null;
         if (nodo != null) {
             for (int i = 0; i < nodo.getCantidadClaves(); i++) {
                 if (nodo.getVehiculoClave(i).getPlaca().equalsIgnoreCase(placa)) {
@@ -34,15 +35,18 @@ public class ArbolB {
 
             if (nodo.getPaginas() != null) {
                 for (int i = 0; i < nodo.getCantidadPaginas() - 1; i++) {
-                    return buscar(nodo.getPagina(i), placa);
+                    vehiculo = buscar(nodo.getPagina(i), placa);
+                    if (vehiculo != null) {
+                        return vehiculo;
+                    }
                 }
 
                 if (nodo.getCantidadPaginas() >= 1) {
-                    return buscar(nodo.getPagina(nodo.getCantidadPaginas() - 1), placa);
+                    vehiculo = buscar(nodo.getPagina(nodo.getCantidadPaginas() - 1), placa);
                 }
             }
         }
-        return null;
+        return vehiculo;
     }
 
     public boolean insertar(Vehiculo vehiculo) {
