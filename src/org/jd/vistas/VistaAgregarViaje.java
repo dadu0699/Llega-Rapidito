@@ -2,7 +2,6 @@ package org.jd.vistas;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -10,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jd.estructuras.ArbolB;
 import org.jd.estructuras.Camino;
 import org.jd.estructuras.ListaAdyacencia;
 import org.jd.estructuras.ListaCircular;
@@ -22,7 +22,6 @@ import org.jd.modelos.Conductor;
 import org.jd.modelos.Vehiculo;
 import org.jd.modelos.Viaje;
 import org.jd.utilidades.PropiedadesPantalla;
-import org.jd.utilidades.Reportes;
 
 public class VistaAgregarViaje extends Stage {
 
@@ -86,12 +85,7 @@ public class VistaAgregarViaje extends Stage {
         cbConductor.setPrefWidth(x);
         gridPane.add(cbConductor, 0, 10);
 
-        ArrayList<Vehiculo> vehiculosTemporales = new ArrayList<>();
-        vehiculosTemporales.add(new Vehiculo("AS213", "Mercedes", "AMG", "2020", "Verde", "Q.200.00", "Mecánica"));
-        vehiculosTemporales.add(new Vehiculo("P21332SD", "BMW", "E30", "1980", "Negro", "Q.200.00", "Mecánica"));
-        vehiculosTemporales.add(new Vehiculo("M123JK", "Volvo", "S40", "2020", "Gris", "Q.200.00", "Mecánica"));
-
-        ObservableList obsVehiculo = FXCollections.observableArrayList(/*ArbolB.getInstancia().obtenerDatos()*/vehiculosTemporales);
+        ObservableList obsVehiculo = FXCollections.observableArrayList(ArbolB.getInstancia().obtenerDatos());
         ObservableList<Vehiculo> vehiculoL = obsVehiculo;
         JFXComboBox<Vehiculo> cbVehiculo = new JFXComboBox<>(vehiculoL);
         cbVehiculo.setPromptText("VEHICULO");

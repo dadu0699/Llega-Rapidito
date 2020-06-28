@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jd.estructuras.ArbolB;
 import org.jd.modelos.Vehiculo;
 import org.jd.utilidades.PropiedadesPantalla;
 
@@ -45,15 +46,10 @@ public class VistaVehiculo extends Stage {
     }
 
     private void actualizarObsList() {
-        ArrayList<Vehiculo> vehiculos = new ArrayList<>();
-        vehiculos.add(new Vehiculo("AS213", "Mercedes", "AMG", "2020", "Verde", "Q.200.00", "Mecánica"));
-        vehiculos.add(new Vehiculo("QEW43", "BMW", "M3", "1980", "Negro", "Q.125.00", "Mecánica"));
-        // vehiculos = CategoryController.getInstancia().getBooks();
-
         if (observableList != null) {
             observableList.clear();
         }
-        observableList = FXCollections.observableArrayList(vehiculos);
+        observableList = FXCollections.observableArrayList(ArbolB.getInstancia().obtenerDatos());
     }
 
     public void actualizarItemsTabla() {

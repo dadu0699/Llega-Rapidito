@@ -219,6 +219,7 @@ public class VistaReporte extends Stage {
             contenido.append("\n\tnode[shape=record, style=filled color=\"#393C4BFF\""
                     + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");
             contenido.append(TablaHash.getInstancia().contenidoGrafica());
+            contenido.append(ArbolB.getInstancia().contenidoGrafica());
             contenido.append(ListaCircular.getInstancia().contenidoGrafica());
             contenido.append(ListaAdyacencia.getInstancia().contenidoGrafica());
 
