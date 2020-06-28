@@ -104,14 +104,14 @@ public class VistaAgregarVehiculo extends Stage {
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
                 boolean vehiculo = ArbolB.getInstancia().insertar(
-                        new Vehiculo(jFTPlaca.getText(), jFTMarca.getText(),
+                        new Vehiculo(jFTPlaca.getText().toUpperCase(), jFTMarca.getText(),
                                 jFTModelo.getText(), jFTAnio.getText(),
                                 jFTColor.getText(), jFTPrecio.getText(),
                                 cbTransmision.getSelectionModel().getSelectedItem()));
                 if (!vehiculo) {
                     Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "EL VEHICULO FUE REGISTRADO PREVIAMENTE");
                 } else {
-                    // VistaCliente.getInstancia().actualizarItemsTabla();
+                    // VistaVehiculo.getInstancia().actualizarItemsTabla();
                     VistaVehiculo.getInstancia().reiniciarHBox();
                     Alerta.getInstancia().mostrarNotificacion("VEHICULO", "REGISTRO REALIZADO EXITOSAMENTE");
                 }

@@ -20,13 +20,40 @@ public class ArbolB {
         return instancia;
     }
 
+    public Vehiculo buscar(String placa) {
+        return buscar(this.raiz, placa);
+    }
+
+    private Vehiculo buscar(NodoArbolB nodo, String placa) {
+        if (nodo != null) {
+            for (int i = 0; i < nodo.getCantidadClaves(); i++) {
+                if (nodo.getVehiculoClave(i).getPlaca().equalsIgnoreCase(placa)) {
+                    return nodo.getVehiculoClave(i);
+                }
+            }
+
+            if (nodo.getPaginas() != null) {
+                for (int i = 0; i < nodo.getCantidadPaginas() - 1; i++) {
+                    return buscar(nodo.getPagina(i), placa);
+                }
+
+                if (nodo.getCantidadPaginas() >= 1) {
+                    return buscar(nodo.getPagina(nodo.getCantidadPaginas() - 1), placa);
+                }
+            }
+        }
+        return null;
+    }
+
     public boolean insertar(Vehiculo vehiculo) {
         if (raiz == null) {
             raiz = new NodoArbolB();
             raiz.setVehiculoClave(vehiculo);
             return true;
+        } else if (buscar(vehiculo.getPlaca()) == null) {
+            return insertar(raiz, vehiculo);
         }
-        return insertar(raiz, vehiculo);
+        return false;
     }
 
     private boolean insertar(NodoArbolB nodo, Vehiculo vehiculo) {
@@ -135,22 +162,50 @@ public class ArbolB {
         ArrayList<Vehiculo> arrayList = new ArrayList<>();
 
         if (nodo != null) {
-            Vehiculo vehiculo;
             for (int i = 0; i < nodo.getCantidadClaves(); i++) {
-                vehiculo = nodo.getVehiculoClave(i);
-                arrayList.add(vehiculo);
+                arrayList.add(nodo.getVehiculoClave(i));
             }
 
             if (nodo.getPaginas() != null) {
-                NodoArbolB auxiliar;
                 for (int i = 0; i < nodo.getCantidadPaginas() - 1; i++) {
-                    auxiliar = nodo.getPagina(i);
-                    arrayList.addAll(obtenerDatos(auxiliar));
+                    arrayList.addAll(obtenerDatos(nodo.getPagina(i)));
                 }
 
                 if (nodo.getCantidadPaginas() >= 1) {
-                    auxiliar = nodo.getPagina(nodo.getCantidadPaginas() - 1);
-                    arrayList.addAll(obtenerDatos(auxiliar));
+                    arrayList.addAll(obtenerDatos(nodo.getPagina(nodo.getCantidadPaginas() - 1)));
+                }
+            }
+        }
+        return arrayList;
+    }
+
+    public ArrayList<Vehiculo> buscarVehiculo(String buscar) {
+        buscar = buscar.toLowerCase();
+        return buscarVehiculo(this.raiz, buscar);
+    }
+
+    private ArrayList<Vehiculo> buscarVehiculo(NodoArbolB nodo, String buscar) {
+        ArrayList<Vehiculo> arrayList = new ArrayList<>();
+
+        if (nodo != null) {
+            for (int i = 0; i < nodo.getCantidadClaves(); i++) {
+                if (nodo.getVehiculoClave(i).getPlaca().toLowerCase().contains(buscar)
+                        || nodo.getVehiculoClave(i).getMarca().toLowerCase().contains(buscar)
+                        || nodo.getVehiculoClave(i).getModelo().toLowerCase().contains(buscar)
+                        || nodo.getVehiculoClave(i).getPrecio().toLowerCase().contains(buscar)
+                        || nodo.getVehiculoClave(i).getAnio().toLowerCase().contains(buscar)
+                        || nodo.getVehiculoClave(i).getColor().toLowerCase().contains(buscar)) {
+                    arrayList.add(nodo.getVehiculoClave(i));
+                }
+            }
+
+            if (nodo.getPaginas() != null) {
+                for (int i = 0; i < nodo.getCantidadPaginas() - 1; i++) {
+                    arrayList.addAll(buscarVehiculo(nodo.getPagina(i), buscar));
+                }
+
+                if (nodo.getCantidadPaginas() >= 1) {
+                    arrayList.addAll(buscarVehiculo(nodo.getPagina(nodo.getCantidadPaginas() - 1), buscar));
                 }
             }
         }
@@ -180,43 +235,47 @@ public class ArbolB {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n\tN").append(aux.getVehiculosClaves()[0].getPlaca()).append("[label=\"");
 
-        int n = aux.getCantidadClaves();
-        boolean isLeaf = aux.getCantidadPaginas() == 0;
+        int cantidadHojas = aux.getCantidadClaves();
+        boolean esHoja = aux.getCantidadPaginas() == 0;
 
-        for (int i = 0; i < n; i++) {
-            if (!isLeaf) {
+        for (int i = 0; i < cantidadHojas; i++) {
+            if (!esHoja) {
                 stringBuilder.append("<f").append(i).append(">|");
             }
 
-            stringBuilder.append("PLACA: ").append(aux.getVehiculosClaves()[i].getPlaca()).append(" \n") /*.append("MARCA: ").append(aux.getVehiculosClaves()[i].getMarca()).append(" \n")
+            stringBuilder.append("PLACA: ").append(aux.getVehiculosClaves()[i].getPlaca()).append(" \n");
+            /*
+                    .append("MARCA: ").append(aux.getVehiculosClaves()[i].getMarca()).append(" \n")
                     .append("MODELO: ").append(aux.getVehiculosClaves()[i].getModelo()).append(" \n")
                     .append("AÑO: ").append(aux.getVehiculosClaves()[i].getAnio()).append(" \n")
                     .append("COLOR: ").append(aux.getVehiculosClaves()[i].getColor()).append(" \n")
                     .append("PRECIO: ").append(aux.getVehiculosClaves()[i].getPrecio()).append(" \n")
-                    .append("TRANSMISION: ").append(aux.getVehiculosClaves()[i].getTransmision())*/;
+                    .append("TRANSMISION: ").append(aux.getVehiculosClaves()[i].getTransmision())
+             */
 
-            if (i < n - 1) {
+            if (i < cantidadHojas - 1) {
                 stringBuilder.append("|");
             }
         }
-        if (!isLeaf) {
-            stringBuilder.append("|<f").append(n).append(">");
+
+        if (!esHoja) {
+            stringBuilder.append("|<f").append(cantidadHojas).append(">");
         }
 
         stringBuilder.append("\", color=\"#9E9BA3\"];");
 
-        for (int i = 0; i < n; i++) {
-            if (!isLeaf) {
+        for (int i = 0; i < cantidadHojas; i++) {
+            if (!esHoja) {
                 stringBuilder.append(contenidoGrafica(aux.getPaginas()[i]));
             }
         }
 
-        if (!isLeaf) {
-            stringBuilder.append(contenidoGrafica(aux.getPagina(n)));
+        if (!esHoja) {
+            stringBuilder.append(contenidoGrafica(aux.getPagina(cantidadHojas)));
         }
 
-        for (int i = 0; i < n + 1; i++) {
-            if (!isLeaf) {
+        for (int i = 0; i < cantidadHojas + 1; i++) {
+            if (!esHoja) {
                 stringBuilder.append("\n\tN").append(aux.getVehiculosClaves()[0].getPlaca())
                         .append(":f").append(i).append(" -> N").append(aux.getPaginas()[i].getVehiculosClaves()[0].getPlaca())
                         .append("[color=\"#E91E63\"];");

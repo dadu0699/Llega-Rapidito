@@ -58,7 +58,8 @@ public class VistaVehiculo extends Stage {
     }
 
     // Lista de busqueda
-    private void actualizarObsList(String search) {
+    private void actualizarObsList(String buscar) {
+        observableList = FXCollections.observableArrayList(ArbolB.getInstancia().buscarVehiculo(buscar));
     }
 
     public void actualizarItemsTabla(String search) {
@@ -120,7 +121,7 @@ public class VistaVehiculo extends Stage {
         btnArchivo.getStyleClass().addAll("customButton", "primaryButton");
         btnArchivo.setButtonType(JFXButton.ButtonType.FLAT);
         btnArchivo.setPrefSize(x, y);
-        btnArchivo.setOnAction(event -> {            
+        btnArchivo.setOnAction(event -> {
             ManejoDeArchivos.getInstancia().subirArchivo("Archivo de Vehiculos", "*.txt");
             ArbolB.getInstancia().agregarArchivo(ManejoDeArchivos.getInstancia().leerArchivo());
             actualizarItemsTabla();
@@ -159,7 +160,7 @@ public class VistaVehiculo extends Stage {
                 reiniciarHBox();
                 // ELIMINAR Vehiculo (METODO)
                 VistaVehiculo.this.actualizarItemsTabla();
-                Alerta.getInstancia().mostrarNotificacion("VEHICULOS", "VEHICULO ELIMINADO EXITOSAMENTE");
+                // Alerta.getInstancia().mostrarNotificacion("VEHICULOS", "VEHICULO ELIMINADO EXITOSAMENTE");
             }
         });
 

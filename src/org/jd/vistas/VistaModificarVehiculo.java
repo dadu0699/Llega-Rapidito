@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jd.estructuras.ArbolB;
 import org.jd.modelos.Vehiculo;
 import org.jd.utilidades.PropiedadesPantalla;
 
@@ -46,6 +47,7 @@ public class VistaModificarVehiculo extends Stage {
         JFXTextField jFTPlaca = new JFXTextField(vehiculo.getPlaca());
         jFTPlaca.setPromptText("PLACA");
         jFTPlaca.setLabelFloat(true);
+        jFTPlaca.setEditable(false);
         jFTPlaca.setPrefWidth(x);
         gridPane.add(jFTPlaca, 0, 5, 2, 1);
 
@@ -103,6 +105,25 @@ public class VistaModificarVehiculo extends Stage {
                     || cbTransmision.getSelectionModel().getSelectedItem() == null) {
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
+                vehiculo.setMarca(jFTMarca.getText().trim());
+                vehiculo.setModelo(jFTModelo.getText().trim());
+                vehiculo.setAnio(jFTAnio.getText().trim());
+                vehiculo.setColor(jFTColor.getText().trim());
+                vehiculo.setPrecio(jFTPrecio.getText().trim());
+                vehiculo.setTransmision(cbTransmision.getSelectionModel().getSelectedItem().trim());
+
+                if (vehiculo.getPlaca().equalsIgnoreCase(jFTPlaca.getText().trim())) {
+                    Alerta.getInstancia().mostrarNotificacion("VEHICULOS", "VEHICULO ACTUALIZADO EXITOSAMENTE");
+                } else {
+                    if (ArbolB.getInstancia().buscar(jFTPlaca.getText().trim()) == null) {
+                        // ArbolB.getInstancia().eliminar(vehiculo.jFTPlaca());
+                        vehiculo.setPlaca(jFTPlaca.getText().trim());
+                        ArbolB.getInstancia().insertar(vehiculo);
+                        Alerta.getInstancia().mostrarNotificacion("VEHICULOS", "VEHICULO ACTUALIZADO EXITOSAMENTE");
+                    } else {
+                        Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "ERROR AL MODIFICAR DPI");
+                    }
+                }
                 VistaVehiculo.getInstancia().actualizarItemsTabla();
             }
         });
