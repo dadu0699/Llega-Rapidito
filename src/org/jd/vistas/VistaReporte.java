@@ -388,7 +388,7 @@ public class VistaReporte extends Stage {
 
         imageView.setPreserveRatio(true);
         ScrollPane sp = new ScrollPane();
-        sp.setPrefHeight(9 * y / 10);
+        sp.setPrefHeight(8 * y / 10);
         sp.setPrefWidth(x);
         sp.setContent(imageView);
         gridPane.add(sp, 0, 3);

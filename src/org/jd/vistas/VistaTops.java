@@ -146,7 +146,7 @@ public class VistaTops extends Stage {
 
         tableView = new TableView<>(observableList);
         tableView.getColumns().addAll(cantidad, colInformacion);
-        tableView.setPrefSize(x, y * 0.995);
+        tableView.setPrefHeight(8 * y / 10);
         gridPane.add(tableView, 0, 3);
 
         hBox.getChildren().add(gridPane);

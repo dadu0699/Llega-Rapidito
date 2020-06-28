@@ -2,7 +2,6 @@ package org.jd.vistas;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import java.util.ArrayList;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +17,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.jd.estructuras.ArbolB;
 import org.jd.modelos.Vehiculo;
+import org.jd.utilidades.ManejoDeArchivos;
 import org.jd.utilidades.PropiedadesPantalla;
 
 public class VistaVehiculo extends Stage {
@@ -120,7 +120,10 @@ public class VistaVehiculo extends Stage {
         btnArchivo.getStyleClass().addAll("customButton", "primaryButton");
         btnArchivo.setButtonType(JFXButton.ButtonType.FLAT);
         btnArchivo.setPrefSize(x, y);
-        btnArchivo.setOnAction(event -> {
+        btnArchivo.setOnAction(event -> {            
+            ManejoDeArchivos.getInstancia().subirArchivo("Archivo de Vehiculos", "*.txt");
+            ArbolB.getInstancia().agregarArchivo(ManejoDeArchivos.getInstancia().leerArchivo());
+            actualizarItemsTabla();
         });
 
         JFXButton btnAgregar = new JFXButton("AGREGAR");
@@ -207,7 +210,7 @@ public class VistaVehiculo extends Stage {
         });
         tableView.setPrefSize(x, y * 0.995);
         gridPane.add(tableView, 0, 2);
-        
+
         return gridPane;
     }
 }

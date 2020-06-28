@@ -80,7 +80,7 @@ public class VistaAgregarVehiculo extends Stage {
         jFTPrecio.setPrefWidth(x);
         gridPane.add(jFTPrecio, 0, 10);
 
-        String[] transmisiones = {"Automática", "Mecánica"};
+        String[] transmisiones = {"Automatica", "Mecanica"};
         ObservableList obsTransmision = FXCollections.observableArrayList(transmisiones);
         ObservableList<String> informacion = obsTransmision;
         JFXComboBox<String> cbTransmision = new JFXComboBox<>(informacion);

@@ -2,6 +2,7 @@ package org.jd.estructuras;
 
 import java.util.ArrayList;
 import org.jd.modelos.Vehiculo;
+import org.jd.vistas.Alerta;
 
 public class ArbolB {
 
@@ -163,13 +164,16 @@ public class ArbolB {
         stringBuilder.append("\n\trankdir = TB;");
         stringBuilder.append("\n\tnode[shape=record, style=filled color=\"#393C4BFF\""
                 + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");
-        stringBuilder.append(contenidoGrafica(this.raiz));
+        stringBuilder.append(contenidoGrafica());
         stringBuilder.append("\n}");
         return stringBuilder.toString();
     }
-    
+
     public String contenidoGrafica() {
-        return contenidoGrafica(this.raiz);
+        if (raiz != null) {
+            return contenidoGrafica(this.raiz);
+        }
+        return "";
     }
 
     private String contenidoGrafica(NodoArbolB aux) {
@@ -184,8 +188,7 @@ public class ArbolB {
                 stringBuilder.append("<f").append(i).append(">|");
             }
 
-            stringBuilder.append("PLACA: ").append(aux.getVehiculosClaves()[i].getPlaca()).append(" \n")
-                    /*.append("MARCA: ").append(aux.getVehiculosClaves()[i].getMarca()).append(" \n")
+            stringBuilder.append("PLACA: ").append(aux.getVehiculosClaves()[i].getPlaca()).append(" \n") /*.append("MARCA: ").append(aux.getVehiculosClaves()[i].getMarca()).append(" \n")
                     .append("MODELO: ").append(aux.getVehiculosClaves()[i].getModelo()).append(" \n")
                     .append("AÑO: ").append(aux.getVehiculosClaves()[i].getAnio()).append(" \n")
                     .append("COLOR: ").append(aux.getVehiculosClaves()[i].getColor()).append(" \n")
@@ -220,5 +223,24 @@ public class ArbolB {
             }
         }
         return stringBuilder.toString();
+    }
+
+    public void agregarArchivo(String contenido) {
+        String[] vehiculos = contenido.replace(System.getProperty("line.separator"), "").split(";");
+        String[] atributos;
+        boolean vehiculoInsertado;
+        if (vehiculos.length > 1) {
+            for (String vehiculo : vehiculos) {
+                atributos = vehiculo.split(":");
+                vehiculoInsertado = insertar(new Vehiculo(atributos[0].trim(),
+                        atributos[1].trim(), atributos[2].trim(), atributos[3].trim(),
+                        atributos[4].trim(), atributos[5].trim(), atributos[6].trim()));
+                if (!vehiculoInsertado) {
+                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO VEHICULO", "EL VEHICULO FUE REGISTRADO PREVIAMENTE");
+                } else {
+                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO VEHICULO", "REGISTRO REALIZADO EXITOSAMENTE");
+                }
+            }
+        }
     }
 }
