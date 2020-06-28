@@ -110,10 +110,14 @@ public class VistaAgregarConductor extends Stage {
                     || jFTDireccion.getText().length() == 0) {
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
-                boolean conductor = ListaCircular.getInstancia().agregar(new Conductor(jFTDPI.getText(),
-                        jFTNombres.getText(), jFTApellidos.getText(),
-                        jFTLicencia.getText(), cbGenero.getSelectionModel().getSelectedItem(),
-                        jFTFNacimiento.getText(), jFTTelefono.getText(), jFTDireccion.getText()));
+                boolean conductor = ListaCircular.getInstancia().agregar(new Conductor(jFTDPI.getText().trim(),
+                        jFTNombres.getText().trim(), 
+                        jFTApellidos.getText().trim(),
+                        jFTLicencia.getText().trim(), 
+                        cbGenero.getSelectionModel().getSelectedItem(),
+                        jFTFNacimiento.getText().trim(), 
+                        jFTTelefono.getText().trim(), 
+                        jFTDireccion.getText().trim()));
 
                 if (!conductor) {
                     Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "EL CONDUCTOR FUE REGISTRADO PREVIAMENTE");

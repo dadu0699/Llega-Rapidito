@@ -10,6 +10,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jd.estructuras.ArbolB;
+import org.jd.modelos.Vehiculo;
 import org.jd.utilidades.PropiedadesPantalla;
 
 public class VistaAgregarVehiculo extends Stage {
@@ -101,6 +103,18 @@ public class VistaAgregarVehiculo extends Stage {
                     || cbTransmision.getSelectionModel().getSelectedItem() == null) {
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
+                boolean vehiculo = ArbolB.getInstancia().insertar(
+                        new Vehiculo(jFTPlaca.getText(), jFTMarca.getText(),
+                                jFTModelo.getText(), jFTAnio.getText(),
+                                jFTColor.getText(), jFTPrecio.getText(),
+                                cbTransmision.getSelectionModel().getSelectedItem()));
+                if (!vehiculo) {
+                    Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "EL VEHICULO FUE REGISTRADO PREVIAMENTE");
+                } else {
+                    // VistaCliente.getInstancia().actualizarItemsTabla();
+                    VistaVehiculo.getInstancia().reiniciarHBox();
+                    Alerta.getInstancia().mostrarNotificacion("VEHICULO", "REGISTRO REALIZADO EXITOSAMENTE");
+                }
             }
         });
         gridPane.add(buttonAdd, 0, 12);

@@ -19,6 +19,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.jd.estructuras.ArbolB;
 import org.jd.estructuras.ListaAdyacencia;
 import org.jd.estructuras.ListaCircular;
 import org.jd.estructuras.ListaDoble;
@@ -62,7 +63,6 @@ public class VistaReporte extends Stage {
         gridPane.setPrefSize(x, y);
         hBox.setPrefSize(x, y);
 
-        
         Text txtTitulo = new Text("REPORTES");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(30));
@@ -95,6 +95,20 @@ public class VistaReporte extends Stage {
         btnVehiculos.setButtonType(JFXButton.ButtonType.FLAT);
         btnVehiculos.setPrefSize(x, y);
         btnVehiculos.setOnAction(event -> {
+            ManejoDeArchivos.getInstancia().escribirArchivo(ArbolB.getInstancia().reporteArbolB(),
+                    "vehiculos.dot", "reportes");
+            ManejoDeArchivos.getInstancia().compilarDOT("vehiculos", "reportes");
+
+            String ruta = System.getProperty("user.dir") + "\\reportes\\vehiculos.png";
+            File directory = new File(ruta);
+            if (directory.exists()) {
+                try {
+                    Image image = new Image(new FileInputStream(ruta));
+                    imageView.setImage(image);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
         });
 
         JFXButton btnConductores = new JFXButton("CONDUCTORES (LISTA CIRCULAR)");
