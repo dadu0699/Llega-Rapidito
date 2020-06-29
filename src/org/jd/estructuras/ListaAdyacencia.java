@@ -112,17 +112,22 @@ public class ListaAdyacencia {
         String[] rutas = contenido.replace(System.getProperty("line.separator"), "").split("%");
         String[] atributos;
         boolean rutaInsertada;
-        if (rutas.length > 1) {
-            for (String ruta : rutas) {
-                atributos = ruta.split("/");
-                rutaInsertada = insertar(atributos[0].trim(), Integer.parseInt(atributos[2].trim()),
-                        atributos[1].trim());
-                if (!rutaInsertada) {
-                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO RUTA", "LA RUTA FUE REGISTRADA PREVIAMENTE");
-                } else {
-                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO RUTA", "REGISTRO REALIZADO EXITOSAMENTE");
+        try {
+            if (rutas.length > 1) {
+                for (String ruta : rutas) {
+                    atributos = ruta.split("/");
+                    rutaInsertada = insertar(atributos[0].trim(), Integer.parseInt(atributos[2].trim()),
+                            atributos[1].trim());
+                    if (!rutaInsertada) {
+                        Alerta.getInstancia().mostrarNotificacion("ARCHIVO RUTA", "LA RUTA FUE REGISTRADA PREVIAMENTE");
+                    } else {
+                        Alerta.getInstancia().mostrarNotificacion("ARCHIVO RUTA", "REGISTRO REALIZADO EXITOSAMENTE");
+                    }
                 }
             }
+        } catch (Exception e) {
+            Alerta.getInstancia().mostrarNotificacion("ARCHIVO RUTA", "NO CONTIENE LA INFORMACION SOLICITADA");
+            System.out.println("\n El archivo no contiene la información solicitada para Rutas. \n");
         }
     }
 

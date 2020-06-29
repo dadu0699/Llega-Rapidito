@@ -288,22 +288,27 @@ public class ArbolB {
         return stringBuilder.toString();
     }
 
-    public void agregarArchivo(String contenido) {
+  public void agregarArchivo(String contenido) {
         String[] vehiculos = contenido.replace(System.getProperty("line.separator"), "").split(";");
         String[] atributos;
         boolean vehiculoInsertado;
-        if (vehiculos.length > 1) {
-            for (String vehiculo : vehiculos) {
-                atributos = vehiculo.split(":");
-                vehiculoInsertado = insertar(new Vehiculo(atributos[0].trim(),
-                        atributos[1].trim(), atributos[2].trim(), atributos[3].trim(),
-                        atributos[4].trim(), atributos[5].trim(), atributos[6].trim()));
-                if (!vehiculoInsertado) {
-                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO VEHICULO", "EL VEHICULO FUE REGISTRADO PREVIAMENTE");
-                } else {
-                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO VEHICULO", "REGISTRO REALIZADO EXITOSAMENTE");
+        try {
+            if (vehiculos.length > 1) {
+                for (String vehiculo : vehiculos) {
+                    atributos = vehiculo.split(":");
+                    vehiculoInsertado = insertar(new Vehiculo(atributos[0].trim(),
+                            atributos[1].trim(), atributos[2].trim(), atributos[3].trim(),
+                            atributos[4].trim(), atributos[5].trim(), atributos[6].trim()));
+                    if (!vehiculoInsertado) {
+                        Alerta.getInstancia().mostrarNotificacion("ARCHIVO VEHICULO", "EL VEHICULO FUE REGISTRADO PREVIAMENTE");
+                    } else {
+                        Alerta.getInstancia().mostrarNotificacion("ARCHIVO VEHICULO", "REGISTRO REALIZADO EXITOSAMENTE");
+                    }
                 }
             }
+        } catch (Exception e) {
+             Alerta.getInstancia().mostrarNotificacion("ARCHIVO VEHICULO", "NO CONTIENE LA INFORMACION SOLICITADA");
+            System.out.println("\n El archivo no contiene la información solicitada para Vehiculos. \n");
         }
     }
 }

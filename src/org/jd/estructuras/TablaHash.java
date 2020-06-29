@@ -118,18 +118,23 @@ public class TablaHash {
         String[] clientes = contenido.replace(System.getProperty("line.separator"), "").split(";");
         String[] atributos;
         boolean clienteInsertado;
-        if (clientes.length > 1) {
-            for (String cliente : clientes) {
-                atributos = cliente.split(",");
-                clienteInsertado = insertar(new Cliente(atributos[0].trim(),
-                        atributos[1].trim(), atributos[2].trim(), atributos[3].trim(),
-                        atributos[4].trim(), atributos[5].trim(), atributos[6].trim()));
-                if (!clienteInsertado) {
-                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO CLIENTE", "EL CLIENTE FUE REGISTRADO PREVIAMENTE");
-                } else {
-                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO CLIENTE", "REGISTRO REALIZADO EXITOSAMENTE");
+        try {
+            if (clientes.length > 1) {
+                for (String cliente : clientes) {
+                    atributos = cliente.split(",");
+                    clienteInsertado = insertar(new Cliente(atributos[0].trim(),
+                            atributos[1].trim(), atributos[2].trim(), atributos[3].trim(),
+                            atributos[4].trim(), atributos[5].trim(), atributos[6].trim()));
+                    if (!clienteInsertado) {
+                        Alerta.getInstancia().mostrarNotificacion("ARCHIVO CLIENTE", "EL CLIENTE FUE REGISTRADO PREVIAMENTE");
+                    } else {
+                        Alerta.getInstancia().mostrarNotificacion("ARCHIVO CLIENTE", "REGISTRO REALIZADO EXITOSAMENTE");
+                    }
                 }
             }
+        } catch (Exception e) {
+            Alerta.getInstancia().mostrarNotificacion("ARCHIVO CLIENTE", "NO CONTIENE LA INFORMACION SOLICITADA");
+            System.out.println("\n El archivo no contiene la información solicitada para Clientes. \n");
         }
     }
 

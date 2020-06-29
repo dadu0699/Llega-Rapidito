@@ -64,16 +64,20 @@ public class TablaCodificacion {
     }
 
     public void agregarArchivo(String contenido) {
-        String[] nodosHuffman = contenido.replace(System.getProperty("line.separator"), "").split(";");
+        String[] nodosHuffman = contenido.split(";");
         String[] atributos;
         
         tablaCodificacion.clear();
-        if (nodosHuffman.length > 1) {
+        try {
+                if (nodosHuffman.length > 1) {
             for (String nodoHuffman : nodosHuffman) {
                 atributos = nodoHuffman.split("%");
                 agregar(new NodoHuffman(atributos[0], Integer.parseInt(atributos[1]),
                         atributos[2]));
             }
+        }
+        } catch (Exception e) {
+            System.out.println("\n El archivo no contiene la información solicitada para Codificar. \n");
         }
     }
 }
