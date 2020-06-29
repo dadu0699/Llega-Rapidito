@@ -199,23 +199,21 @@ public class ListaCircular {
         String[] atributos;
         boolean conductorInsertado;
         try {
-            if (conductores.length > 1) {
-                for (String conductor : conductores) {
-                    atributos = conductor.split("%");
-                    conductorInsertado = agregar(new Conductor(atributos[0].trim(),
-                            atributos[1].trim(), atributos[2].trim(), atributos[3].trim(),
-                            atributos[4].trim(), atributos[5].trim(), atributos[6].trim(),
-                            atributos[7].trim()));
+            for (String conductor : conductores) {
+                atributos = conductor.split("%");
+                conductorInsertado = agregar(new Conductor(atributos[0].trim(),
+                        atributos[1].trim(), atributos[2].trim(), atributos[3].trim(),
+                        atributos[4].trim(), atributos[5].trim(), atributos[6].trim(),
+                        atributos[7].trim()));
 
-                    if (!conductorInsertado) {
-                        Alerta.getInstancia().mostrarNotificacion("ARCHIVO CONDUCTOR", "EL CONDUCTOR FUE REGISTRADO PREVIAMENTE");
-                    } else {
-                        Alerta.getInstancia().mostrarNotificacion("ARCHIVO CONDUCTOR", "REGISTRO REALIZADO EXITOSAMENTE");
-                    }
+                if (!conductorInsertado) {
+                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO CONDUCTOR", "EL CONDUCTOR FUE REGISTRADO PREVIAMENTE");
+                } else {
+                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO CONDUCTOR", "REGISTRO REALIZADO EXITOSAMENTE");
                 }
             }
         } catch (Exception e) {
-             Alerta.getInstancia().mostrarNotificacion("ARCHIVO CONDUCTOR", "NO CONTIENE LA INFORMACION SOLICITADA");
+            Alerta.getInstancia().mostrarNotificacion("ARCHIVO CONDUCTOR", "NO CONTIENE LA INFORMACION SOLICITADA");
             System.out.println("\n El archivo no contiene la información solicitada para Conductores. \n");
         }
     }

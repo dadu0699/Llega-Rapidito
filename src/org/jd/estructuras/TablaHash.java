@@ -119,17 +119,15 @@ public class TablaHash {
         String[] atributos;
         boolean clienteInsertado;
         try {
-            if (clientes.length > 1) {
-                for (String cliente : clientes) {
-                    atributos = cliente.split(",");
-                    clienteInsertado = insertar(new Cliente(atributos[0].trim(),
-                            atributos[1].trim(), atributos[2].trim(), atributos[3].trim(),
-                            atributos[4].trim(), atributos[5].trim(), atributos[6].trim()));
-                    if (!clienteInsertado) {
-                        Alerta.getInstancia().mostrarNotificacion("ARCHIVO CLIENTE", "EL CLIENTE FUE REGISTRADO PREVIAMENTE");
-                    } else {
-                        Alerta.getInstancia().mostrarNotificacion("ARCHIVO CLIENTE", "REGISTRO REALIZADO EXITOSAMENTE");
-                    }
+            for (String cliente : clientes) {
+                atributos = cliente.split(",");
+                clienteInsertado = insertar(new Cliente(atributos[0].trim(),
+                        atributos[1].trim(), atributos[2].trim(), atributos[3].trim(),
+                        atributos[4].trim(), atributos[5].trim(), atributos[6].trim()));
+                if (!clienteInsertado) {
+                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO CLIENTE", "EL CLIENTE FUE REGISTRADO PREVIAMENTE");
+                } else {
+                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO CLIENTE", "REGISTRO REALIZADO EXITOSAMENTE");
                 }
             }
         } catch (Exception e) {
@@ -155,7 +153,7 @@ public class TablaHash {
         NodoListaSimple auxiliar;
 
         for (int i = tablaHash.length - 1; i >= 0; i--) {
-            stringBuilder.append("\n\tBucket").append(i).append("[label =\"Bucket ").append(i).append("\"];");
+            stringBuilder.append("\n\tIndice").append(i).append("[label =\"Indice ").append(i).append("\"];");
             auxiliar = tablaHash[i].getPrimero();
 
             if (auxiliar != null && auxiliar.getCliente() != null) {
@@ -168,7 +166,7 @@ public class TablaHash {
                         .append("TELEFONO: ").append(auxiliar.getCliente().getTelefono()).append("\\n")
                         .append("DIRECCION: ").append(auxiliar.getCliente().getDireccion()).append("\"];");
 
-                stringBuilder.append("\n\tBucket").append(i).append(" -> NCL")
+                stringBuilder.append("\n\tIndice").append(i).append(" -> NCL")
                         .append(auxiliar.getCliente().getDPI()).append("[color=\"#E91E63\"];");
             }
 
@@ -196,7 +194,7 @@ public class TablaHash {
     private void imprimirTabla() {
         NodoListaSimple auxiliar;
         for (int i = 0; i < tablaHash.length; i++) {
-            System.out.print("Bucket " + i + ":  ");
+            System.out.print("Indice " + i + ":  ");
             auxiliar = tablaHash[i].getPrimero();
             while (auxiliar != null) {
                 System.out.print(auxiliar.getCliente().getDPI() + "->");

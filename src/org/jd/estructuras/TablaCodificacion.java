@@ -2,6 +2,7 @@ package org.jd.estructuras;
 
 import java.util.ArrayList;
 import org.jd.utilidades.ManejoDeArchivos;
+import org.jd.vistas.Alerta;
 
 public class TablaCodificacion {
 
@@ -66,17 +67,16 @@ public class TablaCodificacion {
     public void agregarArchivo(String contenido) {
         String[] nodosHuffman = contenido.split(";");
         String[] atributos;
-        
+
         tablaCodificacion.clear();
         try {
-                if (nodosHuffman.length > 1) {
             for (String nodoHuffman : nodosHuffman) {
                 atributos = nodoHuffman.split("%");
                 agregar(new NodoHuffman(atributos[0], Integer.parseInt(atributos[1]),
                         atributos[2]));
             }
-        }
         } catch (Exception e) {
+            // Alerta.getInstancia().mostrarNotificacion("ARCHIVO CODIFICADO", "NO CONTIENE LA INFORMACION SOLICITADA");
             System.out.println("\n El archivo no contiene la información solicitada para Codificar. \n");
         }
     }

@@ -113,16 +113,14 @@ public class ListaAdyacencia {
         String[] atributos;
         boolean rutaInsertada;
         try {
-            if (rutas.length > 1) {
-                for (String ruta : rutas) {
-                    atributos = ruta.split("/");
-                    rutaInsertada = insertar(atributos[0].trim(), Integer.parseInt(atributos[2].trim()),
-                            atributos[1].trim());
-                    if (!rutaInsertada) {
-                        Alerta.getInstancia().mostrarNotificacion("ARCHIVO RUTA", "LA RUTA FUE REGISTRADA PREVIAMENTE");
-                    } else {
-                        Alerta.getInstancia().mostrarNotificacion("ARCHIVO RUTA", "REGISTRO REALIZADO EXITOSAMENTE");
-                    }
+            for (String ruta : rutas) {
+                atributos = ruta.split("/");
+                rutaInsertada = insertar(atributos[0].trim(), Integer.parseInt(atributos[2].trim()),
+                        atributos[1].trim());
+                if (!rutaInsertada) {
+                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO RUTA", "LA RUTA FUE REGISTRADA PREVIAMENTE");
+                } else {
+                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO RUTA", "REGISTRO REALIZADO EXITOSAMENTE");
                 }
             }
         } catch (Exception e) {

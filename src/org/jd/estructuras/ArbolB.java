@@ -75,8 +75,6 @@ public class ArbolB {
             } else if (vehiculo.getPlaca().compareTo(nodo.getVehiculoClave(
                     nodo.getCantidadClaves() - 1).getPlaca()) > 0) {
                 return insertar(nodo.getPagina(nodo.getCantidadClaves()), vehiculo);
-            } else if (vehiculo.getPlaca().compareTo(nodo.getVehiculoClave(0).getPlaca()) == 0) {
-                return false;
             }
 
             for (int i = 1; i < nodo.getCantidadClaves(); i++) {
@@ -85,8 +83,6 @@ public class ArbolB {
                 if (vehiculo.getPlaca().compareTo(vehiculoMenor.getPlaca()) > 0
                         && vehiculo.getPlaca().compareTo(vehiculoMayor.getPlaca()) < 0) {
                     return insertar(nodo.getPagina(i), vehiculo);
-                } else if (vehiculo.getPlaca().compareTo(vehiculoMayor.getPlaca()) == 0) {
-                    return false;
                 }
             }
         }
@@ -288,26 +284,24 @@ public class ArbolB {
         return stringBuilder.toString();
     }
 
-  public void agregarArchivo(String contenido) {
+    public void agregarArchivo(String contenido) {
         String[] vehiculos = contenido.replace(System.getProperty("line.separator"), "").split(";");
         String[] atributos;
         boolean vehiculoInsertado;
         try {
-            if (vehiculos.length > 1) {
-                for (String vehiculo : vehiculos) {
-                    atributos = vehiculo.split(":");
-                    vehiculoInsertado = insertar(new Vehiculo(atributos[0].trim(),
-                            atributos[1].trim(), atributos[2].trim(), atributos[3].trim(),
-                            atributos[4].trim(), atributos[5].trim(), atributos[6].trim()));
-                    if (!vehiculoInsertado) {
-                        Alerta.getInstancia().mostrarNotificacion("ARCHIVO VEHICULO", "EL VEHICULO FUE REGISTRADO PREVIAMENTE");
-                    } else {
-                        Alerta.getInstancia().mostrarNotificacion("ARCHIVO VEHICULO", "REGISTRO REALIZADO EXITOSAMENTE");
-                    }
+            for (String vehiculo : vehiculos) {
+                atributos = vehiculo.split(":");
+                vehiculoInsertado = insertar(new Vehiculo(atributos[0].trim(),
+                        atributos[1].trim(), atributos[2].trim(), atributos[3].trim(),
+                        atributos[4].trim(), atributos[5].trim(), atributos[6].trim()));
+                if (!vehiculoInsertado) {
+                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO VEHICULO", "EL VEHICULO FUE REGISTRADO PREVIAMENTE");
+                } else {
+                    Alerta.getInstancia().mostrarNotificacion("ARCHIVO VEHICULO", "REGISTRO REALIZADO EXITOSAMENTE");
                 }
             }
         } catch (Exception e) {
-             Alerta.getInstancia().mostrarNotificacion("ARCHIVO VEHICULO", "NO CONTIENE LA INFORMACION SOLICITADA");
+            Alerta.getInstancia().mostrarNotificacion("ARCHIVO VEHICULO", "NO CONTIENE LA INFORMACION SOLICITADA");
             System.out.println("\n El archivo no contiene la información solicitada para Vehiculos. \n");
         }
     }
