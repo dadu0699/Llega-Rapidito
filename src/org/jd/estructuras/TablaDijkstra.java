@@ -105,7 +105,7 @@ public class TablaDijkstra {
             auxDijkstra.setVisitado(true);
             actualizarCaminosHijos(auxDijkstra);
         }
-        
+
         Vertice vertice = colaVertices.eliminarCola();
         if (vertice != null) {
             visitar(buscarNodo(vertice));

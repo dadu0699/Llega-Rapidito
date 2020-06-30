@@ -17,7 +17,8 @@ public class Viaje {
     private Vehiculo vehiculo;
     private Camino ruta;  // ruta mas corta
 
-    public Viaje(Vertice origen, Vertice destino, Cliente cliente, Conductor conductor, Vehiculo vehiculo, Camino ruta) {
+    public Viaje(Vertice origen, Vertice destino, Cliente cliente,
+            Conductor conductor, Vehiculo vehiculo, Camino ruta) {
         this.origen = origen;
         this.destino = destino;
         this.fecha = obtenerFechaHora();

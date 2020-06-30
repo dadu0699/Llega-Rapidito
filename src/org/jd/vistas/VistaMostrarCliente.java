@@ -98,11 +98,11 @@ public class VistaMostrarCliente extends Stage {
         btnCopiar.setOnAction(event -> {
             final Clipboard clipboard = Clipboard.getSystemClipboard();
             final ClipboardContent content = new ClipboardContent();
-            content.putString("DPI:                   " + cliente.getDPI() 
-                    + "\nNOMBRES:               " + cliente.getNombres() 
+            content.putString("DPI:                   " + cliente.getDPI()
+                    + "\nNOMBRES:               " + cliente.getNombres()
                     + "\nAPELLIDOS:             " + cliente.getApellidos()
-                    + "\nGENERO:                " + cliente.getGenero() 
-                    + "\nFECHA NACIMIENTO:      " + cliente.getFechaNacimiento() 
+                    + "\nGENERO:                " + cliente.getGenero()
+                    + "\nFECHA NACIMIENTO:      " + cliente.getFechaNacimiento()
                     + "\nTELEFONO:              " + cliente.getTelefono()
                     + "\nDIRECCION:             " + cliente.getDireccion());
             clipboard.setContent(content);

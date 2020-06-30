@@ -10,7 +10,8 @@ public class Vehiculo {
     private String precio;
     private String transmision;
 
-    public Vehiculo(String placa, String marca, String modelo, String anio, String color, String precio, String transmision) {
+    public Vehiculo(String placa, String marca, String modelo, String anio,
+            String color, String precio, String transmision) {
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;

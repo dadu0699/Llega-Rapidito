@@ -54,19 +54,19 @@ public class NodoArbolB {
     public void setVehiculosClaves(Vehiculo[] vehiculosClaves) {
         this.vehiculosClaves = vehiculosClaves;
     }
-    
-    public NodoArbolB getPagina(int posicionPagina){
+
+    public NodoArbolB getPagina(int posicionPagina) {
         if (posicionPagina >= this.cantidadPaginas) {
             return null;
         }
         return paginas[posicionPagina];
     }
-    
-    public void setPagina(NodoArbolB pagina){
+
+    public void setPagina(NodoArbolB pagina) {
         pagina.setPadre(this);
         this.paginas[this.cantidadPaginas] = pagina;
         this.cantidadPaginas++;
-        Arrays.sort(this.paginas, 0, this.cantidadPaginas, new ComparadorPaginas());        
+        Arrays.sort(this.paginas, 0, this.cantidadPaginas, new ComparadorPaginas());
     }
 
     public NodoArbolB[] getPaginas() {
@@ -92,7 +92,7 @@ public class NodoArbolB {
     public void setCantidadPaginas(int cantidadPaginas) {
         this.cantidadPaginas = cantidadPaginas;
     }
-    
+
     public void quitarPagina(NodoArbolB pagina) {
         if (this.cantidadPaginas != 0) {
             boolean buscar = false;
@@ -100,10 +100,10 @@ public class NodoArbolB {
                 if (paginas[i].equals(pagina)) {
                     buscar = true;
                 } else if (buscar) {
-                    paginas[i-1] = paginas[i];
+                    paginas[i - 1] = paginas[i];
                 }
             }
-            
+
             if (buscar) {
                 this.cantidadPaginas--;
                 paginas[cantidadPaginas] = null;

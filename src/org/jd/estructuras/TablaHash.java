@@ -49,7 +49,7 @@ public class TablaHash {
             tablaHash[funcionHash(new Long(llave))].agregar(cliente);
             // cantidadDatos++;
 
-            if ((cantidadDatos * 100 / m) >= 72) {
+            if ((cantidadDatos * 100 / m) >= 75) {
                 m += 37;
                 tablaHash = migrarTabla();
             }

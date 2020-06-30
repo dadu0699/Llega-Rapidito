@@ -216,7 +216,7 @@ public class VistaConductor extends Stage {
         });
         tableView.setPrefSize(x, y * 0.995);
         gridPane.add(tableView, 0, 2);
-        
+
         return gridPane;
     }
 }

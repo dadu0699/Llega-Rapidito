@@ -113,11 +113,11 @@ public class VistaAgregarCliente extends Stage {
                 Alerta.getInstancia().mostrarAlerta(gridPane, "ERROR", "UNO O MÁS DATOS SON INCORRECTOS");
             } else {
                 boolean cliente = TablaHash.getInstancia().insertar(
-                        new Cliente(jFTDPI.getText().trim(), 
+                        new Cliente(jFTDPI.getText().trim(),
                                 jFTNombres.getText().trim(),
                                 jFTApellidos.getText().trim(),
                                 cbGenero.getSelectionModel().getSelectedItem(),
-                                jFTFNacimiento.getText().trim(), 
+                                jFTFNacimiento.getText().trim(),
                                 jFTTelefono.getText().trim(),
                                 jFTDireccion.getText().trim()));
                 if (!cliente) {

@@ -104,10 +104,10 @@ public class ListadoAristas {
                 if (actual.getPeso() > auxiliar.getPeso()) {
                     temporal.setPeso(actual.getPeso());
                     temporal.setDestino(actual.getDestino());
-                    
+
                     actual.setPeso(auxiliar.getPeso());
                     actual.setDestino(auxiliar.getDestino());
-                    
+
                     auxiliar.setPeso(temporal.getPeso());
                     auxiliar.setDestino(temporal.getDestino());
                 }
