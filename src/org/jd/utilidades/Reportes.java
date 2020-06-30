@@ -51,7 +51,8 @@ public class Reportes {
             }
         }
         ManejoDeArchivos.getInstancia().escribirArchivo(contenido.toString(), "TOP10VIAJES.edd", "reportes");
-        ManejoDeArchivos.getInstancia().escribirArchivo(Huffman.getInstancia().comprimirContenido(contenido.toString()),
+        ManejoDeArchivos.getInstancia().escribirArchivo(Huffman.getInstancia()
+                .comprimirContenido(contenido.toString(), "Viajes"),
                 "top10ViajesCOMPRIMIDO.edd", "reportes");
         Alerta.getInstancia().mostrarNotificacion("TOP", "REPORTE Y ARCHIVO COMPRIMIDO GENERADO");
         return reporte;
@@ -87,7 +88,8 @@ public class Reportes {
         });
 
         ManejoDeArchivos.getInstancia().escribirArchivo(contenido.toString(), "TOP10CLIENTES.edd", "reportes");
-        ManejoDeArchivos.getInstancia().escribirArchivo(Huffman.getInstancia().comprimirContenido(contenido.toString()),
+        ManejoDeArchivos.getInstancia().escribirArchivo(Huffman.getInstancia()
+                .comprimirContenido(contenido.toString(), "Clientes"),
                 "top10ClientesCOMPRIMIDO.edd", "reportes");
         Alerta.getInstancia().mostrarNotificacion("TOP", "REPORTE Y ARCHIVO COMPRIMIDO GENERADO");
         return reporte;
@@ -125,7 +127,8 @@ public class Reportes {
         });
 
         ManejoDeArchivos.getInstancia().escribirArchivo(contenido.toString(), "TOP10CONDUCTORES.edd", "reportes");
-        ManejoDeArchivos.getInstancia().escribirArchivo(Huffman.getInstancia().comprimirContenido(contenido.toString()),
+        ManejoDeArchivos.getInstancia().escribirArchivo(Huffman.getInstancia()
+                .comprimirContenido(contenido.toString(), "Conductores"),
                 "top10ConductoresCOMPRIMIDO.edd", "reportes");
         Alerta.getInstancia().mostrarNotificacion("TOP", "REPORTE Y ARCHIVO COMPRIMIDO GENERADO");
         return reporte;
@@ -163,7 +166,8 @@ public class Reportes {
         });
 
         ManejoDeArchivos.getInstancia().escribirArchivo(contenido.toString(), "TOP10VEHICULOSS.edd", "reportes");
-        ManejoDeArchivos.getInstancia().escribirArchivo(Huffman.getInstancia().comprimirContenido(contenido.toString()),
+        ManejoDeArchivos.getInstancia().escribirArchivo(Huffman.getInstancia()
+                .comprimirContenido(contenido.toString(), "Vehiculos"),
                 "top10VehiculosCOMPRIMIDO.edd", "reportes");
         Alerta.getInstancia().mostrarNotificacion("TOP", "REPORTE Y ARCHIVO COMPRIMIDO GENERADO");
         return reporte;

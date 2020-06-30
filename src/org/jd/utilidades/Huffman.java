@@ -24,7 +24,7 @@ public class Huffman {
         return instancia;
     }
 
-    public String comprimirContenido(String contenido) {
+    public String comprimirContenido(String contenido, String nombreArchivo) {
         codificar(contenido);
         List<String> listaCaracteres = Arrays.asList(contenido.split("(?!^)"));
 
@@ -32,7 +32,7 @@ public class Huffman {
             listaCaracteres.set(i, TablaCodificacion.getInstancia().getCodigo(listaCaracteres.get(i)));
         }
         contenido = String.join(" ", listaCaracteres);
-        TablaCodificacion.getInstancia().generarReporteTabla();
+        TablaCodificacion.getInstancia().generarReporteTabla(nombreArchivo);
         return contenido;
     }
 

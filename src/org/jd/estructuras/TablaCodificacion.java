@@ -2,7 +2,6 @@ package org.jd.estructuras;
 
 import java.util.ArrayList;
 import org.jd.utilidades.ManejoDeArchivos;
-import org.jd.vistas.Alerta;
 
 public class TablaCodificacion {
 
@@ -54,14 +53,15 @@ public class TablaCodificacion {
         return "";
     }
 
-    public void generarReporteTabla() {
+    public void generarReporteTabla(String nombreArchivo) {
         StringBuilder contenido = new StringBuilder();
         tablaCodificacion.forEach((nodo) -> {
             contenido.append(nodo.getLetra()).append("%")
                     .append(nodo.getFrecuencia()).append("%")
                     .append(nodo.getCodigo()).append(";");
         });
-        ManejoDeArchivos.getInstancia().escribirArchivo(contenido.toString(), "tablaCodificada.edd", "reportes");
+        ManejoDeArchivos.getInstancia().escribirArchivo(contenido.toString(),
+                "tablaCodificada" + nombreArchivo + ".edd", "reportes");
     }
 
     public void agregarArchivo(String contenido) {

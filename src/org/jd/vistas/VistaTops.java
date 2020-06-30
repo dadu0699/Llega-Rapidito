@@ -112,7 +112,7 @@ public class VistaTops extends Stage {
         gridPane.add(hBoxBotonesTop, 0, 1);
 
         HBox hBoxDecodificar = new HBox();
-        JFXButton btnCargarTabla = new JFXButton("CARGAR TABLA DE COMPRESION");
+        JFXButton btnCargarTabla = new JFXButton("CARGAR TABLA DE CODIFICACION");
         btnCargarTabla.getStyleClass().addAll("customButton", "dangerButton");
         btnCargarTabla.setButtonType(JFXButton.ButtonType.FLAT);
         btnCargarTabla.setPrefSize(x, y);
