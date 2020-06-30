@@ -408,6 +408,10 @@
     -fx-background-insets: 0;
 }
 
+.scroll-pane > .corner {
+    -fx-background-color: #282A36FF;
+}
+
 .jfx-scroll-pane .main-header {
     -fx-background-color: #2D303DFF;
 }

@@ -197,7 +197,7 @@ public class VistaReporte extends Stage {
 
         hBoxBotonesSup.getChildren().addAll(btnTablaClientes, btnVehiculos,
                 btnConductores, btnViajes, btnRutasListaAdyacencia, btnRutasGrafo);
-        hBoxBotonesSup.setPrefSize(x, y / 10);
+        hBoxBotonesSup.setPrefSize(x, y / 40);
         hBoxBotonesSup.setMargin(btnTablaClientes, new Insets(0, 5, 0, 0));
         hBoxBotonesSup.setMargin(btnVehiculos, new Insets(0, 5, 0, 0));
         hBoxBotonesSup.setMargin(btnConductores, new Insets(0, 5, 0, 0));
@@ -381,15 +381,14 @@ public class VistaReporte extends Stage {
         });
 
         hBoxBotonesMed.getChildren().addAll(btnEstructura, btnListaViajes, btnGrafoCamino);
-        hBoxBotonesMed.setPrefSize(x, y / 10);
+        hBoxBotonesMed.setPrefSize(x, y / 40);
         hBoxBotonesMed.setMargin(btnEstructura, new Insets(0, 5, 0, 0));
         hBoxBotonesMed.setMargin(btnListaViajes, new Insets(0, 5, 0, 0));
         gridPane.add(hBoxBotonesMed, 0, 2, 1, 1);
 
         imageView.setPreserveRatio(true);
         ScrollPane sp = new ScrollPane();
-        sp.setPrefHeight(8 * y / 10);
-        sp.setPrefWidth(x);
+        sp.setPrefSize(x, y * 0.95);
         sp.setContent(imageView);
         gridPane.add(sp, 0, 3);
 

@@ -105,14 +105,14 @@ public class VistaTops extends Stage {
 
         hBoxBotonesTop.getChildren().addAll(btnTopViajesLg, btnTopClientes,
                 btnTopConductores, btnTopVehiculos);
-        hBoxBotonesTop.setPrefSize(x, y / 10);
+        hBoxBotonesTop.setPrefSize(x, y / 40);
         hBoxBotonesTop.setMargin(btnTopViajesLg, new Insets(0, 5, 0, 0));
         hBoxBotonesTop.setMargin(btnTopClientes, new Insets(0, 5, 0, 0));
         hBoxBotonesTop.setMargin(btnTopConductores, new Insets(0, 5, 0, 0));
         gridPane.add(hBoxBotonesTop, 0, 1);
 
         HBox hBoxDecodificar = new HBox();
-        JFXButton btnCargarTabla = new JFXButton("CARGAR TABLA DE CODIFICACION");
+        JFXButton btnCargarTabla = new JFXButton("CARGAR TABLA DE COMPRESION");
         btnCargarTabla.getStyleClass().addAll("customButton", "dangerButton");
         btnCargarTabla.setButtonType(JFXButton.ButtonType.FLAT);
         btnCargarTabla.setPrefSize(x, y);
@@ -122,7 +122,7 @@ public class VistaTops extends Stage {
             Alerta.getInstancia().mostrarNotificacion("HUFFMAN", "TABLA DE CODIFICACION CARGADA");
         });
 
-        JFXButton btnCargarArchivo = new JFXButton("DECODIFICAR ARCHIVO");
+        JFXButton btnCargarArchivo = new JFXButton("DESCOMPRIMIR ARCHIVO");
         btnCargarArchivo.getStyleClass().addAll("customButton", "dangerButton");
         btnCargarArchivo.setButtonType(JFXButton.ButtonType.FLAT);
         btnCargarArchivo.setPrefSize(x, y);
@@ -132,7 +132,7 @@ public class VistaTops extends Stage {
         });
 
         hBoxDecodificar.getChildren().addAll(btnCargarTabla, btnCargarArchivo);
-        hBoxDecodificar.setPrefSize(x, y / 10);
+        hBoxDecodificar.setPrefSize(x, y / 40);
         hBoxDecodificar.setMargin(btnCargarTabla, new Insets(0, 5, 0, 0));
         gridPane.add(hBoxDecodificar, 0, 2);
 
@@ -146,7 +146,7 @@ public class VistaTops extends Stage {
 
         tableView = new TableView<>(observableList);
         tableView.getColumns().addAll(cantidad, colInformacion);
-        tableView.setPrefHeight(8 * y / 10);
+        tableView.setPrefHeight(y * 0.95);
         gridPane.add(tableView, 0, 3);
 
         hBox.getChildren().add(gridPane);
