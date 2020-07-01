@@ -34,15 +34,11 @@ public class ArbolB {
             }
 
             if (nodo.getPaginas() != null) {
-                for (int i = 0; i < nodo.getCantidadPaginas() - 1; i++) {
+                for (int i = 0; i < nodo.getCantidadPaginas(); i++) {
                     vehiculo = buscar(nodo.getPagina(i), placa);
                     if (vehiculo != null) {
                         return vehiculo;
                     }
-                }
-
-                if (nodo.getCantidadPaginas() >= 1) {
-                    vehiculo = buscar(nodo.getPagina(nodo.getCantidadPaginas() - 1), placa);
                 }
             }
         }
@@ -163,12 +159,8 @@ public class ArbolB {
             }
 
             if (nodo.getPaginas() != null) {
-                for (int i = 0; i < nodo.getCantidadPaginas() - 1; i++) {
+                for (int i = 0; i < nodo.getCantidadPaginas(); i++) {
                     arrayList.addAll(obtenerDatos(nodo.getPagina(i)));
-                }
-
-                if (nodo.getCantidadPaginas() >= 1) {
-                    arrayList.addAll(obtenerDatos(nodo.getPagina(nodo.getCantidadPaginas() - 1)));
                 }
             }
         }
@@ -196,12 +188,8 @@ public class ArbolB {
             }
 
             if (nodo.getPaginas() != null) {
-                for (int i = 0; i < nodo.getCantidadPaginas() - 1; i++) {
+                for (int i = 0; i < nodo.getCantidadPaginas(); i++) {
                     arrayList.addAll(buscarVehiculo(nodo.getPagina(i), buscar));
-                }
-
-                if (nodo.getCantidadPaginas() >= 1) {
-                    arrayList.addAll(buscarVehiculo(nodo.getPagina(nodo.getCantidadPaginas() - 1), buscar));
                 }
             }
         }
