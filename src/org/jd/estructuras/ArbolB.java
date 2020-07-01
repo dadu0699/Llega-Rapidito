@@ -78,10 +78,8 @@ public class ArbolB {
             }
 
             for (int i = 1; i < nodo.getCantidadClaves(); i++) {
-                Vehiculo vehiculoMenor = nodo.getVehiculoClave(i - 1);
-                Vehiculo vehiculoMayor = nodo.getVehiculoClave(i);
-                if (vehiculo.getPlaca().compareTo(vehiculoMenor.getPlaca()) > 0
-                        && vehiculo.getPlaca().compareTo(vehiculoMayor.getPlaca()) < 0) {
+                if (vehiculo.getPlaca().compareTo(nodo.getVehiculoClave(i - 1).getPlaca()) > 0
+                        && vehiculo.getPlaca().compareTo(nodo.getVehiculoClave(i).getPlaca()) < 0) {
                     return insertar(nodo.getPagina(i), vehiculo);
                 }
             }
@@ -90,15 +88,13 @@ public class ArbolB {
     }
 
     private void dividirNodo(NodoArbolB nodo) {
-        NodoArbolB nodoAuxiliar = nodo;
-        Vehiculo vehiculoCentro = nodo.getVehiculoClave(2); // Se obtiene la clave mediana o central
-        NodoArbolB paginaIzquierda = obtenerPaginasIzquierdas(nodoAuxiliar); // Pagina donde se almacenaran los nodos izquierdos
-        NodoArbolB paginaDerecha = obtenerPaginasDerechas(nodoAuxiliar); // Pagina donde se almacenaran los nodos derechos
+        NodoArbolB paginaIzquierda = obtenerPaginasIzquierdas(nodo); // Pagina donde se almacenaran los nodos izquierdos
+        NodoArbolB paginaDerecha = obtenerPaginasDerechas(nodo); // Pagina donde se almacenaran los nodos derechos
 
         if (nodo.getPadre() == null) {
-            nuevaRaiz(nodoAuxiliar, vehiculoCentro, paginaIzquierda, paginaDerecha);
+            nuevaRaiz(nodo, nodo.getVehiculoClave(2), paginaIzquierda, paginaDerecha);
         } else {
-            subirPadre(nodoAuxiliar, vehiculoCentro, paginaIzquierda, paginaDerecha);
+            subirPadre(nodo, nodo.getVehiculoClave(2), paginaIzquierda, paginaDerecha);
         }
     }
 
