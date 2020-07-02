@@ -95,36 +95,30 @@ public class NodoArbolB {
 
     public void quitarPagina(NodoArbolB pagina) {
         if (this.cantidadPaginas != 0) {
-            boolean buscar = false;
             for (int i = 0; i < this.cantidadPaginas; i++) {
                 if (paginas[i].equals(pagina)) {
-                    buscar = true;
-                } else if (buscar) {
-                    paginas[i - 1] = paginas[i];
+                    for (int j = i; j < this.cantidadPaginas - 1; j++) {
+                        paginas[j] = paginas[j + 1];
+                    }
+                    this.cantidadPaginas--;
+                    paginas[cantidadPaginas] = null;
+                    break;
                 }
-            }
-
-            if (buscar) {
-                this.cantidadPaginas--;
-                paginas[cantidadPaginas] = null;
             }
         }
     }
 
     public void quitarNodo(String placa) {
         if (this.cantidadClaves != 0) {
-            boolean buscar = false;
             for (int i = 0; i < this.cantidadClaves; i++) {
                 if (vehiculosClaves[i].getPlaca().equalsIgnoreCase(placa)) {
-                    buscar = true;
-                } else if (buscar) {
-                    vehiculosClaves[i - 1] = vehiculosClaves[i];
+                    for (int j = i; j < this.cantidadClaves - 1; j++) {
+                        vehiculosClaves[j] = vehiculosClaves[j + 1];
+                    }
+                    this.cantidadClaves--;
+                    vehiculosClaves[cantidadClaves] = null;
+                    break;
                 }
-            }
-
-            if (buscar) {
-                this.cantidadClaves--;
-                vehiculosClaves[cantidadClaves] = null;
             }
         }
     }

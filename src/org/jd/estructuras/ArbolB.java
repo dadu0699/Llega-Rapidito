@@ -96,28 +96,27 @@ public class ArbolB {
 
     private NodoArbolB obtenerPaginasIzquierdas(NodoArbolB nodo) {
         NodoArbolB paginaIzquierda = new NodoArbolB();
-        for (int i = 0; i < 2; i++) {
-            paginaIzquierda.setVehiculoClave(nodo.getVehiculoClave(i));
-        }
-
         if (nodo.getCantidadPaginas() > 0) {
             for (int i = 0; i <= 2; i++) {
                 paginaIzquierda.setPagina(nodo.getPagina(i));
             }
         }
+        for (int i = 0; i < 2; i++) {
+            paginaIzquierda.setVehiculoClave(nodo.getVehiculoClave(i));
+        }
+
         return paginaIzquierda;
     }
 
     private NodoArbolB obtenerPaginasDerechas(NodoArbolB nodo) {
         NodoArbolB paginaDerecha = new NodoArbolB();
-        for (int i = 3; i < nodo.getCantidadClaves(); i++) {
-            paginaDerecha.setVehiculoClave(nodo.getVehiculoClave(i));
-        }
-
         if (nodo.getCantidadPaginas() > 0) {
             for (int i = 3; i < nodo.getCantidadPaginas(); i++) {
                 paginaDerecha.setPagina(nodo.getPagina(i));
             }
+        }
+        for (int i = 3; i < nodo.getCantidadClaves(); i++) {
+            paginaDerecha.setVehiculoClave(nodo.getVehiculoClave(i));
         }
         return paginaDerecha;
     }
