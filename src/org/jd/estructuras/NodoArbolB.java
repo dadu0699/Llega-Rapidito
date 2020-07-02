@@ -110,4 +110,22 @@ public class NodoArbolB {
             }
         }
     }
+
+    public void quitarNodo(String placa) {
+        if (this.cantidadClaves != 0) {
+            boolean buscar = false;
+            for (int i = 0; i < this.cantidadClaves; i++) {
+                if (vehiculosClaves[i].getPlaca().equalsIgnoreCase(placa)) {
+                    buscar = true;
+                } else if (buscar) {
+                    vehiculosClaves[i - 1] = vehiculosClaves[i];
+                }
+            }
+
+            if (buscar) {
+                this.cantidadClaves--;
+                vehiculosClaves[cantidadClaves] = null;
+            }
+        }
+    }
 }

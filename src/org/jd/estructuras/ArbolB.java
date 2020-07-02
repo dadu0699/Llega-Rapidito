@@ -146,6 +146,63 @@ public class ArbolB {
         }
     }
 
+    private NodoArbolB obtenerPagina(String placa) {
+        return obtenerPagina(this.raiz, placa);
+    }
+
+    private NodoArbolB obtenerPagina(NodoArbolB nodo, String placa) {
+        NodoArbolB pagina = null;
+        if (nodo != null) {
+            for (int i = 0; i < nodo.getCantidadClaves(); i++) {
+                if (nodo.getVehiculoClave(i).getPlaca().equalsIgnoreCase(placa)) {
+                    return nodo;
+                }
+            }
+
+            if (nodo.getPaginas() != null) {
+                for (int i = 0; i < nodo.getCantidadPaginas(); i++) {
+                    pagina = obtenerPagina(nodo.getPagina(i), placa);
+                    if (pagina != null) {
+                        return pagina;
+                    }
+                }
+            }
+        }
+        return pagina;
+    }
+
+    private Integer obtenerPosicion(NodoArbolB nodo, String placa) {
+        NodoArbolB pagina = null;
+        if (nodo != null) {
+            for (int i = 0; i < nodo.getCantidadClaves(); i++) {
+                if (nodo.getVehiculoClave(i).getPlaca().equalsIgnoreCase(placa)) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    public void eliminar(String placa) {
+        eliminar(obtenerPagina(placa), placa);
+    }
+
+    public NodoArbolB eliminar(NodoArbolB nodo, String placa) {
+        if (nodo != null) {
+            if (nodo.getCantidadPaginas() == 0) {
+                if (nodo.getPadre() == null || nodo.getCantidadClaves() > 2) {
+                    nodo.quitarNodo(placa);
+                    if (nodo.getCantidadClaves() <= 0) {
+                        this.raiz = null;
+                    }
+                } else {
+
+                }
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Vehiculo> obtenerDatos() {
         return obtenerDatos(this.raiz);
     }
