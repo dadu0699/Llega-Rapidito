@@ -146,6 +146,67 @@ public class ArbolB {
         }
     }
 
+    public void eliminar(String placa) {
+        eliminar(obtenerPagina(placa), placa);
+    }
+
+    private NodoArbolB eliminar(NodoArbolB nodo, String placa) {
+        if (nodo != null) {
+            if (nodo.getCantidadPaginas() == 0) {
+                if (nodo.getPadre() == null || nodo.getCantidadClaves() > 2) {
+                    nodo.quitarNodo(placa);
+                    if (nodo.getCantidadClaves() <= 0) {
+                        this.raiz = null;
+                    }
+                } else {
+                    combinarRotar(nodo, placa);
+                }
+            }
+        }
+        return null;
+    }
+
+    private void combinarRotar(NodoArbolB nodo, String placa) {
+        NodoArbolB padre = nodo.getPadre();
+        NodoArbolB paginaIzquierda = null;
+        NodoArbolB paginaDerecha = null;
+        Integer posicionNodo = obtenerPosicionPagina(padre, nodo);
+        Integer tamanioPaginaIzquierda = -1;
+        Integer tamanioPaginaDerecha = -1;
+
+        if ((posicionNodo - 1) >= 0) { // Verificar que exista una pagina del lado izquierdo
+            paginaIzquierda = padre.getPagina(posicionNodo - 1);
+            tamanioPaginaIzquierda = paginaIzquierda.getCantidadClaves();
+        }
+
+        if ((posicionNodo + 1) < padre.getCantidadPaginas()) { // Verificar que exista pagina derecha (COMPROBAR el <=)
+            paginaDerecha = padre.getPagina(posicionNodo + 1);
+            tamanioPaginaDerecha = paginaDerecha.getCantidadClaves();
+        }
+
+        if (paginaIzquierda != null && tamanioPaginaIzquierda > 2) {
+            Vehiculo vIzquierdo = paginaIzquierda.getVehiculoClave(tamanioPaginaIzquierda - 1);
+            eliminar(paginaIzquierda, vIzquierdo.getPlaca());
+            padre.setVehiculoClave(vIzquierdo);
+
+            Vehiculo vPadre = padre.getVehiculoClave(obtenerPosicionNodo(padre, vIzquierdo.getPlaca()) + 1);
+            padre.quitarNodo(vPadre.getPlaca());
+            nodo.setVehiculoClave(vPadre);
+
+            nodo.quitarNodo(placa);
+        } else if (paginaDerecha != null && tamanioPaginaDerecha > 2) {
+            Vehiculo vDerecho = paginaDerecha.getVehiculoClave(0);
+            eliminar(paginaDerecha, vDerecho.getPlaca());
+            padre.setVehiculoClave(vDerecho);
+
+            Vehiculo vPadre = padre.getVehiculoClave(obtenerPosicionNodo(padre, vDerecho.getPlaca()) - 1);
+            padre.quitarNodo(vPadre.getPlaca());
+            nodo.setVehiculoClave(vPadre);
+
+            nodo.quitarNodo(placa);
+        }
+    }
+
     private NodoArbolB obtenerPagina(String placa) {
         return obtenerPagina(this.raiz, placa);
     }
@@ -171,8 +232,19 @@ public class ArbolB {
         return pagina;
     }
 
-    private Integer obtenerPosicion(NodoArbolB nodo, String placa) {
-        NodoArbolB pagina = null;
+    private int obtenerPosicionPagina(NodoArbolB nodo, NodoArbolB pagina) {
+        Integer posicion = -1;
+        if (nodo != null) {
+            for (int i = 0; i < nodo.getCantidadPaginas(); i++) {
+                if (nodo.getPagina(i).equals(pagina)) {
+                    return i;
+                }
+            }
+        }
+        return posicion;
+    }
+
+    private Integer obtenerPosicionNodo(NodoArbolB nodo, String placa) {
         if (nodo != null) {
             for (int i = 0; i < nodo.getCantidadClaves(); i++) {
                 if (nodo.getVehiculoClave(i).getPlaca().equalsIgnoreCase(placa)) {
@@ -181,26 +253,6 @@ public class ArbolB {
             }
         }
         return -1;
-    }
-
-    public void eliminar(String placa) {
-        eliminar(obtenerPagina(placa), placa);
-    }
-
-    public NodoArbolB eliminar(NodoArbolB nodo, String placa) {
-        if (nodo != null) {
-            if (nodo.getCantidadPaginas() == 0) {
-                if (nodo.getPadre() == null || nodo.getCantidadClaves() > 2) {
-                    nodo.quitarNodo(placa);
-                    if (nodo.getCantidadClaves() <= 0) {
-                        this.raiz = null;
-                    }
-                } else {
-
-                }
-            }
-        }
-        return null;
     }
 
     public ArrayList<Vehiculo> obtenerDatos() {
