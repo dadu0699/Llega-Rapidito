@@ -160,6 +160,14 @@ public class ArbolB {
                 } else {
                     combinarRotar(nodo, placa);
                 }
+            } else {
+                NodoArbolB paginaMayorDeMenores = paginaMayorDeMenores(nodo.getPagina(obtenerPosicionNodo(nodo, placa)));
+                if (paginaMayorDeMenores.getCantidadClaves() > 2) {
+                    Vehiculo vMayor = paginaMayorDeMenores.getVehiculoClave(paginaMayorDeMenores.getCantidadClaves() - 1);
+                    eliminar(paginaMayorDeMenores, vMayor.getPlaca());
+                    nodo.setVehiculoClave(vMayor);
+                    nodo.quitarNodo(placa);
+                }
             }
         }
         return null;
@@ -206,6 +214,13 @@ public class ArbolB {
         }
     }
 
+    private NodoArbolB paginaMayorDeMenores(NodoArbolB nodo) {
+        while (nodo.getCantidadPaginas() > 0) {
+            nodo = nodo.getPagina(nodo.getCantidadPaginas() - 1);
+        }
+        return nodo;
+    }
+
     private NodoArbolB obtenerPagina(String placa) {
         return obtenerPagina(this.raiz, placa);
     }
@@ -231,7 +246,7 @@ public class ArbolB {
         return pagina;
     }
 
-    private int obtenerPosicionPagina(NodoArbolB nodo, NodoArbolB pagina) {
+    private Integer obtenerPosicionPagina(NodoArbolB nodo, NodoArbolB pagina) {
         Integer posicion = -1;
         if (nodo != null) {
             for (int i = 0; i < nodo.getCantidadPaginas(); i++) {
