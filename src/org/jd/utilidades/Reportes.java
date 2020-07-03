@@ -75,17 +75,19 @@ public class Reportes {
 
         StringBuilder contenido = new StringBuilder();
         contenido.append("REPORTE TOP 10 DE CLIENTES CON MAYOR CANTIDAD DE VIAJES\n");
-        topClientes.entrySet().forEach((entry) -> {
-            int contador = 1;
-            reporte.add(new Reporte(entry.getValue().intValue(), entry.getKey().substring(0, entry.getKey().length() - 2)));
+        int contador = 0;
+        for (Map.Entry entry : topClientes.entrySet()) {
+            reporte.add(new Reporte(Integer.parseInt(entry.getValue().toString()),
+                    entry.getKey().toString().substring(0, entry.getKey().toString().length() - 2)));
 
-            contenido.append("CLIENTE: ").append(entry.getKey().substring(0, entry.getKey().length() - 2))
+            contenido.append("CLIENTE: ").append(entry.getKey().toString()
+                    .substring(0, entry.getKey().toString().length() - 2))
                     .append(", VIAJES: ").append(entry.getValue()).append("\n");
             contador++;
             if (contador == 10) {
-                return;
+                break;
             }
-        });
+        }
 
         ManejoDeArchivos.getInstancia().escribirArchivo(contenido.toString(), "TOP10CLIENTES.edd", "reportes");
         ManejoDeArchivos.getInstancia().escribirArchivo(Huffman.getInstancia()
@@ -112,19 +114,19 @@ public class Reportes {
 
         StringBuilder contenido = new StringBuilder();
         contenido.append("REPORTE TOP 10 DE CONDUCTORES CON MAYOR CANTIDAD DE VIAJES\n");
-        topConductores.entrySet().forEach((entry) -> {
-            int contador = 1;
+        int contador = 0;
+        for (Map.Entry entry : topConductores.entrySet()) {
+            reporte.add(new Reporte(Integer.parseInt(entry.getValue().toString()),
+                    entry.getKey().toString().substring(0, entry.getKey().toString().length() - 2)));
 
-            reporte.add(new Reporte(entry.getValue().intValue(), entry.getKey().substring(0, entry.getKey().length() - 2)));
-
-            contenido.append("CONDUCTOR: ").append(entry.getKey().substring(0, entry.getKey().length() - 2))
+            contenido.append("CONDUCTOR: ").append(entry.getKey().toString()
+                    .substring(0, entry.getKey().toString().length() - 2))
                     .append(", VIAJES: ").append(entry.getValue()).append("\n");
-
             contador++;
             if (contador == 10) {
-                return;
+                break;
             }
-        });
+        }
 
         ManejoDeArchivos.getInstancia().escribirArchivo(contenido.toString(), "TOP10CONDUCTORES.edd", "reportes");
         ManejoDeArchivos.getInstancia().escribirArchivo(Huffman.getInstancia()
@@ -151,19 +153,19 @@ public class Reportes {
 
         StringBuilder contenido = new StringBuilder();
         contenido.append("REPORTE TOP 10 DE VEHICULOS CON MAYOR CANTIDAD DE VIAJES\n");
-        topVehiculos.entrySet().forEach((entry) -> {
-            int contador = 1;
+        int contador = 0;
+        for (Map.Entry entry : topVehiculos.entrySet()) {
+            reporte.add(new Reporte(Integer.parseInt(entry.getValue().toString()),
+                    entry.getKey().toString().substring(0, entry.getKey().toString().length() - 2)));
 
-            reporte.add(new Reporte(entry.getValue().intValue(), entry.getKey().substring(0, entry.getKey().length() - 2)));
-
-            contenido.append("VEHICULO: ").append(entry.getKey().substring(0, entry.getKey().length() - 2))
+            contenido.append("VEHICULO: ").append(entry.getKey().toString()
+                    .substring(0, entry.getKey().toString().length() - 2))
                     .append(", VIAJES: ").append(entry.getValue()).append("\n");
-
             contador++;
             if (contador == 10) {
-                return;
+                break;
             }
-        });
+        }
 
         ManejoDeArchivos.getInstancia().escribirArchivo(contenido.toString(), "TOP10VEHICULOSS.edd", "reportes");
         ManejoDeArchivos.getInstancia().escribirArchivo(Huffman.getInstancia()
