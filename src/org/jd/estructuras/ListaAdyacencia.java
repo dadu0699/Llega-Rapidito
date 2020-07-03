@@ -218,7 +218,7 @@ public class ListaAdyacencia {
         stringBuilder.append("digraph G {");
         stringBuilder.append("\n\tgraph [bgcolor=transparent];");
         stringBuilder.append("\n\trankdir = LR;");
-        stringBuilder.append("\n\tnode[shape=record, style=filled color=\"#393C4BFF\""
+        stringBuilder.append("\n\tnode[style=filled color=\"#393C4BFF\""
                 + " fillcolor=\"#393C4BFF\", fontcolor = \"#F8F8F2FF\"];");
         stringBuilder.append(contenidoGrafo());
         stringBuilder.append("\n}");

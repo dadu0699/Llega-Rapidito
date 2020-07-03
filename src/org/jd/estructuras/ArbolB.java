@@ -186,7 +186,7 @@ public class ArbolB {
             tamanioPaginaIzquierda = paginaIzquierda.getCantidadClaves();
         }
 
-        if ((posicionNodo + 1) < padre.getCantidadPaginas()) { // Verificar que exista pagina derecha (COMPROBAR el <=)
+        if ((posicionNodo + 1) < padre.getCantidadPaginas()) { // Verificar que exista pagina derecha
             paginaDerecha = padre.getPagina(posicionNodo + 1);
             tamanioPaginaDerecha = paginaDerecha.getCantidadClaves();
         }
