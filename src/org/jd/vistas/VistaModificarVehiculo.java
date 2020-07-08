@@ -42,44 +42,44 @@ public class VistaModificarVehiculo extends Stage {
         Text txtTitulo = new Text("MODIFICAR");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(25));
-        gridPane.add(txtTitulo, 0, 4, 2, 1);
+        gridPane.add(txtTitulo, 0, 0, 2, 1);
 
         JFXTextField jFTPlaca = new JFXTextField(vehiculo.getPlaca());
         jFTPlaca.setPromptText("PLACA");
         jFTPlaca.setLabelFloat(true);
         jFTPlaca.setEditable(false);
         jFTPlaca.setPrefWidth(x);
-        gridPane.add(jFTPlaca, 0, 5, 2, 1);
+        gridPane.add(jFTPlaca, 0, 1, 2, 1);
 
         JFXTextField jFTMarca = new JFXTextField(vehiculo.getMarca());
         jFTMarca.setPromptText("MARCA");
         jFTMarca.setLabelFloat(true);
         jFTMarca.setPrefWidth(x);
-        gridPane.add(jFTMarca, 0, 6, 2, 1);
+        gridPane.add(jFTMarca, 0, 2, 2, 1);
 
         JFXTextField jFTModelo = new JFXTextField(vehiculo.getModelo());
         jFTModelo.setPromptText("MODELO");
         jFTModelo.setLabelFloat(true);
         jFTModelo.setPrefWidth(x);
-        gridPane.add(jFTModelo, 0, 7, 2, 1);
+        gridPane.add(jFTModelo, 0, 3, 2, 1);
 
         JFXTextField jFTAnio = new JFXTextField(vehiculo.getAnio());
         jFTAnio.setPromptText("AÑO");
         jFTAnio.setLabelFloat(true);
         jFTAnio.setPrefWidth(x);
-        gridPane.add(jFTAnio, 0, 8, 2, 1);
+        gridPane.add(jFTAnio, 0, 4, 2, 1);
 
         JFXTextField jFTColor = new JFXTextField(vehiculo.getColor());
         jFTColor.setPromptText("COLOR");
         jFTColor.setLabelFloat(true);
         jFTColor.setPrefWidth(x);
-        gridPane.add(jFTColor, 0, 9, 2, 1);
+        gridPane.add(jFTColor, 0, 5, 2, 1);
 
         JFXTextField jFTPrecio = new JFXTextField(vehiculo.getPrecio());
         jFTPrecio.setPromptText("PRECIO");
         jFTPrecio.setLabelFloat(true);
         jFTPrecio.setPrefWidth(x);
-        gridPane.add(jFTPrecio, 0, 10, 2, 1);
+        gridPane.add(jFTPrecio, 0, 6, 2, 1);
 
         String[] transmisiones = {"Automatica", "Mecanica"};
         ObservableList obsTransmision = FXCollections.observableArrayList(transmisiones);
@@ -89,7 +89,7 @@ public class VistaModificarVehiculo extends Stage {
         cbTransmision.getSelectionModel().select(vehiculo.getTransmision());
         cbTransmision.setLabelFloat(true);
         cbTransmision.setPrefWidth(x);
-        gridPane.add(cbTransmision, 0, 11, 2, 1);
+        gridPane.add(cbTransmision, 0, 7, 2, 1);
 
         JFXButton btnModificar = new JFXButton("MODIFICAR");
         btnModificar.getStyleClass().addAll("customButton", "primaryButton");
@@ -127,14 +127,14 @@ public class VistaModificarVehiculo extends Stage {
                 VistaVehiculo.getInstancia().actualizarItemsTabla();
             }
         });
-        gridPane.add(btnModificar, 0, 12);
+        gridPane.add(btnModificar, 0, 8);
 
         JFXButton btnCancelar = new JFXButton("CANCELAR");
         btnCancelar.getStyleClass().addAll("customButton", "dangerButton");
         btnCancelar.setButtonType(JFXButton.ButtonType.FLAT);
         btnCancelar.setPrefSize(x, y * 0.04);
         btnCancelar.setOnAction(event -> VistaVehiculo.getInstancia().reiniciarHBox());
-        gridPane.add(btnCancelar, 1, 12);
+        gridPane.add(btnCancelar, 1, 8);
 
         return gridPane;
     }

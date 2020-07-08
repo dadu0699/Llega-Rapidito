@@ -6,6 +6,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -90,6 +91,7 @@ public class VistaConductor extends Stage {
 
         vBoxCRUD = new VBox();
         vBoxCRUD.setPrefSize(x * 0.30, y * 0.995);
+        vBoxCRUD.setAlignment(Pos.CENTER);
         vBoxCRUD.getChildren().add(VistaAgregarConductor.getInstancia().getFormulario());
 
         hBoxPaneles.getChildren().addAll(getTablaConductor(), vBoxCRUD);

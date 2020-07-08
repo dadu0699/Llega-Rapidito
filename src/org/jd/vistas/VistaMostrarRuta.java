@@ -40,28 +40,28 @@ class VistaMostrarRuta extends Stage {
         Text txtTitulo = new Text("MOSTRAR");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(25));
-        gridPane.add(txtTitulo, 0, 6);
+        gridPane.add(txtTitulo, 0, 0);
 
         JFXTextField jFTOrigen = new JFXTextField();
         jFTOrigen.setPromptText("ORIGEN");
         jFTOrigen.setLabelFloat(true);
         jFTOrigen.setPrefWidth(x);
         jFTOrigen.setEditable(false);
-        gridPane.add(jFTOrigen, 0, 7);
+        gridPane.add(jFTOrigen, 0, 1);
 
         JFXTextField jFTDestino = new JFXTextField();
         jFTDestino.setPromptText("DESTINO");
         jFTDestino.setLabelFloat(true);
         jFTDestino.setPrefWidth(x);
         jFTDestino.setEditable(false);
-        gridPane.add(jFTDestino, 0, 8);
+        gridPane.add(jFTDestino, 0, 2);
 
         JFXTextField jFTTiempoRuta = new JFXTextField();
         jFTTiempoRuta.setPromptText("TIEMPO RUTA");
         jFTTiempoRuta.setLabelFloat(true);
         jFTTiempoRuta.setPrefWidth(x);
         jFTTiempoRuta.setEditable(false);
-        gridPane.add(jFTTiempoRuta, 0, 9);
+        gridPane.add(jFTTiempoRuta, 0, 3);
 
         if (ruta != null) {
             jFTOrigen.setText(ruta.getOrigen());
@@ -81,7 +81,7 @@ class VistaMostrarRuta extends Stage {
                     + "\nTIEMPO RUTA:   " + ruta.getTiempoRuta());
             clipboard.setContent(content);
         });
-        gridPane.add(btnCopiar, 0, 10);
+        gridPane.add(btnCopiar, 0, 4);
         return gridPane;
     }
 }

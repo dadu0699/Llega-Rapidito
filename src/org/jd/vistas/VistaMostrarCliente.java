@@ -40,56 +40,56 @@ public class VistaMostrarCliente extends Stage {
         Text txtTitulo = new Text("MOSTRAR");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(25));
-        gridPane.add(txtTitulo, 0, 4);
+        gridPane.add(txtTitulo, 0, 0);
 
         JFXTextField jFTDPI = new JFXTextField(String.valueOf(cliente.getDPI()));
         jFTDPI.setPromptText("DPI");
         jFTDPI.setLabelFloat(true);
         jFTDPI.setPrefWidth(x);
         jFTDPI.setEditable(false);
-        gridPane.add(jFTDPI, 0, 5);
+        gridPane.add(jFTDPI, 0, 1);
 
         JFXTextField jFTNombres = new JFXTextField(cliente.getNombres());
         jFTNombres.setPromptText("NOMBRES");
         jFTNombres.setLabelFloat(true);
         jFTNombres.setPrefWidth(x);
         jFTNombres.setEditable(false);
-        gridPane.add(jFTNombres, 0, 6);
+        gridPane.add(jFTNombres, 0, 2);
 
         JFXTextField jFTApellidos = new JFXTextField(cliente.getApellidos());
         jFTApellidos.setPromptText("APELLIDOS");
         jFTApellidos.setLabelFloat(true);
         jFTApellidos.setPrefWidth(x);
         jFTApellidos.setEditable(false);
-        gridPane.add(jFTApellidos, 0, 7);
+        gridPane.add(jFTApellidos, 0, 3);
 
         JFXTextField jFTGenero = new JFXTextField(cliente.getGenero());
         jFTGenero.setPromptText("GENERO");
         jFTGenero.setLabelFloat(true);
         jFTGenero.setPrefWidth(x);
         jFTGenero.setEditable(false);
-        gridPane.add(jFTGenero, 0, 8);
+        gridPane.add(jFTGenero, 0, 4);
 
         JFXTextField jFTFNacimiento = new JFXTextField(cliente.getFechaNacimiento());
         jFTFNacimiento.setPromptText("FECHA NACIMIENTO");
         jFTFNacimiento.setLabelFloat(true);
         jFTFNacimiento.setPrefWidth(x);
         jFTFNacimiento.setEditable(false);
-        gridPane.add(jFTFNacimiento, 0, 9);
+        gridPane.add(jFTFNacimiento, 0, 5);
 
         JFXTextField jFTTelefono = new JFXTextField(cliente.getTelefono());
         jFTTelefono.setPromptText("TELEFONO");
         jFTTelefono.setLabelFloat(true);
         jFTTelefono.setPrefWidth(x);
         jFTTelefono.setEditable(false);
-        gridPane.add(jFTTelefono, 0, 10);
+        gridPane.add(jFTTelefono, 0, 6);
 
         JFXTextField jFTDireccion = new JFXTextField(cliente.getDireccion());
         jFTDireccion.setPromptText("DIRECCION");
         jFTDireccion.setLabelFloat(true);
         jFTDireccion.setPrefWidth(x);
         jFTDireccion.setEditable(false);
-        gridPane.add(jFTDireccion, 0, 11);
+        gridPane.add(jFTDireccion, 0, 7);
 
         JFXButton btnCopiar = new JFXButton("COPIAR");
         btnCopiar.getStyleClass().addAll("customButton", "primaryButton");
@@ -107,7 +107,7 @@ public class VistaMostrarCliente extends Stage {
                     + "\nDIRECCION:             " + cliente.getDireccion());
             clipboard.setContent(content);
         });
-        gridPane.add(btnCopiar, 0, 12);
+        gridPane.add(btnCopiar, 0, 8);
         return gridPane;
     }
 }

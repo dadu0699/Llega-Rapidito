@@ -40,21 +40,21 @@ public class VistaMostrarViaje extends Stage {
         Text txtTitulo = new Text("MOSTRAR");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(25));
-        gridPane.add(txtTitulo, 0, 4);
+        gridPane.add(txtTitulo, 0, 0);
 
         JFXTextField jFTID = new JFXTextField(String.valueOf(viaje.getId()));
         jFTID.setPromptText("ID");
         jFTID.setLabelFloat(true);
         jFTID.setPrefWidth(x);
         jFTID.setEditable(false);
-        gridPane.add(jFTID, 0, 5);
+        gridPane.add(jFTID, 0, 1);
 
         JFXTextField jFTOrigen = new JFXTextField(viaje.getOrigen().toString());
         jFTOrigen.setPromptText("ORIGEN");
         jFTOrigen.setLabelFloat(true);
         jFTOrigen.setPrefWidth(x);
         jFTOrigen.setEditable(false);
-        gridPane.add(jFTOrigen, 0, 6);
+        gridPane.add(jFTOrigen, 0, 2);
 
         JFXTextField jFTDestino = new JFXTextField(viaje.getDestino().toString());
         jFTDestino.setPromptText("DESTINO");
@@ -68,28 +68,28 @@ public class VistaMostrarViaje extends Stage {
         jFTFecha.setLabelFloat(true);
         jFTFecha.setPrefWidth(x);
         jFTFecha.setEditable(false);
-        gridPane.add(jFTFecha, 0, 8);
+        gridPane.add(jFTFecha, 0, 3);
 
         JFXTextField jFTCliente = new JFXTextField(viaje.getCliente().toString());
         jFTCliente.setPromptText("CLIENTE");
         jFTCliente.setLabelFloat(true);
         jFTCliente.setPrefWidth(x);
         jFTCliente.setEditable(false);
-        gridPane.add(jFTCliente, 0, 9);
+        gridPane.add(jFTCliente, 0, 4);
 
         JFXTextField jFTConductor = new JFXTextField(viaje.getConductor().toString());
         jFTConductor.setPromptText("CONDUCTOR");
         jFTConductor.setLabelFloat(true);
         jFTConductor.setPrefWidth(x);
         jFTConductor.setEditable(false);
-        gridPane.add(jFTConductor, 0, 10);
+        gridPane.add(jFTConductor, 0, 5);
 
         JFXTextField jFTVehiculo = new JFXTextField(viaje.getVehiculo().toString());
         jFTVehiculo.setPromptText("VEHICULO");
         jFTVehiculo.setLabelFloat(true);
         jFTVehiculo.setPrefWidth(x);
         jFTVehiculo.setEditable(false);
-        gridPane.add(jFTVehiculo, 0, 11);
+        gridPane.add(jFTVehiculo, 0, 6);
 
         JFXButton btnCopiar = new JFXButton("COPIAR");
         btnCopiar.getStyleClass().addAll("customButton", "primaryButton");
@@ -107,7 +107,7 @@ public class VistaMostrarViaje extends Stage {
                     + "\nVEHICULO:            " + viaje.getVehiculo().toString());
             clipboard.setContent(content);
         });
-        gridPane.add(btnCopiar, 0, 12);
+        gridPane.add(btnCopiar, 0, 7);
         return gridPane;
     }
 }

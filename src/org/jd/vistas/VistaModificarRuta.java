@@ -38,28 +38,28 @@ public class VistaModificarRuta extends Stage {
         Text txtTitulo = new Text("MODIFICAR");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(25));
-        gridPane.add(txtTitulo, 0, 6, 2, 1);
+        gridPane.add(txtTitulo, 0, 0, 2, 1);
 
         JFXTextField jFTOrigen = new JFXTextField(ruta.getOrigen());
         jFTOrigen.setPromptText("ORIGEN");
         jFTOrigen.setLabelFloat(true);
         jFTOrigen.setPrefWidth(x);
         jFTOrigen.setEditable(false);
-        gridPane.add(jFTOrigen, 0, 7, 2, 1);
+        gridPane.add(jFTOrigen, 0, 1, 2, 1);
 
         JFXTextField jFTDestino = new JFXTextField(ruta.getDestino());
         jFTDestino.setPromptText("DESTINO");
         jFTDestino.setLabelFloat(true);
         jFTDestino.setPrefWidth(x);
         jFTDestino.setEditable(false);
-        gridPane.add(jFTDestino, 0, 8, 2, 1);
+        gridPane.add(jFTDestino, 0, 2, 2, 1);
 
         JFXTextField jFTTiempoRuta = new JFXTextField(ruta.getTiempoRuta());
         jFTTiempoRuta.setPromptText("TIEMPO RUTA");
         jFTTiempoRuta.setLabelFloat(true);
         jFTTiempoRuta.setPrefWidth(x);
         jFTTiempoRuta.setEditable(false);
-        gridPane.add(jFTTiempoRuta, 0, 9, 2, 1);
+        gridPane.add(jFTTiempoRuta, 0, 3, 2, 1);
 
         JFXButton btnModificar = new JFXButton("MODIFICAR");
         btnModificar.getStyleClass().addAll("customButton", "primaryButton");
@@ -75,14 +75,14 @@ public class VistaModificarRuta extends Stage {
                 VistaRuta.getInstancia().actualizarItemsTabla();
             }
         });
-        gridPane.add(btnModificar, 0, 10);
+        gridPane.add(btnModificar, 0, 4);
 
         JFXButton btnCancelar = new JFXButton("CANCELAR");
         btnCancelar.getStyleClass().addAll("customButton", "dangerButton");
         btnCancelar.setButtonType(JFXButton.ButtonType.FLAT);
         btnCancelar.setPrefSize(x, y * 0.04);
         btnCancelar.setOnAction(event -> VistaRuta.getInstancia().reiniciarHBox());
-        gridPane.add(btnCancelar, 1, 10);
+        gridPane.add(btnCancelar, 1, 4);
 
         return gridPane;
     }

@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Pos;
 import org.jd.estructuras.TablaHash;
 import org.jd.modelos.Cliente;
 import org.jd.utilidades.ManejoDeArchivos;
@@ -91,6 +92,7 @@ public class VistaCliente extends Stage {
 
         vBoxCRUD = new VBox();
         vBoxCRUD.setPrefSize(x * 0.30, y * 0.995);
+        vBoxCRUD.setAlignment(Pos.CENTER);
         vBoxCRUD.getChildren().add(VistaAgregarCliente.getInstancia().getFormulario());
 
         hBoxPaneles.getChildren().addAll(getTablaCliente(), vBoxCRUD);

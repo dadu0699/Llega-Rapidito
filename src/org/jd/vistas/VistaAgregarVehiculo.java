@@ -42,43 +42,43 @@ public class VistaAgregarVehiculo extends Stage {
         Text txtTitulo = new Text("AGREGAR");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(25));
-        gridPane.add(txtTitulo, 0, 4);
+        gridPane.add(txtTitulo, 0, 0);
 
         JFXTextField jFTPlaca = new JFXTextField();
         jFTPlaca.setPromptText("PLACA");
         jFTPlaca.setLabelFloat(true);
         jFTPlaca.setPrefWidth(x);
-        gridPane.add(jFTPlaca, 0, 5);
+        gridPane.add(jFTPlaca, 0, 1);
 
         JFXTextField jFTMarca = new JFXTextField();
         jFTMarca.setPromptText("MARCA");
         jFTMarca.setLabelFloat(true);
         jFTMarca.setPrefWidth(x);
-        gridPane.add(jFTMarca, 0, 6);
+        gridPane.add(jFTMarca, 0, 2);
 
         JFXTextField jFTModelo = new JFXTextField();
         jFTModelo.setPromptText("MODELO");
         jFTModelo.setLabelFloat(true);
         jFTModelo.setPrefWidth(x);
-        gridPane.add(jFTModelo, 0, 7);
+        gridPane.add(jFTModelo, 0, 3);
 
         JFXTextField jFTAnio = new JFXTextField();
         jFTAnio.setPromptText("AÑO");
         jFTAnio.setLabelFloat(true);
         jFTAnio.setPrefWidth(x);
-        gridPane.add(jFTAnio, 0, 8);
+        gridPane.add(jFTAnio, 0, 4);
 
         JFXTextField jFTColor = new JFXTextField();
         jFTColor.setPromptText("COLOR");
         jFTColor.setLabelFloat(true);
         jFTColor.setPrefWidth(x);
-        gridPane.add(jFTColor, 0, 9);
+        gridPane.add(jFTColor, 0, 5);
 
         JFXTextField jFTPrecio = new JFXTextField();
         jFTPrecio.setPromptText("PRECIO");
         jFTPrecio.setLabelFloat(true);
         jFTPrecio.setPrefWidth(x);
-        gridPane.add(jFTPrecio, 0, 10);
+        gridPane.add(jFTPrecio, 0, 6);
 
         String[] transmisiones = {"Automatica", "Mecanica"};
         ObservableList obsTransmision = FXCollections.observableArrayList(transmisiones);
@@ -87,7 +87,7 @@ public class VistaAgregarVehiculo extends Stage {
         cbTransmision.setPromptText("TRANSMISIÓN");
         cbTransmision.setLabelFloat(true);
         cbTransmision.setPrefWidth(x);
-        gridPane.add(cbTransmision, 0, 11);
+        gridPane.add(cbTransmision, 0, 7);
 
         JFXButton buttonAdd = new JFXButton("AGREGAR");
         buttonAdd.getStyleClass().addAll("customButton", "primaryButton");
@@ -117,7 +117,7 @@ public class VistaAgregarVehiculo extends Stage {
                 }
             }
         });
-        gridPane.add(buttonAdd, 0, 12);
+        gridPane.add(buttonAdd, 0, 8);
         return gridPane;
     }
 }

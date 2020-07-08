@@ -42,31 +42,31 @@ public class VistaModificarConductor extends Stage {
         Text txtTitulo = new Text("MODIFICAR");
         txtTitulo.getStyleClass().add("textTitle");
         txtTitulo.setFont(new Font(25));
-        gridPane.add(txtTitulo, 0, 3, 2, 1);
+        gridPane.add(txtTitulo, 0, 0, 2, 1);
 
         JFXTextField jFTDPI = new JFXTextField(conductor.getDPI());
         jFTDPI.setPromptText("DPI");
         jFTDPI.setLabelFloat(true);
         jFTDPI.setPrefWidth(x);
-        gridPane.add(jFTDPI, 0, 4, 2, 1);
+        gridPane.add(jFTDPI, 0, 1, 2, 1);
 
         JFXTextField jFTNombres = new JFXTextField(conductor.getNombres());
         jFTNombres.setPromptText("NOMBRES");
         jFTNombres.setLabelFloat(true);
         jFTNombres.setPrefWidth(x);
-        gridPane.add(jFTNombres, 0, 5, 2, 1);
+        gridPane.add(jFTNombres, 0, 2, 2, 1);
 
         JFXTextField jFTApellidos = new JFXTextField(conductor.getApellidos());
         jFTApellidos.setPromptText("APELLIDOS");
         jFTApellidos.setLabelFloat(true);
         jFTApellidos.setPrefWidth(x);
-        gridPane.add(jFTApellidos, 0, 6, 2, 1);
+        gridPane.add(jFTApellidos, 0, 3, 2, 1);
 
         JFXTextField jFTLicencia = new JFXTextField(conductor.getLicencia());
         jFTLicencia.setPromptText("LICENCIA");
         jFTLicencia.setLabelFloat(true);
         jFTLicencia.setPrefWidth(x);
-        gridPane.add(jFTLicencia, 0, 7, 2, 1);
+        gridPane.add(jFTLicencia, 0, 4, 2, 1);
 
         String[] generos = {"Masculino", "Femenino"};
         ObservableList obsGenero = FXCollections.observableArrayList(generos);
@@ -76,25 +76,25 @@ public class VistaModificarConductor extends Stage {
         cbGenero.setPromptText("GENERO");
         cbGenero.setLabelFloat(true);
         cbGenero.setPrefWidth(x);
-        gridPane.add(cbGenero, 0, 8, 2, 1);
+        gridPane.add(cbGenero, 0, 5, 2, 1);
 
         JFXTextField jFTFNacimiento = new JFXTextField(conductor.getFechaNacimiento());
         jFTFNacimiento.setPromptText("FECHA NACIMIENTO");
         jFTFNacimiento.setLabelFloat(true);
         jFTFNacimiento.setPrefWidth(x);
-        gridPane.add(jFTFNacimiento, 0, 9, 2, 1);
+        gridPane.add(jFTFNacimiento, 0, 6, 2, 1);
 
         JFXTextField jFTTelefono = new JFXTextField(conductor.getTelefono());
         jFTTelefono.setPromptText("TELEFONO");
         jFTTelefono.setLabelFloat(true);
         jFTTelefono.setPrefWidth(x);
-        gridPane.add(jFTTelefono, 0, 10, 2, 1);
+        gridPane.add(jFTTelefono, 0, 7, 2, 1);
 
         JFXTextField jFTDireccion = new JFXTextField(conductor.getDireccion());
         jFTDireccion.setPromptText("DIRECCION");
         jFTDireccion.setLabelFloat(true);
         jFTDireccion.setPrefWidth(x);
-        gridPane.add(jFTDireccion, 0, 11, 2, 1);
+        gridPane.add(jFTDireccion, 0, 8, 2, 1);
 
         JFXButton btnModificar = new JFXButton("MODIFICAR");
         btnModificar.getStyleClass().addAll("customButton", "primaryButton");
@@ -134,14 +134,14 @@ public class VistaModificarConductor extends Stage {
                 VistaConductor.getInstancia().actualizarItemsTabla();
             }
         });
-        gridPane.add(btnModificar, 0, 12);
+        gridPane.add(btnModificar, 0, 9);
 
         JFXButton btnCancelar = new JFXButton("CANCELAR");
         btnCancelar.getStyleClass().addAll("customButton", "dangerButton");
         btnCancelar.setButtonType(JFXButton.ButtonType.FLAT);
         btnCancelar.setPrefSize(x, y * 0.04);
         btnCancelar.setOnAction(event -> VistaConductor.getInstancia().reiniciarHBox());
-        gridPane.add(btnCancelar, 1, 12);
+        gridPane.add(btnCancelar, 1, 9);
 
         return gridPane;
     }
